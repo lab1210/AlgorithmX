@@ -1,13 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import styles from "../../../css/StudentAuth.module.css";
+import styles from "../css/StudentAuth.module.css";
 import { LuCopy } from "react-icons/lu";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-const Get_token = () => {
-  const searchParams = useSearchParams();
-  const role = searchParams.get("role");
-  const token = "6583-0251-4789-3560";
+const Get_token = ({ token }) => {
   const [copied, setCopied] = useState(false);
 
   const handleCopyToken = () => {
@@ -17,10 +13,7 @@ const Get_token = () => {
       setCopied(false);
     }, 2000);
   };
-  const registrationFormPath =
-    role === "teacher"
-      ? `/Register/Teacher/Registration-Form`
-      : `/Register/Student/Registration-Form`;
+
   return (
     <div className={styles.Token_Container}>
       {copied && (
@@ -39,7 +32,7 @@ const Get_token = () => {
 
           <div />
         </div>
-        <Link href={registrationFormPath}>
+        <Link href={"/Register/Role"}>
           <button className={styles.continuebtn}>Next</button>
         </Link>
       </div>
