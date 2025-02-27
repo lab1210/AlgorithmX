@@ -102,8 +102,17 @@ const Register = () => {
 
   return (
     <div className={styles.Student_Auth_Container}>
-      <LeftAuth />
-      <div className={styles.Student_Right_Auth}>
+      <div
+        className={`${styles.overlay} ${
+          isModalOpen ? styles.overlayActive : ""
+        }`}
+      ></div>
+      <LeftAuth className={`${isModalOpen ? styles.opacity : ""}`} />
+      <div
+        className={`${styles.Student_Right_Auth} ${
+          isModalOpen ? styles.opacity : ""
+        }`}
+      >
         <div className={styles.Reg_box2}>
           <div className={styles.login_form}>
             <div className={styles.Regtitle2}>

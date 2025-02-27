@@ -11,11 +11,14 @@ import { FaRegUser } from "react-icons/fa6";
 import { TbLogout } from "react-icons/tb";
 import { useSearchParams, usePathname } from "next/navigation";
 import Link from "next/link";
-const LeftSidebar = () => {
+const LeftSidebar = ({ setUser }) => {
   const searchParams = useSearchParams();
   const schoolId = searchParams.get("schoolid");
   const userId = searchParams.get("userid");
   const pathname = usePathname();
+  const handleLogout = () => {
+    setUser(null);
+  };
   const StudentLeft = [
     {
       Name: "Dashboard",
@@ -84,7 +87,7 @@ const LeftSidebar = () => {
           })}
         </ul>
         <div className={styles.logout}>
-          <button>
+          <button onClick={handleLogout}>
             <span>
               <TbLogout size={22} />
             </span>

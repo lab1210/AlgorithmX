@@ -1,8 +1,12 @@
-import React, { useEffect, useState } from "react";
+"use client";
+import React, { Suspense, useEffect, useState } from "react";
 import styles from "../css/layout.module.css";
 import LeftSidebar from "./StudentDashBoard/LeftSidebar";
 import { usePathname } from "next/navigation";
-const layout = ({ children }) => {
+import RightSidebar from "./StudentDashBoard/RightSidebar";
+import { useUser } from "./StudentDashBoard/context/UserProvider";
+const Layout = ({ children }) => {
+  const { user, isLoading, checkUser, setUser } = useUser();
   const [headerTitle, setHeaderTitle] = useState("Dashboard");
   const pathName = usePathname();
   const generateTitle = (path) => {
@@ -16,13 +20,30 @@ const layout = ({ children }) => {
   };
 
   useEffect(() => {
+    if (!checkUser()) {
+      return;
+    }
+  }, [user, isLoading, checkUser]);
+
+  useEffect(() => {
     const title = generateTitle(pathName);
     setHeaderTitle(title || "Dashboard");
   }, [pathName]);
+
+  if (isLoading) {
+    return (
+      <div className={styles.loadingContainer}>
+        {" "}
+        <div className={styles.spinner}></div> {/* New: Spinner element */}
+      </div>
+    );
+  }
   return (
     <div className={styles.LayoutGrid}>
       <div className={styles.left}>
-        <LeftSidebar />
+        <Suspense>
+          <LeftSidebar setUser={setUser} />
+        </Suspense>
       </div>
       <div className={styles.middle}>
         <div className={styles.header}>
@@ -30,9 +51,11 @@ const layout = ({ children }) => {
         </div>
         <div className={styles.content}>{children}</div>
       </div>
-      <div className={styles.right}>right</div>
+      <div className={styles.right}>
+        <RightSidebar user={user} />
+      </div>
     </div>
   );
 };
 
-export default layout;
+export default Layout;

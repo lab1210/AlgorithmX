@@ -1,14 +1,14 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import styles from "./dashboard.module.css";
-import Layout from "../../Components/Studentlayout";
+import { UserProvider } from "@/app/Components/StudentDashBoard/context/UserProvider";
+import Studentdashboard from "@/app/Components/StudentDashBoard/Pages/Studentdashboard";
+import React from "react";
 
-const dashboard = () => {
+const Dashboard = () => {
   return (
-    <Layout>
-      <div>stuff</div>
-    </Layout>
+    <UserProvider>
+      <Studentdashboard />
+    </UserProvider>
   );
 };
 
-export default dashboard;
+export default Dashboard;

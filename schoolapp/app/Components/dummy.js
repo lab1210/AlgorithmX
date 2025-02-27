@@ -3,9 +3,10 @@ const dummyUsers = [
     userId: "USR001",
     schoolid: "SCH001",
     pin: "1234",
-    username: "John Doe",
+    username: "Ife Babalola Adesina",
     password: "password",
     Role: "Student",
+    profilePic: "/female.png",
   },
   {
     userId: "USR002",
@@ -14,6 +15,7 @@ const dummyUsers = [
     username: "Jane Smith",
     password: "password",
     Role: "Teacher",
+    profilePic: "/profile.png",
   },
   {
     userId: "USR003",
@@ -22,6 +24,7 @@ const dummyUsers = [
     username: "Bob Johnson",
     password: "password",
     Role: "Student",
+    profilePic: "/profile.png",
   },
   {
     userId: "USR004",
@@ -30,6 +33,7 @@ const dummyUsers = [
     username: "Mary Lee",
     password: "password",
     Role: "Student",
+    profilePic: "/profile.png",
   },
   {
     userId: "USR005",
@@ -38,6 +42,7 @@ const dummyUsers = [
     username: "Tom Brown",
     password: "password",
     Role: "Student",
+    profilePic: "/profile.png",
   },
 ];
 export default dummyUsers;
