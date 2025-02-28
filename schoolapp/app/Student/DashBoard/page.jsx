@@ -2,7 +2,7 @@
 import { UserProvider } from "@/app/Components/StudentDashBoard/context/UserProvider";
 import Studentdashboard from "@/app/Components/StudentDashBoard/Pages/Studentdashboard";
 import React, { Suspense } from "react";
-import styles from "../../../css/layout.module.css";
+import styles from "../../css/layout.module.css";
 
 
 const Dashboard = () => {
