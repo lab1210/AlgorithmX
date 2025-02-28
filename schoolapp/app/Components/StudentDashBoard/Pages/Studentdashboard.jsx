@@ -91,7 +91,7 @@ const Studentdashboard = () => {
               return (
                 <Link
                   key={index}
-                  href={`${item.Link}?schoolid=${schoolId}userid=${userId}`}
+                  href={`${item.Link}?schoolid=${schoolId}&userid=${userId}`}
                   className={fullClass}
                 >
                   <div className={styles2.iconContainer}>{item.icon}</div>
