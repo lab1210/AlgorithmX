@@ -1,12 +1,13 @@
 "use client";
+import { UserProvider } from "@/app/Components/StudentDashBoard/context/UserProvider";
+import FeesPaymentItem from "@/app/Components/StudentDashBoard/Pages/FeesPaymentItem";
 import React from "react";
-import Layout from "../../Components/Studentlayout";
 
 const Fees_Payment = () => {
   return (
-    <Layout>
-      <div>Fees</div>
-    </Layout>
+    <UserProvider>
+      <FeesPaymentItem />
+    </UserProvider>
   );
 };
 

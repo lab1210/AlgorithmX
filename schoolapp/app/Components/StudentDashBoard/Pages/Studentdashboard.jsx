@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import styles2 from "./dashboard.module.css";
+import styles2 from "./css/dashboard.module.css";
 import styles from "../../../css/layout.module.css";
 import Layout from "../../../Components/Studentlayout";
 import { useUser } from "../context/UserProvider";
@@ -10,28 +10,35 @@ import { MdOutlineCalendarMonth } from "react-icons/md";
 import { RiBookShelfLine } from "react-icons/ri";
 import { BiPieChart } from "react-icons/bi";
 import { LiaHeartbeatSolid } from "react-icons/lia";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 const Studentdashboard = () => {
   const { user, isLoading } = useUser();
-
+  const searchParams = useSearchParams();
+  const schoolId = searchParams.get("schoolid");
+  const userId = searchParams.get("userid");
   const overview = [
     {
       id: "Fees",
       icon: <IoWalletOutline size={50} />,
       title: "School Fees Payment",
       description: "Pay fees seamlessly",
+      Link: "/Student/Fees-Payment",
     },
     {
       id: "result",
       icon: <LuNotepadText size={50} />,
       title: "Result",
       description: "View continous assessment",
+      Link: "/Student/Result",
     },
     {
       id: "attendance",
       icon: <BiPieChart size={50} />,
       title: "Attendance",
       description: "View class and  event attendance",
+      Link: "/Student/Attendance",
     },
     {
       id: "Registration",
@@ -82,13 +89,17 @@ const Studentdashboard = () => {
               const fullClass = `${styles2.overviewCardItem} ${cardClass}`;
 
               return (
-                <div key={index} className={fullClass}>
+                <Link
+                  key={index}
+                  href={`${item.Link}?schoolid=${schoolId}userid=${userId}`}
+                  className={fullClass}
+                >
                   <div className={styles2.iconContainer}>{item.icon}</div>
                   <div className={styles2.content}>
                     <h4>{item.title}</h4>
                     <p>{item.description}</p>
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>

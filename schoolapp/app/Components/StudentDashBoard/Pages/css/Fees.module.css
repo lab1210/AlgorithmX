@@ -1,0 +1,54 @@
+.firstCard,
+.secondCard,
+.thirdCard {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.firstCard {
+  display: flex;
+  align-items: center;
+  padding: 34px 50px;
+  justify-content: space-between;
+}
+
+@media (min-width: 1024px) {
+  .firstCard {
+    padding: 25px 10px;
+    justify-content: space-between;
+  }
+}
+.firstCardItem1 {
+  background-color: rgba(64, 132, 177, 1);
+  color: rgba(255, 255, 255, 1);
+  border-radius: 20px;
+}
+.firstCardItem1 .TopSection,
+.firstCardItem2 .TopSection {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  justify-content: space-between;
+  align-items: center;
+}
+.firstCardItem1 .BottomSection,
+.firstCardItem2 .BottomSection {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  text-align: center;
+  padding: 5px;
+}
+
+.firstCardItem2 {
+  background-color: rgba(249, 65, 68, 1);
+  color: rgba(255, 255, 255, 1);
+  border-radius: 20px;
+}
+
+.Cardimage {
+  max-width: 50px;
+}
+.Cardimage img {
+  width: 100%;
+  object-fit: cover;
+}

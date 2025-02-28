@@ -33,19 +33,27 @@ const LeftSidebar = ({ setUser }) => {
     {
       Name: "Result",
       icon: <LuNotepadText />,
+      route: "/Student/Result",
     },
     {
       Name: "Attendance",
       icon: <BiPieChartAlt2 />,
+      route: "/Student/Attendance",
     },
-    { Name: "Subject Registration", icon: <RiBookShelfLine /> },
+    {
+      Name: "Subject Registration",
+      icon: <RiBookShelfLine />,
+      route: "/Student/Subject-Registration",
+    },
     {
       Name: "Timetable",
       icon: <MdOutlineCalendarMonth />,
+      route: "/Student/Timetable",
     },
     {
       Name: "Health Record",
       icon: <LiaHeartbeatSolid />,
+      route: "/Student/Health-Record",
     },
     {
       Name: "Profile",
