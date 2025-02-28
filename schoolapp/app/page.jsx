@@ -40,33 +40,7 @@ export default function Login() {
       return;
     }
 
-    // try {
-    //   const response = await fetch("/api/login", {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify({ username, password }),
-    //   });
-    //   if (!response.ok) {
-    //     const errorData = await response.json();
-    //     if (errorData.error === "Invalid Username") {
-    //       setUsernameerror(errorData.message);
-    //     } else if (errorData.error === "Invalid Password") {
-    //       setPassworderror(errorData.message);
-    //     } else {
-    //       throw new Error("Something went wrong");
-    //     }
-    //   } else {
-    //     const data = await response.json();
-    //     // Handle successful login
-    //     console.log("Login successful", data);
-    //     // Use Next.js router to navigate
-    //     // router.push("/dashboard");
-    //   }
-    // } catch (error) {
-    //   setPassworderror(error.message);
-    //   setUsernameerror(error.message);
-    // }
-
+   
     const user = dummy.find(
       (u) => u.username === username && u.password === password
     );
