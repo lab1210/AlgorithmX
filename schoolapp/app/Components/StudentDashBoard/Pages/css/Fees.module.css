@@ -1,7 +1,13 @@
+.FeeContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 .firstCard,
 .secondCard,
 .thirdCard {
   background-color: rgba(255, 255, 255, 1);
+  border-radius: 15px;
 }
 
 .firstCard {
@@ -35,7 +41,6 @@
   background-color: rgba(0, 0, 0, 0.1);
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
-  text-align: center;
   padding: 5px;
 }
 
@@ -51,4 +56,111 @@
 .Cardimage img {
   width: 100%;
   object-fit: cover;
+}
+
+.CardDetails h4 {
+  margin-bottom: 10px;
+  font-weight: 700;
+  font-size: 20px;
+}
+.CardDetails p,
+.info p {
+  font-weight: 400;
+  font-size: 12px;
+}
+.info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.info div {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 1);
+  display: flex;
+  align-items: center;
+  padding: 2px;
+}
+.firstCardItem1 .info svg{
+  color:#39779F ;
+}
+.firstCardItem2 .info svg{
+  color: #E03A3D;
+}
+.info div svg {
+  object-fit: contain;
+  width: 100%;
+}
+
+.secondCard{
+  padding: 20px;
+}
+.thirdCard{
+  padding: 20px;
+}
+.firstrow{
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  margin-bottom: 30px;
+}
+.dropdown{
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+.dropdown label{
+  font-weight: 400;
+  font-size: 14px;
+}
+.dropdown select{
+  background-color: #CFCFCF66;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-weight: 400;
+  font-size: 16px;
+  padding: 5px
+}
+
+.firstrow button{
+  background-color: #0B71B5;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  padding: 16px 32px;
+  border-radius: 8px;
+}
+.secondrow{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+
+}
+.secondrow p{
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.feesTable thead{
+  background-color: #F94144;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.feesTable table{
+  border-width: 1px, 0px, 0px, 1px;
+
+  border-style: solid;
+  
+  border-color: #CFCFCFCF;
+  
+  ;
 }
