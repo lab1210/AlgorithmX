@@ -1,7 +1,7 @@
 "use client";
 import { UserProvider } from "@/app/Components/StudentDashBoard/context/UserProvider";
 import FeesPaymentItem from "@/app/Components/StudentDashBoard/Pages/FeesPaymentItem";
-import React from "react";
+import React, { Suspense } from "react";
 import styles from "../../css/layout.module.css";
 
 const Fees_Payment = () => {
