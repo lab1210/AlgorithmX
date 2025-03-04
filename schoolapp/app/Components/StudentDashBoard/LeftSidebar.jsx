@@ -13,7 +13,7 @@ import { useSearchParams, usePathname } from "next/navigation";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 const LeftSidebar = ({ setUser }) => {
-  const route = useRouter();
+  const router = useRouter();
   const searchParams = useSearchParams();
   const schoolId = searchParams.get("schoolid");
   const userId = searchParams.get("userid");
