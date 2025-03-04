@@ -20,14 +20,14 @@ const dummyUsers = [
         purpose: "School fees for 1st Term",
         TransactionNumber: "TD02",
         AmountBilled: 250000,
-        AmountPaid: 250000,
+        AmountPaid: 0,
         PaymentDate: "Pending",
       },
       {
         purpose: "PTA dues",
         TransactionNumber: "TD03",
         AmountBilled: 2000,
-        AmountPaid: 2000,
+        AmountPaid: 0,
         PaymentDate: "Pending",
       },
       {
@@ -47,36 +47,6 @@ const dummyUsers = [
     password: "password",
     Role: "Teacher",
     profilePic: "/profile.png",
-    fees: [
-      {
-        purpose: "Admission Acceptance Fee",
-        TransactionNumber: "TD01",
-        AmountBilled: 52000,
-        AmountPaid: 52000,
-        PaymentDate: "07/09/23",
-      },
-      {
-        purpose: "School fees for 1st Term",
-        TransactionNumber: "TD02",
-        AmountBilled: 250000,
-        AmountPaid: 250000,
-        PaymentDate: "Pending",
-      },
-      {
-        purpose: "PTA dues",
-        TransactionNumber: "TD03",
-        AmountBilled: 2000,
-        AmountPaid: 2000,
-        PaymentDate: "Pending",
-      },
-      {
-        purpose: "Extracurricular Sports Mentorship",
-        TransactionNumber: "TD04",
-        AmountBilled: 20000,
-        AmountPaid: 20000,
-        PaymentDate: "07/09/23",
-      },
-    ],
   },
   {
     userId: "USR003",
@@ -85,7 +55,7 @@ const dummyUsers = [
     username: "Bob Johnson",
     password: "password",
     Role: "Student",
-    profilePic: "/profile.png",
+    profilePic: "/female.png",
     fees: [
       {
         purpose: "Admission Acceptance Fee",
@@ -98,14 +68,14 @@ const dummyUsers = [
         purpose: "School fees for 1st Term",
         TransactionNumber: "TD02",
         AmountBilled: 250000,
-        AmountPaid: 250000,
+        AmountPaid: 0,
         PaymentDate: "Pending",
       },
       {
         purpose: "PTA dues",
         TransactionNumber: "TD03",
         AmountBilled: 2000,
-        AmountPaid: 2000,
+        AmountPaid: 0,
         PaymentDate: "Pending",
       },
       {
@@ -137,14 +107,14 @@ const dummyUsers = [
         purpose: "School fees for 1st Term",
         TransactionNumber: "TD02",
         AmountBilled: 250000,
-        AmountPaid: 250000,
+        AmountPaid: 0,
         PaymentDate: "Pending",
       },
       {
         purpose: "PTA dues",
         TransactionNumber: "TD03",
         AmountBilled: 2000,
-        AmountPaid: 2000,
+        AmountPaid: 0,
         PaymentDate: "Pending",
       },
       {
@@ -176,14 +146,14 @@ const dummyUsers = [
         purpose: "School fees for 1st Term",
         TransactionNumber: "TD02",
         AmountBilled: 250000,
-        AmountPaid: 250000,
+        AmountPaid: 0,
         PaymentDate: "Pending",
       },
       {
         purpose: "PTA dues",
         TransactionNumber: "TD03",
         AmountBilled: 2000,
-        AmountPaid: 2000,
+        AmountPaid: 0,
         PaymentDate: "Pending",
       },
       {

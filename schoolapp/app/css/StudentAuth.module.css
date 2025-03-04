@@ -15,10 +15,12 @@
   z-index: 999; /* Below the modal (z-index 1000) */
   opacity: 0; /* Initially hidden */
   transition: opacity 0.3s ease; /* Smooth transition */
+  pointer-events: none;
 }
 
 .overlayActive {
   opacity: 1; /* Visible when modal is open */
+  pointer-events: auto;
 }
 
 .opacity {

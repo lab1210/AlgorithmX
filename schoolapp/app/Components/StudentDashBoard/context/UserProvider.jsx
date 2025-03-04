@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import React, { createContext, useState, useEffect, useContext } from "react";
 
 const UserContext = createContext(null);
@@ -6,7 +7,7 @@ const UserContext = createContext(null);
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true); // Add loading state
-
+  const router = useRouter();
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
@@ -41,7 +42,12 @@ export const UserProvider = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ user, setUser: updateUser, isLoading, checkUser }}
+      value={{
+        user,
+        setUser: updateUser,
+        isLoading,
+        checkUser,
+      }}
     >
       {" "}
       {/* Use updateUser */}

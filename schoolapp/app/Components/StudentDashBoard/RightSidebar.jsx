@@ -91,18 +91,20 @@ const RightSidebar = ({ user }) => {
           <div className={styles.profileimg}>
             {user && user.profilePic && <img src={user.profilePic} alt="" />}
           </div>
-          <p>
-            {user.username}{" "}
-            <span>
+          <div className={styles.NameIcon}>
+            <div>
+              <p className={styles.username}>{user.username}</p>
+            </div>
+            <div>
               <IoChevronDownOutline size={12} />
-            </span>
-          </p>
+            </div>
+          </div>
         </div>
       </div>
       <div className={styles.down}>
         <div className={styles.events}>
           <div className={styles.top}>
-            <h1>Events</h1>
+            <h2>Events</h2>
             <div className={styles.calender}>
               <p className={styles.title}>Date</p>
               <div className={styles.MonthArrow}>
@@ -175,19 +177,21 @@ const RightSidebar = ({ user }) => {
                       }}
                     >
                       <div className={styles.eventDetails}>
-                        <h4>{event.title}</h4>
-                        <p
-                          className={
-                            clickedEventIndex === index
-                              ? styles.eventDetailsClicked
-                              : "" // Apply description color change
-                          }
-                        >
-                          {event.description}
-                        </p>
-                      </div>
-                      <div className={styles.detailarrow}>
-                        <IoChevronForward />
+                        <div>
+                          <h5>{event.title}</h5>
+                          <p
+                            className={
+                              clickedEventIndex === index
+                                ? styles.eventDetailsClicked
+                                : ""
+                            }
+                          >
+                            {event.description}
+                          </p>
+                        </div>
+                        <div className={styles.detailarrow}>
+                          <IoChevronForward />
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -199,7 +203,7 @@ const RightSidebar = ({ user }) => {
 
         <div className={styles.notification}>
           <div className={styles.TopN}>
-            <h1>Notification</h1>
+            <h2>Notification</h2>
             <hr />
           </div>
           <div className={styles.notificationList}>

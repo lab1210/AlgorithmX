@@ -42,7 +42,6 @@
 }
 .overviewCards {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
 }
 .overviewCardItem {
@@ -51,10 +50,11 @@
   color: rgba(255, 255, 255, 1);
   display: grid;
   align-items: center;
-  grid-template-columns: 70px 1fr;
+  grid-template-columns: 60px 1fr;
   gap: 10px;
   margin-bottom: 10px;
 }
+
 .content:hover {
   opacity: 0.6;
 }
@@ -79,9 +79,27 @@
 .overviewCardItem h4 {
   font-size: 18px;
   margin-bottom: 10px;
+  max-width: 100%;
+  overflow-wrap: break-word;
 }
 .overviewCardItem p {
   font-size: 12px;
+  max-width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .overviewCardItem p {
+    overflow-wrap: break-word;
+  }
+  .overviewCards {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+@media (min-width: 1200px) {
+  .overviewCards {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .Fees {

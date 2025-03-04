@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../Studentlayout";
 import styles from "../../../css/layout.module.css";
 import { useUser } from "../context/UserProvider";
@@ -7,11 +7,17 @@ import styles2 from "../../../Components/StudentDashBoard/Pages/css/Fees.module.
 import { FaArrowRight } from "react-icons/fa";
 import dummysession from "../../../Components/session";
 import dummyterm from "../../../Components/Term";
+import { LuArrowDownUp } from "react-icons/lu";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 const FeesPaymentItem = () => {
   const { user, isLoading } = useUser();
   const [term, setTerm] = useState("");
   const [session, setSession] = useState(dummysession[0]);
+  const searchParams = useSearchParams();
+  const schoolId = searchParams.get("schoolid");
+  const userId = searchParams.get("userid");
   if (isLoading) {
     return (
       <div className={styles.loadingContainer}>
@@ -21,11 +27,33 @@ const FeesPaymentItem = () => {
     );
   }
 
+  const formatCurrency = (amount) => {
+    return amount.toLocaleString("en-US", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  };
+
+  const totalAmountBilled = user.fees.reduce(
+    (sum, fee) => sum + fee.AmountBilled,
+    0
+  );
+
+  const totalAmountPaid = user.fees.reduce(
+    (sum, fee) => sum + fee.AmountPaid,
+    0
+  );
+
+  const totalAmountPending = totalAmountBilled - totalAmountPaid;
+
   return (
     <Layout>
       <div className={styles2.FeeContainer}>
         <div className={styles2.firstCard}>
-          <div className={styles2.firstCardItem1}>
+          <Link
+            href={`/Student/Fees-Payment/Make-Payment?schoolid=${schoolId}&userid=${userId}`}
+            className={styles2.firstCardItem1}
+          >
             <div className={styles2.TopSection}>
               <div className={styles2.CardDetails}>
                 <h4> Make Payment</h4>
@@ -43,7 +71,7 @@ const FeesPaymentItem = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </Link>
           <div className={styles2.firstCardItem2}>
             <div className={styles2.TopSection}>
               <div className={styles2.CardDetails}>
@@ -126,22 +154,64 @@ const FeesPaymentItem = () => {
                   <th>Transaction Number</th>
                   <th>Amount Billed</th>
                   <th>Amount Paid</th>
-                  <th>Payment</th>
+                  <th>Payment Date</th>
                 </tr>
               </thead>
               <tbody>
                 {user.fees.map((item, index) => {
-                  <tr key={index}>
-                    <td>{index+1}</td>
-                    <td>{item.purpose}</td>
-                    <td>{item.TransactionNumber}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>;
+                  return (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{item.purpose}</td>
+                      <td>{item.TransactionNumber}</td>
+                      <td>{formatCurrency(item.AmountBilled)}</td>
+                      <td> {formatCurrency(item.AmountPaid)}</td>
+                      <td
+                        className={
+                          item.PaymentDate === "Pending"
+                            ? styles2.red
+                            : styles2.filter
+                        }
+                      >
+                        {item.PaymentDate}
+                        <span>
+                          <LuArrowDownUp />
+                        </span>
+                      </td>
+                    </tr>
+                  );
                 })}
               </tbody>
             </table>
+
+            <div className={styles2.tableBottom}>
+              <div className={styles2.tableBottomItem}>
+                <p>
+                  Amount brought forward:
+                  <span>Nil</span>
+                </p>
+              </div>
+              <div className={styles2.tableBottomItem}>
+                <p>
+                  Total Charges:
+                  <span>{formatCurrency(totalAmountBilled)}</span>
+                </p>
+              </div>
+              <div className={styles2.tableBottomItem}>
+                <p>
+                  Amount Paid:
+                  <span>{formatCurrency(totalAmountPaid)}</span>
+                </p>
+              </div>
+              <div className={styles2.tableBottomItem}>
+                <p>
+                  Amount Pending:{" "}
+                  <span className={styles2.redSpan}>
+                    {formatCurrency(totalAmountPending)}
+                  </span>
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

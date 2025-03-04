@@ -1,4 +1,4 @@
-.FeeContainer{
+.FeeContainer {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -13,14 +13,73 @@
 .firstCard {
   display: flex;
   align-items: center;
-  padding: 34px 50px;
-  justify-content: space-between;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .firstCard {
     padding: 25px 10px;
     justify-content: space-between;
+  }
+  .firstCardItem1 .TopSection,
+  .firstCardItem2 .TopSection {
+    padding: 15px;
+    grid-template-columns: 180px 1fr;
+    justify-content: space-between;
+  }
+  .dropdown {
+    gap: 10px;
+  }
+  .dropdown label {
+    font-size: 10px;
+  }
+  .dropdown select {
+    font-size: 12px;
+    padding: 2px;
+  }
+
+  .firstrow button {
+    font-size: 14px;
+    padding: 14px 30px;
+  }
+  .secondrow p {
+    font-size: 12px;
+  }
+  .tableBottom p {
+    font-size: 10px;
+  }
+}
+@media (min-width: 1250px) {
+  .firstCard {
+    padding: 25px 10px;
+    justify-content: space-around;
+  }
+  .firstCardItem1 .TopSection,
+  .firstCardItem2 .TopSection {
+    padding: 20px;
+    grid-template-columns: 200px 1fr;
+    justify-content: space-between;
+  }
+  .dropdown {
+    gap: 30px;
+  }
+  .dropdown label {
+    font-size: 12px;
+  }
+  .dropdown select {
+    font-size: 14px;
+    padding: 5px;
+  }
+
+  .firstrow button {
+    font-size: 16px;
+
+    padding: 16px 32px;
+  }
+  .secondrow p {
+    font-size: 14px;
+  }
+  .tableBottom p {
+    font-size: 13px;
   }
 }
 .firstCardItem1 {
@@ -30,9 +89,7 @@
 }
 .firstCardItem1 .TopSection,
 .firstCardItem2 .TopSection {
-  padding: 20px;
   display: grid;
-  grid-template-columns: 200px 1fr;
   justify-content: space-between;
   align-items: center;
 }
@@ -84,83 +141,186 @@
   align-items: center;
   padding: 2px;
 }
-.firstCardItem1 .info svg{
-  color:#39779F ;
+.firstCardItem1 .info svg {
+  color: #39779f;
 }
-.firstCardItem2 .info svg{
-  color: #E03A3D;
+.firstCardItem2 .info svg {
+  color: #e03a3d;
 }
 .info div svg {
   object-fit: contain;
   width: 100%;
 }
 
-.secondCard{
+.secondCard {
   padding: 20px;
 }
-.thirdCard{
+.thirdCard {
   padding: 20px;
 }
-.firstrow{
+.firstrow {
   display: grid;
   grid-template-columns: 1fr 1fr auto;
   margin-bottom: 30px;
 }
-.dropdown{
+.dropdown {
   display: flex;
-  gap: 30px;
   align-items: center;
 }
-.dropdown label{
+.dropdown label {
   font-weight: 400;
-  font-size: 14px;
 }
-.dropdown select{
-  background-color: #CFCFCF66;
+.dropdown select {
+  background-color: #cfcfcf66;
   border-radius: 10px;
   border: none;
   outline: none;
   font-weight: 400;
-  font-size: 16px;
-  padding: 5px
 }
 
-.firstrow button{
-  background-color: #0B71B5;
+.firstrow button {
+  background-color: #0b71b5;
   color: #ffffff;
   font-weight: 700;
-  font-size: 16px;
   border: none;
   outline: none;
-  padding: 16px 32px;
   border-radius: 8px;
+  transition: background-color 0.3s ease-in-out;
 }
-.secondrow{
+.firstrow button:hover {
+  background-color: #f94144;
+  opacity: 0.7;
+}
+.secondrow {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
   margin-bottom: 20px;
-
 }
-.secondrow p{
+.secondrow p {
   font-weight: 700;
-  font-size: 14px;
 }
 
-.feesTable thead{
-  background-color: #F94144;
+.feesTable thead {
+  background-color: #f94144;
   color: #ffffff;
   font-weight: 700;
-  font-size: 16px;
+  text-align: left;
 }
 
-.feesTable table{
-  border-width: 1px, 0px, 0px, 1px;
+.feesTable table {
+  border-radius: 4px;
+  font-size: 12px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.feesTable tbody {
+  background-color: #ffffff;
+}
 
-  border-style: solid;
-  
-  border-color: #CFCFCFCF;
-  
-  ;
+.feesTable th,
+.feesTable td {
+  border: 1px solid #cfcfcfcf;
+  padding: 6px 8px 6px 8px;
+}
+.red {
+  color: #dd1b10;
+}
+
+.tableBottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.tableBottomItem p {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.tableBottomItem p span {
+  background-color: #cfcfcf66;
+  border-radius: 10px;
+  padding: 2px;
+  font-weight: 400;
+}
+.filter,
+.red {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.filter span,
+.red span {
+  color: #cfcfcfcf;
+  cursor: pointer;
+}
+
+.redSpan {
+  background-color: #f94144 !important;
+  color: #ffffff;
+}
+
+@media (min-width: 1024px) {
+  .MakePaymentGrid {
+    grid-template-rows: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .MakePaymentGrid {
+    grid-template-rows: repeat(4, 1fr);
+  }
+}
+.MakePaymentGrid {
+  display: grid;
+}
+.MakePaymentGrid div {
+  background-color: #ffffff;
+}
+.MakePaymentItem1 {
+  padding: 10px 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  border-radius: 10px;
+}
+.linecompleted {
+  border-top: 2px solid #000000;
+  width: 100%;
+}
+.line {
+  border-top: 2px solid #c9c9c9;
+  width: 100%;
+}
+.block2 span {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  color: #c9c9c9;
+  border: 2px solid #c9c9c9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  font-size: 10px;
+}
+.MakePaymentItem1 .block1 {
+  display: flex;
+  font-size: 10px;
+  align-items: center;
+  font-weight: 400;
+  gap: 5px;
+}
+.block2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  min-width: 100px;
+  text-align: center;
+}
+.MakePaymentItem1 .completed,
+.MakePaymentItem1 .incomplete {
+  display: flex;
 }

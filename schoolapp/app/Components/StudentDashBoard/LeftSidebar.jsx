@@ -11,12 +11,15 @@ import { FaRegUser } from "react-icons/fa6";
 import { TbLogout } from "react-icons/tb";
 import { useSearchParams, usePathname } from "next/navigation";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 const LeftSidebar = ({ setUser }) => {
+  const route = useRouter();
   const searchParams = useSearchParams();
   const schoolId = searchParams.get("schoolid");
   const userId = searchParams.get("userid");
   const pathname = usePathname();
   const handleLogout = () => {
+    router.push("/");
     setUser(null);
   };
   const StudentLeft = [
@@ -61,7 +64,7 @@ const LeftSidebar = ({ setUser }) => {
     },
   ];
   return (
-    <>
+    <div className={styles.leftsidebar}>
       <div className={styles.Logo}>
         <div className={styles.logoimg}>
           <img src="/logo.svg" alt="logo" />
@@ -103,7 +106,7 @@ const LeftSidebar = ({ setUser }) => {
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
