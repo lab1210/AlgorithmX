@@ -37,6 +37,29 @@ const dummyUsers = [
         AmountPaid: 20000,
         PaymentDate: "07/09/23",
       },
+      {
+        purpose: "Payment Charge",
+        TransactionNumber: "PC01",
+        AmountBilled: 650,
+        AmountPaid: 0,
+        PaymentDate: "Pending",
+      },
+    ],
+    receipts: [
+      {
+        purpose: "Admission Acceptance Fee",
+        TransactionNumber: "TD01",
+        AmountBilled: 52000,
+        AmountPaid: 52000,
+        // PaymentDate: "07/09/23", // Removed from receipts
+      },
+      {
+        purpose: "Extracurricular Sports Mentorship",
+        TransactionNumber: "TD04",
+        AmountBilled: 20000,
+        AmountPaid: 20000,
+        //PaymentDate: "07/09/23", // Removed from receipts
+      },
     ],
   },
   {
@@ -53,8 +76,10 @@ const dummyUsers = [
     schoolid: "SCH003",
     pin: "9012",
     username: "Bob Johnson",
+
     password: "password",
     Role: "Student",
+    class: "JSS 1",
     profilePic: "/female.png",
     fees: [
       {
@@ -84,6 +109,29 @@ const dummyUsers = [
         AmountBilled: 20000,
         AmountPaid: 20000,
         PaymentDate: "07/09/23",
+      },
+      {
+        purpose: "Payment Charge",
+        TransactionNumber: "PC01",
+        AmountBilled: 650,
+        AmountPaid: 0,
+        PaymentDate: "Pending",
+      },
+    ],
+    receipts: [
+      {
+        purpose: "Admission Acceptance Fee",
+        TransactionNumber: "TD01",
+        AmountBilled: 52000,
+        AmountPaid: 52000,
+        // PaymentDate: "07/09/23", // Removed from receipts
+      },
+      {
+        purpose: "Extracurricular Sports Mentorship",
+        TransactionNumber: "TD04",
+        AmountBilled: 20000,
+        AmountPaid: 20000,
+        //PaymentDate: "07/09/23", // Removed from receipts
       },
     ],
   },
@@ -124,6 +172,29 @@ const dummyUsers = [
         AmountPaid: 20000,
         PaymentDate: "07/09/23",
       },
+      {
+        purpose: "Payment Charge",
+        TransactionNumber: "PC01",
+        AmountBilled: 650,
+        AmountPaid: 0,
+        PaymentDate: "Pending",
+      },
+    ],
+    receipts: [
+      {
+        purpose: "Admission Acceptance Fee",
+        TransactionNumber: "TD01",
+        AmountBilled: 52000,
+        AmountPaid: 52000,
+        // PaymentDate: "07/09/23", // Removed from receipts
+      },
+      {
+        purpose: "Extracurricular Sports Mentorship",
+        TransactionNumber: "TD04",
+        AmountBilled: 20000,
+        AmountPaid: 20000,
+        //PaymentDate: "07/09/23", // Removed from receipts
+      },
     ],
   },
   {
@@ -162,6 +233,29 @@ const dummyUsers = [
         AmountBilled: 20000,
         AmountPaid: 20000,
         PaymentDate: "07/09/23",
+      },
+      {
+        purpose: "Payment Charge",
+        TransactionNumber: "PC01",
+        AmountBilled: 650,
+        AmountPaid: 0,
+        PaymentDate: "Pending",
+      },
+    ],
+    receipts: [
+      {
+        purpose: "Admission Acceptance Fee",
+        TransactionNumber: "TD01",
+        AmountBilled: 52000,
+        AmountPaid: 52000,
+        // PaymentDate: "07/09/23", // Removed from receipts
+      },
+      {
+        purpose: "Extracurricular Sports Mentorship",
+        TransactionNumber: "TD04",
+        AmountBilled: 20000,
+        AmountPaid: 20000,
+        //PaymentDate: "07/09/23", // Removed from receipts
       },
     ],
   },

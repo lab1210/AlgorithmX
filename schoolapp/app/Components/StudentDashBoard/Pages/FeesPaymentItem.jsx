@@ -10,7 +10,7 @@ import dummyterm from "../../../Components/Term";
 import { LuArrowDownUp } from "react-icons/lu";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-
+import downloadPdf from "../../Print/DownloadasPdf";
 const FeesPaymentItem = () => {
   const { user, isLoading } = useUser();
   const [term, setTerm] = useState("");
@@ -26,6 +26,13 @@ const FeesPaymentItem = () => {
       </div>
     );
   }
+
+  const handleDownloadPDF = () => {
+    downloadPdf(
+      `.${styles2.thirdCard}`,
+      `${user.username}-Statement-of-Account-${session}-${term}.pdf`
+    );
+  };
 
   const formatCurrency = (amount) => {
     return amount.toLocaleString("en-US", {
@@ -72,7 +79,10 @@ const FeesPaymentItem = () => {
               </div>
             </div>
           </Link>
-          <div className={styles2.firstCardItem2}>
+          <Link
+            href={`/Student/Fees-Payment/Receipt?schoolid=${schoolId}&userid=${userId}`}
+            className={styles2.firstCardItem2}
+          >
             <div className={styles2.TopSection}>
               <div className={styles2.CardDetails}>
                 <h4> Receipt</h4>
@@ -90,7 +100,7 @@ const FeesPaymentItem = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </Link>
         </div>
         <div className={styles2.secondCard}>
           <h3>Statement of Account</h3>
@@ -136,7 +146,7 @@ const FeesPaymentItem = () => {
               </select>
             </div>
             <div>
-              <button>Print</button>
+              <button onClick={handleDownloadPDF}>Print</button>
             </div>
           </div>
           <div className={styles2.secondrow}>
