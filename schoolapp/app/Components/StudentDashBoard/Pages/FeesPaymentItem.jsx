@@ -10,7 +10,6 @@ import dummyterm from "../../../Components/Term";
 import { LuArrowDownUp } from "react-icons/lu";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import downloadPdf from "../../Print/DownloadasPdf";
 const FeesPaymentItem = () => {
   const { user, isLoading } = useUser();
   const [term, setTerm] = useState("");
@@ -18,6 +17,14 @@ const FeesPaymentItem = () => {
   const searchParams = useSearchParams();
   const schoolId = searchParams.get("schoolid");
   const userId = searchParams.get("userid");
+
+  const [downloadPdf, setDownloadPdf] = useState(null);
+
+  useEffect(() => {
+    import("../../Print/DownloadasPdf").then((module) => {
+      setDownloadPdf(() => module.default);
+    });
+  });
   if (isLoading) {
     return (
       <div className={styles.loadingContainer}>
@@ -28,10 +35,14 @@ const FeesPaymentItem = () => {
   }
 
   const handleDownloadPDF = () => {
-    downloadPdf(
-      `.${styles2.thirdCard}`,
-      `${user.username}-Statement-of-Account-${session}-${term}.pdf`
-    );
+    if (downloadPdf) {
+      downloadPdf(
+        `.${styles.thirdCard}`,
+        `${user.username}-Statement-of-Account-${session}-${term}.pdf`
+      );
+    } else {
+      console.error("downloadPdf not loaded yet.");
+    }
   };
 
   const formatCurrency = (amount) => {

@@ -1,14 +1,20 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../Studentlayout";
 import styles from "../Pages/css/Receiptitem.module.css";
 import styles2 from "../../../css/layout.module.css";
 import dummysession from "../../session";
 import { useUser } from "../context/UserProvider";
-import downloadPdf from "../../Print/DownloadasPdf";
 const ReceiptItem = () => {
   const [session, setSession] = useState(dummysession[0]);
   const { user, isLoading } = useUser();
+  const [downloadPdf, setDownloadPdf] = useState(null);
+
+  useEffect(() => {
+    import("../../Print/DownloadasPdf").then((module) => {
+      setDownloadPdf(() => module.default);
+    });
+  });
 
   if (isLoading) {
     return (
@@ -20,10 +26,14 @@ const ReceiptItem = () => {
   }
 
   const handleDownloadPDF = () => {
-    downloadPdf(
-      `.${styles.ReceiptPageContent}`,
-      `${user.username}-Receipt.pdf`
-    );
+    if (downloadPdf) {
+      downloadPdf(
+        `.${styles.ReceiptPageContent}`,
+        `${user.username}-Receipt.pdf`
+      );
+    } else {
+      console.error("downloadPdf not loaded yet.");
+    }
   };
 
   return (

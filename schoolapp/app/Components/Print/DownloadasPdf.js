@@ -1,7 +1,7 @@
 "use client";
 import html2pdf from "html2pdf.js";
 
-const downloadAsPDF = (selector, filename = "Document.pdf") => {
+const downloadPdf = (selector, filename = "Document.pdf") => {
   const element = document.querySelector(selector);
 
   if (!element) {
@@ -20,4 +20,4 @@ const downloadAsPDF = (selector, filename = "Document.pdf") => {
   html2pdf().from(element).set(opt).save();
 };
 
-export default downloadAsPDF;
+export default downloadPdf;
