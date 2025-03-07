@@ -37,7 +37,7 @@ const FeesPaymentItem = () => {
   const handleDownloadPDF = () => {
     if (downloadPdf) {
       downloadPdf(
-        `.${styles.thirdCard}`,
+        `.${styles2.thirdCard}`,
         `${user.username}-Statement-of-Account-${session}-${term}.pdf`
       );
     } else {
