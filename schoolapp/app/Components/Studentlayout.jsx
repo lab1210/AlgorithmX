@@ -26,7 +26,7 @@ const Layout = ({ children }) => {
       };
     }
 
-    return formattedParts.join(" / ") || "Dashboard";
+    return formattedParts.join(" / ") || "Dashboard]";
   };
 
   useEffect(() => {

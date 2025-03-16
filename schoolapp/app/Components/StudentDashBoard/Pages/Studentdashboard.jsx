@@ -1,7 +1,5 @@
 "use client";
 import React from "react";
-import styles2 from "./css/dashboard.module.css";
-import styles from "../../../css/layout.module.css";
 import Layout from "../../../Components/Studentlayout";
 import { useUser } from "../context/UserProvider";
 import { IoWalletOutline } from "react-icons/io5";
@@ -18,6 +16,7 @@ const Studentdashboard = () => {
   const searchParams = useSearchParams();
   const schoolId = searchParams.get("schoolid");
   const userId = searchParams.get("userid");
+
   const overview = [
     {
       id: "Fees",
@@ -37,7 +36,7 @@ const Studentdashboard = () => {
       id: "attendance",
       icon: <BiPieChart size={50} />,
       title: "Attendance",
-      description: "View class and  event attendance",
+      description: "View class and event attendance",
       Link: "/Student/Attendance",
     },
     {
@@ -62,46 +61,67 @@ const Studentdashboard = () => {
 
   if (isLoading) {
     return (
-      <div className={styles.loadingContainer}>
-        {" "}
-        <div className={styles.spinner}></div> {/* New: Spinner element */}
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex justify-center items-center w-full h-full z-[1000]">
+        <div className="border-4 border-[rgba(0,64,128,1)] border-t-[rgba(249,65,68,1)] rounded-full w-[50px] h-[50px] animate-spin"></div>
       </div>
     );
   }
   const name = user.username.split(" ")[0];
+
+  // Mapping background colors for cards and their icon containers
+  const cardBg = {
+    Fees: "bg-[rgba(11,113,181,1)]",
+    result: "bg-[rgba(249,65,68,1)]",
+    attendance: "bg-[rgba(255,221,41,1)]",
+    Registration: "bg-[rgba(255,46,121,1)]",
+    timetable: "bg-[rgba(57,1,129,1)]",
+    health: "bg-[rgba(0,128,0,1)]",
+  };
+
+  const iconBg = {
+    Fees: "bg-[rgba(128,173,203,1)]",
+    result: "bg-[rgba(242,100,92,1)]",
+    attendance: "bg-[rgba(255,232,112,1)]",
+    Registration: "bg-[rgba(254,109,161,1)]",
+    timetable: "bg-[rgba(103,57,163,1)]",
+    health: "bg-[rgba(107,181,107,1)]",
+  };
+
   return (
     <Layout>
-      <div className={styles2.DashboardContainer}>
-        <div className={styles2.top}>
-          <div className={styles2.greeting}>
-            <h1>Hi, {name}</h1>
-            <p>Welcome to the official Foursquare student portal.</p>
+      {/* Grid container replicating the LayoutGrid */}
+      <div className="grid w-full h-screen md:[grid-template-columns:150px_minmax(200px,_1fr)_250px] xl:[grid-template-columns:160px_1fr_300px] md:px-[15px] md:pt-[10px] xl:px-[15px] xl:pt-[15px]">
+        <div className="flex flex-col gap-[30px]">
+          {/* Top Section */}
+          <div className="min-w-[1000px] min-h-[180px] bg-[#004080] rounded-[15px] py-[15px] px-[20px] flex justify-between items-center">
+            <div className="text-white font-bold">
+              <h1 className="text-[2.5rem] mb-[15px]">Hi, {name}</h1>
+              <p className="text-base">Welcome to the official Foursquare student portal.</p>
+            </div>
+            <div className="max-w-[200px]">
+              <img src="/female_teacher.svg" alt="Teacher" className="w-full object-contain" />
+            </div>
           </div>
-          <div className={styles2.topImg}>
-            <img src="/female_teacher.svg" alt="" />
-          </div>
-        </div>
-        <div className={styles2.overview}>
-          <h2>Overview</h2>
-          <div className={styles2.overviewCards}>
-            {overview.map((item, index) => {
-              const cardClass = styles2[item.id];
-              const fullClass = `${styles2.overviewCardItem} ${cardClass}`;
-
-              return (
+          {/* Overview Section */}
+          <div className="bg-white font-bold rounded-[15px] pt-[25px] pb-[15px] px-[10px] min-w-[1000px]">
+            <h2 className="text-[25px] mb-[50px]">Overview</h2>
+            <div className="grid gap-[20px] grid-cols-3 md:grid-cols-2 lg:grid-cols-3">
+              {overview.map((item, index) => (
                 <Link
                   key={index}
                   href={`${item.Link}?schoolid=${schoolId}&userid=${userId}`}
-                  className={fullClass}
+                  className={`${cardBg[item.id]} rounded-[15px] p-[30px] text-white grid items-center grid-cols-[70px_1fr] gap-[20px] mb-[20px] min-w-[300px] min-h-[120px]`}
                 >
-                  <div className={styles2.iconContainer}>{item.icon}</div>
-                  <div className={styles2.content}>
-                    <h4>{item.title}</h4>
-                    <p>{item.description}</p>
+                  <div className={`${iconBg[item.id]} flex w-fit items-center text-white rounded-[10px] pr-2 ml-2`}>
+                    {item.icon}
+                  </div>
+                  <div className="text-white cursor-pointer group hover:opacity-60 transition">
+                    <h4 className="text-[20px] mb-[10px] break-words">{item.title}</h4>
+                    <p className="text-[14px] group-hover:scale-90 transition">{item.description}</p>
                   </div>
                 </Link>
-              );
-            })}
+              ))}
+            </div>
           </div>
         </div>
       </div>
