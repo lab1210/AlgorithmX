@@ -1,10 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { IoChevronDownOutline } from "react-icons/io5";
-import { IoNotificationsOutline } from "react-icons/io5";
-import { IoChevronBackSharp } from "react-icons/io5";
-import { IoChevronForward } from "react-icons/io5";
-import styles from "../../css/layout.module.css";
+import { IoChevronDownOutline, IoNotificationsOutline, IoChevronBackSharp, IoChevronForward } from "react-icons/io5";
 import {
   format,
   startOfWeek,
@@ -72,157 +68,139 @@ const RightSidebar = ({ user }) => {
 
   console.log(user);
   return (
-    <div className={styles.Rightcontainer}>
-      <div className={styles.NotificationProfile}>
-        <div className={styles.icon}>
-          <IoNotificationsOutline
-            size={30}
+    <div className="h-screen bg-white md:px-3 xl:pl-6">
+      <div className="flex gap-4 items-center py-4">
+        <div className="relative">
+          <IoNotificationsOutline 
+            className="text-gray-800 w-8 h-8 cursor-pointer transition-colors hover:text-gray-400"
             onClick={() => setIsnotification(!isnotification)}
           />
-          <div
-            className={
-              isnotification
-                ? styles.notificationcount
-                : styles.notificationcounthide
-            }
-          ></div>
+          {isnotification && (
+            <div className="absolute top-1 right-1 w-2 h-2 rounded-full bg-red-500"></div>
+          )}
         </div>
-        <div className={styles.profilename}>
-          <div className={styles.profileimg}>
-            {user && user.profilePic && <img src={user.profilePic} alt="" />}
+        <div className="flex items-center gap-2">
+          <div className="rounded-full overflow-hidden w-12 h-12 md:w-10 md:h-10 xl:w-12 xl:h-12">
+            {user?.profilePic && <img src={user.profilePic} alt="" className="w-full h-full object-cover" />}
           </div>
-          <div className={styles.NameIcon}>
-            <div>
-              <p className={styles.username}>{user.username}</p>
-            </div>
-            <div>
-              <IoChevronDownOutline size={12} />
-            </div>
+          <div className="hidden xl:flex items-center gap-1">
+            <p className="font-bold text-sm">{user?.username}</p>
+            <IoChevronDownOutline className="w-3 h-3" />
           </div>
         </div>
       </div>
-      <div className={styles.down}>
-        <div className={styles.events}>
-          <div className={styles.top}>
-            <h2>Events</h2>
-            <div className={styles.calender}>
-              <p className={styles.title}>Date</p>
-              <div className={styles.MonthArrow}>
-                <p className={styles.day}>{format(currentDate, "MMM yyy")}</p>
-                <div className={styles.arrows}>
-                  <div onClick={() => handleMonthChange("prev")}>
-                    <IoChevronBackSharp />
-                  </div>
-                  <div onClick={() => handleMonthChange("next")}>
-                    <IoChevronForward />
-                  </div>
+
+      <div className="space-y-4">
+        {/* Events Section */}
+        <div className="bg-blue-900 text-white rounded-xl p-4 shadow-lg">
+          <div className="space-y-4">
+            <h2 className="text-xl font-bold">Events</h2>
+            <div className="space-y-2">
+              <p className="text-xs text-gray-300">Date</p>
+              <div className="flex justify-between items-center">
+                <p className="text-xs">{format(currentDate, "MMM yyy")}</p>
+                <div className="flex gap-1">
+                  <button 
+                    onClick={() => handleMonthChange("prev")}
+                    className="bg-white text-black rounded-full w-4 h-4 flex items-center justify-center"
+                  >
+                    <IoChevronBackSharp className="w-3 h-3" />
+                  </button>
+                  <button
+                    onClick={() => handleMonthChange("next")}
+                    className="bg-white text-black rounded-full w-4 h-4 flex items-center justify-center"
+                  >
+                    <IoChevronForward className="w-3 h-3" />
+                  </button>
                 </div>
               </div>
             </div>
-            <div className={styles.Dategrid}>
-              <div className={styles.weekdays}>
-                {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(
-                  (day) => (
-                    <div key={day}>{day}</div>
-                  )
-                )}
+
+            {/* Calendar Grid */}
+            <div className="space-y-2">
+              <div className="flex justify-between text-gray-300 text-xs">
+                {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(day => (
+                  <span key={day}>{day}</span>
+                ))}
               </div>
-              <div className={styles.dates}>
-                {days.map((day) => (
-                  <div key={day.toISOString()} className={styles.date}>
+              <div className="flex justify-between text-xs">
+                {days.map(day => (
+                  <div key={day.toISOString()} className="relative">
                     {format(day, "d")}
-                    {dummyevents
-                      .filter((event) => {
-                        const eventDate = parseISO(event.date);
-                        return (
-                          isSameDay(eventDate, day) &&
-                          isSameMonth(eventDate, day)
-                        );
-                      })
-                      .map((index) => (
-                        <div key={index} className={styles.eventDot}></div>
-                      ))}
+                    {dummyevents.filter(event => {
+                      const eventDate = parseISO(event.date);
+                      return isSameDay(eventDate, day) && isSameMonth(eventDate, day);
+                    }).map((_, i) => (
+                      <div key={i} className="absolute bottom-0 left-1/2 w-1 h-1 bg-red-500 rounded-full"></div>
+                    ))}
                   </div>
                 ))}
               </div>
-              <hr />
             </div>
           </div>
-          <div className={styles.eventlist}>
-            <ul>
-              {dummyevents.map((event, index) => (
-                <li
-                  key={index}
-                  className={clickedEventIndex === index ? styles.changebg : ""}
-                >
-                  <div className={styles.eventItem}>
-                    <div
-                      className={`${styles.eventDate} ${
-                        clickedEventIndex === index
-                          ? styles.eventDateClicked
-                          : "" // Apply color change
-                      }`}
-                    >
-                      <span className={styles.day}>
-                        {format(parseISO(event.date), "EEE")}
-                      </span>{" "}
-                      <span className={styles.date}>
-                        {format(parseISO(event.date), "dd")}
-                      </span>{" "}
+
+          {/* Event List */}
+          <ul className="mt-4 space-y-2">
+          <hr className="border-t border-gray-300" />
+            {dummyevents.map((event, index) => (
+              <li
+                key={index}
+                className={`rounded-lg p-2 transition-colors ${
+                  clickedEventIndex === index ? 'bg-blue-700' : ''
+                }`}
+              >
+                <div className="grid grid-cols-[48px_1fr] gap-2">
+                  <div className={`rounded-lg p-1 text-center ${
+                    clickedEventIndex === index ? 'bg-transparent text-white' : 'bg-white text-black'
+                  }`}>
+                    <div className="text-xs font-light">
+                      {format(parseISO(event.date), "EEE")}
                     </div>
-                    <div
-                      className={styles.detailsCont}
-                      onClick={() => {
-                        handleItemClick(index);
-                      }}
-                    >
-                      <div className={styles.eventDetails}>
-                        <div>
-                          <h5>{event.title}</h5>
-                          <p
-                            className={
-                              clickedEventIndex === index
-                                ? styles.eventDetailsClicked
-                                : ""
-                            }
-                          >
-                            {event.description}
-                          </p>
-                        </div>
-                        <div className={styles.detailarrow}>
-                          <IoChevronForward />
-                        </div>
-                      </div>
+                    <div className="text-2xl">
+                      {format(parseISO(event.date), "dd")}
                     </div>
                   </div>
-                </li>
-              ))}
-            </ul>
-          </div>
+                  <div 
+                    className="flex justify-between items-center cursor-pointer"
+                    onClick={() => handleItemClick(index)}
+                  >
+                    <div>
+                      <h5 className="text-xs font-bold text-white">{event.title}</h5>
+                      <p className={`text-[8px] ${
+                        clickedEventIndex === index ? 'text-blue-200' : 'text-black'
+                      }`}>
+                        {event.description}
+                      </p>
+                    </div>
+                    <div className="bg-white rounded-full w-4 h-4 flex items-center justify-center">
+                      <IoChevronForward className="w-3 h-3 text-black" />
+                    </div>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        <div className={styles.notification}>
-          <div className={styles.TopN}>
-            <h2>Notification</h2>
-            <hr />
+        {/* Notifications Section */}
+        <div className="bg-red-500 text-white rounded-xl p-4 shadow-lg">
+          <div className="text-center mb-4">
+            <h2 className="text-xl font-bold">Notification</h2>
+            <hr className="my-2 border-white" />
           </div>
-          <div className={styles.notificationList}>
-            <ul>
-              {dummyNotifications.map((item, index) => {
-                return (
-                  <li key={index}>
-                    <div className={styles.notificationdetails}>
-                      <span className={styles.Ntitle}>{item.title}</span>
-                      <span className={styles.Ndesc}>{item.description}</span>
-                    </div>
-                    <div className={styles.Narrow}>
-                      <IoChevronForward />
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+          <ul className="space-y-2">
+            {dummyNotifications.map((item, index) => (
+              <li key={index} className="bg-white rounded p-2 flex justify-between items-center">
+                <div className="text-black">
+                  <div className="text-xs font-bold">{item.title}</div>
+                  <div className="text-[10px]">{item.description}</div>
+                </div>
+                <div className="bg-red-500 rounded-full w-5 h-5 flex items-center justify-center">
+                  <IoChevronForward className="w-3 h-3 text-white" />
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>

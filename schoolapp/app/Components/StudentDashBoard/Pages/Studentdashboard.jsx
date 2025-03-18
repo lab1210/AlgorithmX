@@ -110,9 +110,9 @@ const Studentdashboard = () => {
                 <Link
                   key={index}
                   href={`${item.Link}?schoolid=${schoolId}&userid=${userId}`}
-                  className={`${cardBg[item.id]} rounded-[15px] p-[30px] text-white grid items-center grid-cols-[70px_1fr] gap-[20px] mb-[20px] min-w-[300px] min-h-[120px]`}
+                  className={`${cardBg[item.id]} rounded-[15px] p-[30px] text-white grid items-center grid-cols-[40px_1fr] gap-[15px] mb-[15px] min-w-[250] min-h-[100px]`}
                 >
-                  <div className={`${iconBg[item.id]} flex w-fit items-center text-white rounded-[10px] pr-2 ml-2`}>
+                  <div className={`${iconBg[item.id]} flex w-fit items-center text-white rounded-[10px] pr-0.5 ml-0.5`}>
                     {item.icon}
                   </div>
                   <div className="text-white cursor-pointer group hover:opacity-60 transition">
