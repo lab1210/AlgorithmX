@@ -1,15 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Layout from "../../Studentlayout";
-import styles from "../../../css/layout.module.css";
 import { useUser } from "../context/UserProvider";
-import styles2 from "../../../Components/StudentDashBoard/Pages/css/Fees.module.css";
 import { FaArrowRight } from "react-icons/fa";
 import dummysession from "../../../Components/session";
 import dummyterm from "../../../Components/Term";
 import { LuArrowDownUp } from "react-icons/lu";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+
 const FeesPaymentItem = () => {
   const { user, isLoading } = useUser();
   const [term, setTerm] = useState("");
@@ -24,12 +23,12 @@ const FeesPaymentItem = () => {
     import("../../Print/DownloadasPdf").then((module) => {
       setDownloadPdf(() => module.default);
     });
-  });
+  }, []);
+
   if (isLoading) {
     return (
-      <div className={styles.loadingContainer}>
-        {" "}
-        <div className={styles.spinner}></div> {/* New: Spinner element */}
+      <div className="fixed inset-0 flex items-center justify-center bg-white z-50">
+        <div className="w-12 h-12 border-4 border-blue-900 border-t-red-500 rounded-full animate-spin"></div>
       </div>
     );
   }
@@ -37,7 +36,7 @@ const FeesPaymentItem = () => {
   const handleDownloadPDF = () => {
     if (downloadPdf) {
       downloadPdf(
-        `.${styles2.thirdCard}`,
+        ".thirdCard",
         `${user.username}-Statement-of-Account-${session}-${term}.pdf`
       );
     } else {
@@ -66,172 +65,164 @@ const FeesPaymentItem = () => {
 
   return (
     <Layout>
-      <div className={styles2.FeeContainer}>
-        <div className={styles2.firstCard}>
+      <div className="flex flex-col gap-5 p-4">
+        {/* First Card Section */}
+        <div className="flex flex-col gap-4 md:flex-row md:justify-between bg-white rounded-xl p-4">
           <Link
             href={`/Student/Fees-Payment/Make-Payment?schoolid=${schoolId}&userid=${userId}`}
-            className={styles2.firstCardItem1}
+            className="bg-blue-800 text-white rounded-2xl flex-1"
           >
-            <div className={styles2.TopSection}>
-              <div className={styles2.CardDetails}>
-                <h4> Make Payment</h4>
-                <p>payment made easy</p>
+            <div className="grid grid-cols-[1fr_auto] items-center justify-between p-4 text-white">
+              <div>
+                <h4 className="text-xl font-bold mb-2">Make Payment</h4>
+                <p className="text-sm">payment made easy</p>
               </div>
-              <div className={styles2.Cardimage}>
-                <img src="/Wallet.png" alt="" />
+              <div className="max-w-[50px]">
+                <img src="/Wallet.png" alt="" className="w-full object-cover" />
               </div>
             </div>
-            <div className={styles2.BottomSection}>
-              <div className={styles2.info}>
-                <p>More info</p>
-                <div>
-                  <FaArrowRight />
+            <div className="bg-black/10 p-2 rounded-b-2xl">
+              <div className="flex items-center gap-2 justify-center">
+                <p className="text-sm text-white">More info</p>
+                <div className="w-4 h-4 bg-white rounded-full flex items-center justify-center">
+                  <FaArrowRight className="text-blue-600 text-xs" />
                 </div>
               </div>
             </div>
           </Link>
+
           <Link
             href={`/Student/Fees-Payment/Receipt?schoolid=${schoolId}&userid=${userId}`}
-            className={styles2.firstCardItem2}
+            className="bg-red-500 text-white rounded-2xl flex-1"
           >
-            <div className={styles2.TopSection}>
-              <div className={styles2.CardDetails}>
-                <h4> Receipt</h4>
-                <p>view receipt</p>
+            <div className="grid grid-cols-[1fr_auto] items-center justify-between p-4 text-white">
+              <div>
+                <h4 className="text-xl font-bold mb-2">Receipt</h4>
+                <p className="text-sm">view receipt</p>
               </div>
-              <div className={styles2.Cardimage}>
-                <img src="/Glyph.png" alt="" />
+              <div className="max-w-[50px]">
+                <img src="/Glyph.png" alt="" className="w-full object-cover" />
               </div>
             </div>
-            <div className={styles2.BottomSection}>
-              <div className={styles2.info}>
-                <p>More info</p>
-                <div>
-                  <FaArrowRight />
+            <div className="bg-black/10 p-2 rounded-b-2xl">
+              <div className="flex items-center gap-2 justify-center">
+                <p className="text-sm text-white">More info</p>
+                <div className="w-4 h-4 bg-white rounded-full flex items-center justify-center">
+                  <FaArrowRight className="text-red-500 text-xs" />
                 </div>
               </div>
             </div>
           </Link>
         </div>
-        <div className={styles2.secondCard}>
-          <h3>Statement of Account</h3>
+
+        {/* Statement Section */}
+        <div className="bg-white rounded-xl p-5">
+          <h3 className="text-xl font-bold">Statement of Account</h3>
         </div>
-        <div className={styles2.thirdCard}>
-          <div className={styles2.firstrow}>
-            <div className={styles2.dropdown}>
-              <label htmlFor="session">Select Session :</label>
+
+        {/* Table Section */}
+        <div className="bg-white rounded-xl p-5 thirdCard">
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] gap-4 mb-8">
+            <div className="flex items-center gap-2">
+              <label className="text-sm">Select Session :</label>
               <select
-                name="session"
+                className="bg-gray-100 rounded-lg px-2 py-1 text-sm"
                 value={session}
-                onChange={(e) => {
-                  setSession(e.target.value);
-                }}
-                required
+                onChange={(e) => setSession(e.target.value)}
               >
-                {dummysession.map((item, index) => {
-                  return (
-                    <option key={index} value={item}>
-                      {item}
-                    </option>
-                  );
-                })}
+                {dummysession.map((item, index) => (
+                  <option key={index} value={item}>
+                    {item}
+                  </option>
+                ))}
               </select>
             </div>
-            <div className={styles2.dropdown}>
-              <label htmlFor="term">Select Term :</label>
+
+            <div className="flex items-center gap-2">
+              <label className="text-sm">Select Term :</label>
               <select
-                name="term"
+                className="bg-gray-100 rounded-lg px-2 py-1 text-sm"
                 value={term}
-                onChange={(e) => {
-                  setTerm(e.target.value);
-                }}
-                required
+                onChange={(e) => setTerm(e.target.value)}
               >
-                {dummyterm.map((item, index) => {
-                  return (
-                    <option key={index} value={item}>
-                      {item}
-                    </option>
-                  );
-                })}
+                {dummyterm.map((item, index) => (
+                  <option key={index} value={item}>
+                    {item}
+                  </option>
+                ))}
               </select>
             </div>
-            <div>
-              <button onClick={handleDownloadPDF}>Print</button>
-            </div>
+
+            <button
+              onClick={handleDownloadPDF}
+              className="bg-blue-700 text-white rounded-lg px-4 py-2 text-sm hover:bg-red-500 transition-colors duration-300"
+            >
+              Print
+            </button>
           </div>
-          <div className={styles2.secondrow}>
-            <p>Name: {user.username}</p>
-            <p>Student ID: {user.userId}</p>
-            <p>Class: {user.class}</p>
-            <p>Session: {session}</p>
+
+          <div className="flex flex-wrap gap-4 mb-6">
+            <p className="text-sm">Name: {user.username}</p>
+            <p className="text-sm">Student ID: {user.userId}</p>
+            <p className="text-sm">Class: {user.class}</p>
+            <p className="text-sm">Session: {session}</p>
           </div>
-          <div className={styles2.feesTable}>
-            <table>
-              <thead>
+
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead className="bg-red-500 text-white">
                 <tr>
-                  <th>S/N</th>
-                  <th>Purpose</th>
-                  <th>Transaction Number</th>
-                  <th>Amount Billed</th>
-                  <th>Amount Paid</th>
-                  <th>Payment Date</th>
+                  <th className="p-3 text-left border-r border-gray-200">S/N</th>
+                  <th className="p-3 text-left border-r border-gray-200">Purpose</th>
+                  <th className="p-3 text-left border-r border-gray-200">Transaction Number</th>
+                  <th className="p-3 text-left border-r border-gray-200">Amount Billed</th>
+                  <th className="p-3 text-left border-r border-gray-200">Amount Paid</th>
+                  <th className="p-3 text-left">Payment Date</th>
                 </tr>
               </thead>
+
               <tbody>
-                {user.fees.map((item, index) => {
-                  return (
-                    <tr key={index}>
-                      <td>{index + 1}</td>
-                      <td>{item.purpose}</td>
-                      <td>{item.TransactionNumber}</td>
-                      <td>{formatCurrency(item.AmountBilled)}</td>
-                      <td> {formatCurrency(item.AmountPaid)}</td>
-                      <td
-                        className={
-                          item.PaymentDate === "Pending"
-                            ? styles2.red
-                            : styles2.filter
-                        }
-                      >
-                        {item.PaymentDate}
-                        <span>
-                          <LuArrowDownUp />
-                        </span>
-                      </td>
-                    </tr>
-                  );
-                })}
+                {user.fees.map((item, index) => (
+                  <tr key={index} className="border-b border-gray-200">
+                    <td className="p-3 border-r border-gray-200">{index + 1}</td>
+                    <td className="p-3 border-r border-gray-200">{item.purpose}</td>
+                    <td className="p-3 border-r border-gray-200">{item.TransactionNumber}</td>
+                    <td className="p-3 border-r border-gray-200">{formatCurrency(item.AmountBilled)}</td>
+                    <td className="p-3 border-r border-gray-200">{formatCurrency(item.AmountPaid)}</td>
+                    <td className={`p-3 flex items-center gap-2 ${
+                      item.PaymentDate === "Pending" ? "text-red-500" : "text-gray-700"
+                    }`}>
+                      {item.PaymentDate}
+                      <LuArrowDownUp className="text-gray-400 cursor-pointer" />
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
+          </div>
 
-            <div className={styles2.tableBottom}>
-              <div className={styles2.tableBottomItem}>
-                <p>
-                  Amount brought forward:
-                  <span>Nil</span>
-                </p>
-              </div>
-              <div className={styles2.tableBottomItem}>
-                <p>
-                  Total Charges:
-                  <span>{formatCurrency(totalAmountBilled)}</span>
-                </p>
-              </div>
-              <div className={styles2.tableBottomItem}>
-                <p>
-                  Amount Paid:
-                  <span>{formatCurrency(totalAmountPaid)}</span>
-                </p>
-              </div>
-              <div className={styles2.tableBottomItem}>
-                <p>
-                  Amount Pending:{" "}
-                  <span className={styles2.redSpan}>
-                    {formatCurrency(totalAmountPending)}
-                  </span>
-                </p>
-              </div>
+          <div className="flex flex-wrap justify-between gap-4 mt-6">
+            <div className="flex items-center gap-2">
+              <p className="text-sm">Amount brought forward:</p>
+              <span className="bg-gray-100 rounded px-2 text-sm">Nil</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <p className="text-sm">Total Charges:</p>
+              <span className="bg-gray-100 rounded px-2 text-sm">
+                {formatCurrency(totalAmountBilled)}
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <p className="text-sm">Amount Paid:</p>
+              <span className="bg-gray-100 rounded px-2 text-sm">
+                {formatCurrency(totalAmountPaid)}
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <p className="text-sm">Amount Pending:</p>
+              <span className="bg-red-500 text-white rounded px-2 text-sm">
+                {formatCurrency(totalAmountPending)}
+              </span>
             </div>
           </div>
         </div>
