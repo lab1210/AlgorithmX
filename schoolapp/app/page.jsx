@@ -40,7 +40,6 @@ export default function Login() {
       return;
     }
 
-   
     const user = dummy.find(
       (u) => u.username === username && u.password === password
     );
@@ -55,6 +54,11 @@ export default function Login() {
       } else if (user.Role === "Student") {
         console.log("Login successful (dummy):", user);
         const url = `/Student/DashBoard?schoolid=${user.schoolid}&userid=${user.userId}`;
+        console.log(url);
+        router.push(url);
+      } else if (user.Role === "Super Admin") {
+        console.log("Login successful (dummy):", user);
+        const url = `/Super-Admin/DashBoard?schoolid=${user.schoolid}&userid=${user.userId}`;
         console.log(url);
         router.push(url);
       }

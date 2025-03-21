@@ -1,0 +1,66 @@
+const school = [
+  {
+    SchoolName: "Peace International College",
+    SchoolType: "Private",
+    ShortSchName: "PIC",
+    RegDate: "13/02/2025",
+    Status: "Active",
+  },
+  {
+    SchoolName: "God's Grace College",
+    SchoolType: "Private",
+    ShortSchName: "PIC",
+    RegDate: "13/02/2025",
+    Status: "Inactive",
+  },
+  {
+    SchoolName: "Peace International College",
+    SchoolType: "Private",
+    ShortSchName: "PIC",
+    RegDate: "13/02/2025",
+    Status: "Active",
+  },
+  {
+    SchoolName: "Peace International College",
+    SchoolType: "Private",
+    ShortSchName: "PIC",
+    RegDate: "13/02/2025",
+    Status: "Active",
+  },
+  {
+    SchoolName: "Peace International College",
+    SchoolType: "Private",
+    ShortSchName: "PIC",
+    RegDate: "13/02/2025",
+    Status: "Active",
+  },
+  {
+    SchoolName: "God's Grace College",
+    SchoolType: "Private",
+    ShortSchName: "PIC",
+    RegDate: "13/02/2025",
+    Status: "Inactive",
+  },
+  {
+    SchoolName: "God's Grace College",
+    SchoolType: "Private",
+    ShortSchName: "PIC",
+    RegDate: "13/02/2025",
+    Status: "Inactive",
+  },
+  {
+    SchoolName: "Peace International College",
+    SchoolType: "Private",
+    ShortSchName: "PIC",
+    RegDate: "13/02/2025",
+    Status: "Active",
+  },
+  {
+    SchoolName: "Peace International College",
+    SchoolType: "Private",
+    ShortSchName: "PIC",
+    RegDate: "13/02/2025",
+    Status: "Active",
+  },
+];
+export default school;
