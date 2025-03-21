@@ -1,15 +1,16 @@
 "use client";
 import React, { useState } from "react";
 import SuperAdminLayout from "../SuperAdminLayout";
-import DashboardHeader from "../DashboardHeader";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { BiChevronDown } from "react-icons/bi";
 import { Country, State, City } from "country-state-city";
 import Image from "next/image";
 import { LuUpload } from "react-icons/lu";
+import DashboardHeader from "../DashboardHeader";
+import schools from "../../school";
 
-const AddSchoolItem = () => {
+const EditSchoolAdminItem = () => {
   const searchParams = useSearchParams();
   const schoolId = searchParams.get("schoolid");
   const userId = searchParams.get("userid");
@@ -62,10 +63,10 @@ const AddSchoolItem = () => {
       <div className="bg-[#ffffff] pl-4 pt-6 pb-6 pr-4 sticky top-0  z-10 shadow-md  flex justify-between items-center ">
         <DashboardHeader />
         <Link
-          href={`/Super-Admin/Manage-Existing-Schools?schoolid=${schoolId}&userid=${userId}`}
+          href={`/Super-Admin/Manage-School-Admin?schoolid=${schoolId}&userid=${userId}`}
         >
           <button className="bg-[#07508F] text-white p-2 rounded-lg cursor-pointer ">
-            View Existing School
+            View All Admin
           </button>
         </Link>
       </div>
@@ -74,77 +75,45 @@ const AddSchoolItem = () => {
           <div className="bg-[#ffffff] rounded-lg flex flex-col lg:overflow-y-auto lg:max-h-[calc(100vh-120px)] lg:overflow-auto no-scrollbar">
             <div>
               <p className="font-bold text-xl p-6">
-                General School Information
+                Administrative Information
               </p>
               <hr className="w-full border-t border-[#978F8F]" />
             </div>
-            <form className="flex-grow flex flex-col ">
+            <form className="flex-grow flex flex-col  ">
               <div className="grid grid-cols-2 mt-6 pl-6 pr-6 gap-3 pb-0 ">
                 <div className="flex flex-col gap-1 mb-2">
                   <label className="text-[#808080] font-semibold" htmlFor="">
-                    School Name
+                    First Name
                   </label>
 
                   <input
                     type="text"
-                    className="text-base text-[#808080] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#d4d4d4] placeholder:text-[#d4d4d4] "
-                    placeholder="Enter School Name"
+                    className="text-base font-bold text-[#01427A] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#01427A] placeholder:text-[#01427A] "
+                    placeholder="Enter First Name"
                   />
                 </div>
 
                 <div className="flex flex-col gap-1 mb-2 ">
                   <label className="text-[#808080] font-semibold" htmlFor="">
-                    School Short Name
+                    Middle Name
                   </label>
 
                   <input
                     type="text"
-                    className="text-base text-[#808080] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#d4d4d4] placeholder:text-[#d4d4d4] "
-                    placeholder="Enter School Short Name"
+                    className="text-base font-bold text-[#01427A] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#01427A] placeholder:text-[#01427A] "
+                    placeholder="Enter Middle Name"
                   />
                 </div>
-
                 <div className="flex flex-col gap-1 mb-2 ">
                   <label className="text-[#808080] font-semibold" htmlFor="">
-                    School Type
+                    Last Name
                   </label>
 
-                  <div className="grid grid-cols-1 ">
-                    <select
-                      name=""
-                      id=""
-                      className=" w-full bg-white col-start-1 row-start-1 appearance-none text-base text-[#808080] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#d4d4d4] placeholder:text-[#d4d4d4] "
-                    >
-                      <option value="" disabled selected>
-                        Select School Type
-                      </option>
-                      <option value="Private">Private</option>
-                      <option value="Public">Public</option>
-                    </select>
-                    <BiChevronDown className="text-[#d4d4d4] col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end pointer-events-none" />
-                  </div>
-                </div>
-
-                <div className="flex flex-col gap-1 mb-2">
-                  <label className="text-[#808080] font-semibold" htmlFor="">
-                    Education Level
-                  </label>
-
-                  <div className="grid grid-cols-1 ">
-                    <select
-                      name=""
-                      id=""
-                      className=" w-full bg-white col-start-1 row-start-1 appearance-none text-base text-[#808080] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#d4d4d4] placeholder:text-[#d4d4d4] "
-                    >
-                      <option value="" disabled selected>
-                        Select Education Level
-                      </option>
-                      <option value="Primary">Primary</option>
-                      <option value="Junior">Junior Secondary</option>
-                      <option value="Senior">Senior Secondary</option>
-                    </select>
-                    <BiChevronDown className="text-[#d4d4d4] col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end pointer-events-none" />
-                  </div>
+                  <input
+                    type="text"
+                    className="text-base font-bold text-[#01427A] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#01427A] placeholder:text-[#01427A] "
+                    placeholder="Enter Last Name"
+                  />
                 </div>
                 <div className="flex flex-col gap-1 mb-2 ">
                   <label className="text-[#808080] font-semibold" htmlFor="">
@@ -152,32 +121,101 @@ const AddSchoolItem = () => {
                   </label>
 
                   <input
-                    type="tel"
-                    className="text-base text-[#808080] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#d4d4d4] placeholder:text-[#d4d4d4] "
+                    type="text"
+                    className="text-base font-bold text-[#01427A] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#01427A] placeholder:text-[#01427A] "
                     placeholder="Enter Phone Number"
                   />
                 </div>
-
-                <div className="flex flex-col gap-1 mb-2">
+                <div className="flex flex-col gap-1 mb-2 ">
                   <label className="text-[#808080] font-semibold" htmlFor="">
-                    School Email
+                    Email
                   </label>
 
                   <input
                     type="email"
-                    className="text-base text-[#808080] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#d4d4d4] placeholder:text-[#d4d4d4] "
-                    placeholder="Enter School Email"
+                    className="text-base font-bold text-[#01427A] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#01427A] placeholder:text-[#01427A] "
+                    placeholder="Enter Email"
+                  />
+                </div>
+                <div className="flex flex-col gap-1 mb-2 ">
+                  <label className="text-[#808080] font-semibold" htmlFor="">
+                    Designation
+                  </label>
+
+                  <input
+                    type="text"
+                    className="text-base font-bold text-[#01427A] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#01427A] placeholder:text-[#01427A] "
+                    placeholder="Enter Designation"
+                  />
+                </div>
+                <div className="flex flex-col gap-1 mb-2 ">
+                  <label className="text-[#808080] font-semibold" htmlFor="">
+                    Create Username
+                  </label>
+
+                  <input
+                    type="text"
+                    className="text-base font-bold text-[#01427A] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#01427A] placeholder:text-[#01427A] "
+                    placeholder="Enter Username"
+                  />
+                </div>
+                <div className="flex flex-col gap-1 mb-2 ">
+                  <label className="text-[#808080] font-semibold" htmlFor="">
+                    Create Password
+                  </label>
+
+                  <input
+                    type="text"
+                    className="text-base font-bold text-[#01427A] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#01427A] placeholder:text-[#01427A] "
+                    placeholder="Enter Password"
+                  />
+                </div>
+                <div className="flex flex-col gap-1 mb-2">
+                  <label className="text-[#808080] font-semibold" htmlFor="">
+                    School Name
+                  </label>
+
+                  <div className="grid grid-cols-1 ">
+                    <select
+                      name=""
+                      id=""
+                      className=" font-bold w-full bg-white col-start-1 row-start-1 appearance-none text-base text-[#01427A] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#01427A] placeholder:text-[#01427A] "
+                    >
+                      <option value="" disabled selected>
+                        Select School
+                      </option>
+                      {schools.map((item, index) => {
+                        return (
+                          <option key={index} value={item}>
+                            {item.SchoolName}
+                          </option>
+                        );
+                      })}
+                    </select>
+                    <BiChevronDown className="text-[#01427A] col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end pointer-events-none" />
+                  </div>
+                </div>
+                <div className="flex flex-col gap-1 mb-2 ">
+                  <label className="text-[#808080] font-semibold" htmlFor="">
+                    User Role
+                  </label>
+
+                  <input
+                    type="text"
+                    defaultValue="School Admin"
+                    readOnly
+                    className="text-base text-[#07508F] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#01427A] font-bold "
                   />
                 </div>
               </div>
               <div className="pt-4 pl-6 pr-6 pb-0">
                 <label className="text-[#808080] font-semibold" htmlFor="">
-                  School Address
+                  Address
                 </label>
                 <div className="grid grid-cols-2 gap-3 mt-1 ">
                   <div className="grid grid-cols-1 mb-2">
                     <select
-                      className="w-full bg-white col-start-1 row-start-1 appearance-none text-base text-[#808080] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#d4d4d4]"
+                      className=" font-bold w-full bg-white col-start-1 row-start-1 appearance-none text-base text-[#01427A] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#01427A] placeholder:text-[#01427A] "
                       onChange={handleCountryChange}
                       value={selectedCountry ? selectedCountry.isoCode : ""}
                     >
@@ -190,11 +228,11 @@ const AddSchoolItem = () => {
                         </option>
                       ))}
                     </select>
-                    <BiChevronDown className="text-[#d4d4d4] col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end pointer-events-none" />
+                    <BiChevronDown className="text-[#01427A] col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end pointer-events-none" />
                   </div>
                   <div className="grid grid-cols-1 mb-2">
                     <select
-                      className="w-full bg-white col-start-1 row-start-1 appearance-none text-base text-[#808080] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#d4d4d4]"
+                      className=" font-bold w-full bg-white col-start-1 row-start-1 appearance-none text-base text-[#01427A] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#01427A] placeholder:text-[#01427A] "
                       onChange={handleStateChange}
                       value={selectedState ? selectedState.isoCode : ""}
                       disabled={!selectedCountry}
@@ -208,12 +246,12 @@ const AddSchoolItem = () => {
                         </option>
                       ))}
                     </select>
-                    <BiChevronDown className="text-[#d4d4d4] col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end pointer-events-none" />
+                    <BiChevronDown className="text-[#01427A] col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end pointer-events-none" />
                   </div>
 
                   <div className="grid grid-cols-1">
                     <select
-                      className="w-full bg-white col-start-1 row-start-1 appearance-none text-base text-[#808080] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#d4d4d4]"
+                      className=" font-bold w-full bg-white col-start-1 row-start-1 appearance-none text-base text-[#01427A] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#01427A] placeholder:text-[#01427A] "
                       onChange={handleCityChange}
                       value={selectedCity ? selectedCity.name : ""}
                       disabled={!selectedState}
@@ -227,13 +265,13 @@ const AddSchoolItem = () => {
                         </option>
                       ))}
                     </select>
-                    <BiChevronDown className="text-[#d4d4d4] col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end pointer-events-none" />
+                    <BiChevronDown className="text-[#01427A] col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end pointer-events-none" />
                   </div>
                 </div>
               </div>
               <div className="flex justify-end pr-6 pb-2  mt-auto ">
                 <button className="bg-[#07508F]  text-white pt-2 pb-2 pl-12 pr-12 text-sm rounded-lg cursor-pointer ">
-                  Save
+                  Save Changes
                 </button>
               </div>
             </form>
@@ -262,15 +300,19 @@ const AddSchoolItem = () => {
                     />
                   </div>
                 </div>
-                <button
-                  onClick={() => document.getElementById("logo-upload").click()}
-                  className="text-[#07508F] border-[1.5px] rounded-lg cursor-pointer  border-dashed  w-48 p-2 flex items-center justify-between"
-                >
-                  Upload School LOGO
-                  <span>
-                    <LuUpload size={20} />
-                  </span>
-                </button>
+                <div>
+                  <button
+                    onClick={() =>
+                      document.getElementById("logo-upload").click()
+                    }
+                    className="text-[#07508F]  border-[1.5px] rounded-lg cursor-pointer  border-dashed  w-48 p-2 flex items-center justify-between"
+                  >
+                    Upload School LOGO
+                    <span>
+                      <LuUpload size={20} />
+                    </span>
+                  </button>
+                </div>
               </div>
             </div>
             <div className="bg-[#ffffff] xl:gap-0 lg:gap-2 h-auto rounded-lg pt-5 pl-5 pr-5 xl:pb-2 pb-8 drop-shadow-lg flex flex-col">
@@ -311,4 +353,4 @@ const AddSchoolItem = () => {
   );
 };
 
-export default AddSchoolItem;
+export default EditSchoolAdminItem;

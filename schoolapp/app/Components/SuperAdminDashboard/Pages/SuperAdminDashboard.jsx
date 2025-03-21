@@ -48,7 +48,7 @@ const SuperAdminDashboardItem = () => {
     {
       background: "#AE2E30",
       Title: "Total No of Users",
-      icon: <FaRegUser className="w-full " />,
+      icon: <FaRegUser className="w-full h-full " />,
       subtitle: 545,
     },
   ];
@@ -128,7 +128,8 @@ const SuperAdminDashboardItem = () => {
                 return (
                   <div
                     key={index}
-                    className={`bg-[${item.background}] rounded-xl flex flex-col p-3.5 gap-3`}
+                    className={"rounded-xl flex flex-col p-3.5 gap-3"}
+                    style={{ backgroundColor: item.background }}
                   >
                     <div className="flex justify-between items-center   ">
                       <p className="md:text-sm sm:text-xs font-bold">

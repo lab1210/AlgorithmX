@@ -5,6 +5,10 @@ const school = [
     ShortSchName: "PIC",
     RegDate: "13/02/2025",
     Status: "Active",
+    EducationLevel: "Senior Sec. School",
+    Phone: "08052835653",
+    Email: "joedoe001@gmail.com",
+    Address: "Abeokuta,Ogun State, Nigeria",
   },
   {
     SchoolName: "God's Grace College",
@@ -12,6 +16,10 @@ const school = [
     ShortSchName: "PIC",
     RegDate: "13/02/2025",
     Status: "Inactive",
+    EducationLevel: "Senior Sec. School",
+    Phone: "08052835653",
+    Email: "joedoe001@gmail.com",
+    Address: "Abeokuta,Ogun State, Nigeria",
   },
   {
     SchoolName: "Peace International College",
@@ -19,6 +27,11 @@ const school = [
     ShortSchName: "PIC",
     RegDate: "13/02/2025",
     Status: "Active",
+
+    EducationLevel: "Senior Sec. School",
+    Phone: "08052835653",
+    Email: "joedoe001@gmail.com",
+    Address: "Abeokuta,Ogun State, Nigeria",
   },
   {
     SchoolName: "Peace International College",
@@ -26,6 +39,11 @@ const school = [
     ShortSchName: "PIC",
     RegDate: "13/02/2025",
     Status: "Active",
+
+    EducationLevel: "Senior Sec. School",
+    Phone: "08052835653",
+    Email: "joedoe001@gmail.com",
+    Address: "Abeokuta,Ogun State, Nigeria",
   },
   {
     SchoolName: "Peace International College",
@@ -33,6 +51,11 @@ const school = [
     ShortSchName: "PIC",
     RegDate: "13/02/2025",
     Status: "Active",
+
+    EducationLevel: "Senior Sec. School",
+    Phone: "08052835653",
+    Email: "joedoe001@gmail.com",
+    Address: "Abeokuta,Ogun State, Nigeria",
   },
   {
     SchoolName: "God's Grace College",
@@ -40,6 +63,10 @@ const school = [
     ShortSchName: "PIC",
     RegDate: "13/02/2025",
     Status: "Inactive",
+    EducationLevel: "Senior Sec. School",
+    Phone: "08052835653",
+    Email: "joedoe001@gmail.com",
+    Address: "Abeokuta,Ogun State, Nigeria",
   },
   {
     SchoolName: "God's Grace College",
@@ -47,6 +74,10 @@ const school = [
     ShortSchName: "PIC",
     RegDate: "13/02/2025",
     Status: "Inactive",
+    EducationLevel: "Senior Sec. School",
+    Phone: "08052835653",
+    Email: "joedoe001@gmail.com",
+    Address: "Abeokuta,Ogun State, Nigeria",
   },
   {
     SchoolName: "Peace International College",
@@ -54,6 +85,11 @@ const school = [
     ShortSchName: "PIC",
     RegDate: "13/02/2025",
     Status: "Active",
+
+    EducationLevel: "Senior Sec. School",
+    Phone: "08052835653",
+    Email: "joedoe001@gmail.com",
+    Address: "Abeokuta,Ogun State, Nigeria",
   },
   {
     SchoolName: "Peace International College",
@@ -61,6 +97,11 @@ const school = [
     ShortSchName: "PIC",
     RegDate: "13/02/2025",
     Status: "Active",
+
+    EducationLevel: "Senior Sec. School",
+    Phone: "08052835653",
+    Email: "joedoe001@gmail.com",
+    Address: "Abeokuta,Ogun State, Nigeria",
   },
 ];
 export default school;

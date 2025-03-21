@@ -1,9 +1,9 @@
 import { UserProvider } from "@/app/Components/StudentDashBoard/context/UserProvider";
 import React, { Suspense } from "react";
-import styles from "../css/spinner.module.css";
-import ManageSchoolsItem from "@/app/Components/SuperAdminDashboard/Pages/ManageSchoolsItem";
+import styles from "../../css/spinner.module.css";
+import AddSchoolAdminItem from "@/app/Components/SuperAdminDashboard/Pages/AddSchoolAdminItem";
 
-const ManageSchools = () => {
+const AddSchoolAdmin = () => {
   return (
     <UserProvider>
       <Suspense
@@ -13,10 +13,10 @@ const ManageSchools = () => {
           </div>
         }
       >
-        <ManageSchoolsItem />
+        <AddSchoolAdminItem />
       </Suspense>
     </UserProvider>
   );
 };
 
-export default ManageSchools;
+export default AddSchoolAdmin;

@@ -1,15 +1,15 @@
 "use client";
 import React, { useState } from "react";
 import SuperAdminLayout from "../SuperAdminLayout";
+import { useSearchParams } from "next/navigation";
 import DashboardHeader from "../DashboardHeader";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { BiChevronDown } from "react-icons/bi";
 import { Country, State, City } from "country-state-city";
 import Image from "next/image";
 import { LuUpload } from "react-icons/lu";
 
-const AddSchoolItem = () => {
+const EditSchoolItem = () => {
   const searchParams = useSearchParams();
   const schoolId = searchParams.get("schoolid");
   const userId = searchParams.get("userid");
@@ -87,7 +87,7 @@ const AddSchoolItem = () => {
 
                   <input
                     type="text"
-                    className="text-base text-[#808080] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#d4d4d4] placeholder:text-[#d4d4d4] "
+                    className="text-base font-bold text-[#01427A] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#01427A] placeholder:text-[#01427A] "
                     placeholder="Enter School Name"
                   />
                 </div>
@@ -99,7 +99,7 @@ const AddSchoolItem = () => {
 
                   <input
                     type="text"
-                    className="text-base text-[#808080] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#d4d4d4] placeholder:text-[#d4d4d4] "
+                    className="text-base text-[#01427A] font-bold rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#01427A] placeholder:text-[#01427A] "
                     placeholder="Enter School Short Name"
                   />
                 </div>
@@ -113,7 +113,7 @@ const AddSchoolItem = () => {
                     <select
                       name=""
                       id=""
-                      className=" w-full bg-white col-start-1 row-start-1 appearance-none text-base text-[#808080] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#d4d4d4] placeholder:text-[#d4d4d4] "
+                      className=" font-bold w-full bg-white col-start-1 row-start-1 appearance-none text-base text-[#01427A] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#01427A] placeholder:text-[#01427A] "
                     >
                       <option value="" disabled selected>
                         Select School Type
@@ -121,7 +121,7 @@ const AddSchoolItem = () => {
                       <option value="Private">Private</option>
                       <option value="Public">Public</option>
                     </select>
-                    <BiChevronDown className="text-[#d4d4d4] col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end pointer-events-none" />
+                    <BiChevronDown className="text-[#01427A] col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end pointer-events-none" />
                   </div>
                 </div>
 
@@ -134,7 +134,7 @@ const AddSchoolItem = () => {
                     <select
                       name=""
                       id=""
-                      className=" w-full bg-white col-start-1 row-start-1 appearance-none text-base text-[#808080] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#d4d4d4] placeholder:text-[#d4d4d4] "
+                      className=" font-bold w-full bg-white col-start-1 row-start-1 appearance-none text-base text-[#01427A] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#01427A] placeholder:text-[#01427A] "
                     >
                       <option value="" disabled selected>
                         Select Education Level
@@ -143,7 +143,7 @@ const AddSchoolItem = () => {
                       <option value="Junior">Junior Secondary</option>
                       <option value="Senior">Senior Secondary</option>
                     </select>
-                    <BiChevronDown className="text-[#d4d4d4] col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end pointer-events-none" />
+                    <BiChevronDown className="text-[#01427A] col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end pointer-events-none" />
                   </div>
                 </div>
                 <div className="flex flex-col gap-1 mb-2 ">
@@ -153,7 +153,7 @@ const AddSchoolItem = () => {
 
                   <input
                     type="tel"
-                    className="text-base text-[#808080] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#d4d4d4] placeholder:text-[#d4d4d4] "
+                    className="text-base font-bold text-[#01427A] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#01427A] placeholder:text-[#01427A] "
                     placeholder="Enter Phone Number"
                   />
                 </div>
@@ -165,7 +165,7 @@ const AddSchoolItem = () => {
 
                   <input
                     type="email"
-                    className="text-base text-[#808080] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#d4d4d4] placeholder:text-[#d4d4d4] "
+                    className="text-base font-bold text-[#01427A] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#01427A] placeholder:text-[#01427A] "
                     placeholder="Enter School Email"
                   />
                 </div>
@@ -177,7 +177,7 @@ const AddSchoolItem = () => {
                 <div className="grid grid-cols-2 gap-3 mt-1 ">
                   <div className="grid grid-cols-1 mb-2">
                     <select
-                      className="w-full bg-white col-start-1 row-start-1 appearance-none text-base text-[#808080] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#d4d4d4]"
+                      className=" font-bold w-full bg-white col-start-1 row-start-1 appearance-none text-base text-[#01427A] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#01427A] placeholder:text-[#01427A] "
                       onChange={handleCountryChange}
                       value={selectedCountry ? selectedCountry.isoCode : ""}
                     >
@@ -190,11 +190,11 @@ const AddSchoolItem = () => {
                         </option>
                       ))}
                     </select>
-                    <BiChevronDown className="text-[#d4d4d4] col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end pointer-events-none" />
+                    <BiChevronDown className="text-[#01427A] col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end pointer-events-none" />
                   </div>
                   <div className="grid grid-cols-1 mb-2">
                     <select
-                      className="w-full bg-white col-start-1 row-start-1 appearance-none text-base text-[#808080] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#d4d4d4]"
+                      className=" font-bold w-full bg-white col-start-1 row-start-1 appearance-none text-base text-[#01427A] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#01427A] placeholder:text-[#01427A] "
                       onChange={handleStateChange}
                       value={selectedState ? selectedState.isoCode : ""}
                       disabled={!selectedCountry}
@@ -208,12 +208,12 @@ const AddSchoolItem = () => {
                         </option>
                       ))}
                     </select>
-                    <BiChevronDown className="text-[#d4d4d4] col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end pointer-events-none" />
+                    <BiChevronDown className="text-[#01427A] col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end pointer-events-none" />
                   </div>
 
                   <div className="grid grid-cols-1">
                     <select
-                      className="w-full bg-white col-start-1 row-start-1 appearance-none text-base text-[#808080] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#d4d4d4]"
+                      className=" font-bold w-full bg-white col-start-1 row-start-1 appearance-none text-base text-[#01427A] rounded-lg focus:outline-none sm:text-sm border-[2px] p-2 border-[#01427A] placeholder:text-[#01427A] "
                       onChange={handleCityChange}
                       value={selectedCity ? selectedCity.name : ""}
                       disabled={!selectedState}
@@ -227,13 +227,13 @@ const AddSchoolItem = () => {
                         </option>
                       ))}
                     </select>
-                    <BiChevronDown className="text-[#d4d4d4] col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end pointer-events-none" />
+                    <BiChevronDown className="text-[#01427A] col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end pointer-events-none" />
                   </div>
                 </div>
               </div>
               <div className="flex justify-end pr-6 pb-2  mt-auto ">
-                <button className="bg-[#07508F]  text-white pt-2 pb-2 pl-12 pr-12 text-sm rounded-lg cursor-pointer ">
-                  Save
+                <button className="bg-[#07508F]  text-white pt-2 pb-2 pl-8 pr-8 text-sm rounded-lg cursor-pointer ">
+                  Save Changes
                 </button>
               </div>
             </form>
@@ -262,15 +262,19 @@ const AddSchoolItem = () => {
                     />
                   </div>
                 </div>
-                <button
-                  onClick={() => document.getElementById("logo-upload").click()}
-                  className="text-[#07508F] border-[1.5px] rounded-lg cursor-pointer  border-dashed  w-48 p-2 flex items-center justify-between"
-                >
-                  Upload School LOGO
-                  <span>
-                    <LuUpload size={20} />
-                  </span>
-                </button>
+                <div>
+                  <button
+                    onClick={() =>
+                      document.getElementById("logo-upload").click()
+                    }
+                    className="text-[#07508F]  border-[1.5px] rounded-lg cursor-pointer  border-dashed  w-48 p-2 flex items-center justify-between"
+                  >
+                    Upload School LOGO
+                    <span>
+                      <LuUpload size={20} />
+                    </span>
+                  </button>
+                </div>
               </div>
             </div>
             <div className="bg-[#ffffff] xl:gap-0 lg:gap-2 h-auto rounded-lg pt-5 pl-5 pr-5 xl:pb-2 pb-8 drop-shadow-lg flex flex-col">
@@ -311,4 +315,4 @@ const AddSchoolItem = () => {
   );
 };
 
-export default AddSchoolItem;
+export default EditSchoolItem;
