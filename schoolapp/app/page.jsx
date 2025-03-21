@@ -63,7 +63,6 @@ export default function Login() {
         router.push(url);
       }
     } else {
-      setGeneralError("Invalid username or password"); // Set a general error message
       console.error("Invalid username or password");
     }
   };
