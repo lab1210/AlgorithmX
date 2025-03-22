@@ -7,23 +7,26 @@ import User from "../../User";
 import { FiEdit3, FiTrash2 } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
 import AddUser from "../Modals/AddUser";
+import EditUser from "../Modals/EditUser";
 
 const ManageUserItem = () => {
   const [modalTransform, setModalTransform] = useState("translateX(-100%)");
   const [modalOpacity, setModalOpacity] = useState(0);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [formData, setFormData] = useState({
-    Surname: "",
-    FirstName: "",
-    PhoneNumber: "",
-    EmailAddress: "",
-    UserRole: "",
-    Address: "",
-  });
-  // Function to open modal
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  // Function to open Add modal
   const openAddModal = () => {
-    setIsModalOpen(true);
+    setIsAddModalOpen(true);
+    setTimeout(() => {
+      setModalTransform("translateX(0)");
+      setModalOpacity(1);
+    }, 0);
+  };
+
+  const openEditModal = () => {
+    setIsEditModalOpen(true);
     setTimeout(() => {
       setModalTransform("translateX(0)");
       setModalOpacity(1);
@@ -32,7 +35,14 @@ const ManageUserItem = () => {
 
   // Function to close modal
   const closeAddModal = () => {
-    setIsModalOpen(false);
+    setIsAddModalOpen(false);
+    setModalTransform("translateX(-100%)");
+    setModalOpacity(0);
+  };
+
+  // Function to close Edit modal
+  const closeEditModal = () => {
+    setIsEditModalOpen(false);
     setModalTransform("translateX(-100%)");
     setModalOpacity(0);
   };
@@ -49,14 +59,14 @@ const ManageUserItem = () => {
   return (
     <SuperAdminLayout>
       {/* ADD USER */}
-      {isModalOpen && (
+      {isAddModalOpen && (
         <div className="fixed inset-0 flex justify-center items-center z-50">
           <div
-            className="absolute inset-0 bg-black/30"
+            className="absolute inset-0 bg-black/60"
             onClick={closeAddModal}
           ></div>
           <div
-            className="relative md:pl-6 md:pr-6 pt-4 pb-4 sm:pl-3 sm:pr-3  bg-white  rounded-md shadow-lg lg:max-w-280 md:max-w-180 sm:max-w-150  z-50 transition-transform  duration-300 ease-in-out"
+            className="relative md:pl-6 md:pr-6 pt-4 pb-4 sm:pl-3 sm:pr-3  bg-white  rounded-md shadow-lg  lg:max-w-280 md:max-w-180 sm:max-w-150  z-50 transition-transform  duration-300 ease-in-out"
             style={{ transform: modalTransform, opacity: modalOpacity }}
           >
             <div className="flex justify-end">
@@ -71,11 +81,37 @@ const ManageUserItem = () => {
           </div>
         </div>
       )}
+
+      {/* Edit User */}
+
+      {isEditModalOpen && (
+        <div className="fixed inset-0 flex justify-center items-center z-50">
+          <div
+            className="absolute inset-0 bg-black/30"
+            onClick={closeEditModal}
+          ></div>
+          <div
+            className="relative md:pl-6 md:pr-6 pt-4 pb-4 sm:pl-3 sm:pr-3  bg-white  rounded-md shadow-lg lg:max-w-280 md:max-w-180 sm:max-w-150  z-50 transition-transform  duration-300 ease-in-out"
+            style={{ transform: modalTransform, opacity: modalOpacity }}
+          >
+            <div className="flex justify-end">
+              <span onClick={closeEditModal} className="cursor-pointer">
+                <IoClose size={20} />
+              </span>
+            </div>
+            <div className="flex justify-center">
+              <p className="font-bold text-xl">EDIT USER</p>
+            </div>
+            <EditUser />
+          </div>
+        </div>
+      )}
+
       <div className="bg-[#ffffff] pl-4 pt-6 pb-6 pr-4 sticky top-0  z-10 shadow-md  flex justify-between items-center ">
         <DashboardHeader />
 
         <div className="flex items-center gap-4">
-          <div className="flex items-center rounded-4xl border min-w-[300px]  border-[#978F8F] ">
+          <div className="flex items-center rounded-4xl border lg:min-w-[300px]  border-[#978F8F] ">
             <input
               type="text"
               placeholder="Search School"
@@ -145,6 +181,7 @@ const ManageUserItem = () => {
                       <FiEdit3
                         className="text-[#80ADCB] cursor-pointer"
                         size={20}
+                        onClick={openEditModal}
                       />
                       <FiTrash2
                         className="text-[#F94144] cursor-pointer"

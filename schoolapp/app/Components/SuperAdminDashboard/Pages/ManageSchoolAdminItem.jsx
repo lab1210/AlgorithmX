@@ -125,7 +125,7 @@ const ManageSchoolAdminItem = () => {
         <DashboardHeader />
 
         <div className="flex items-center gap-4">
-          <div className="flex items-center rounded-4xl border min-w-[300px]  border-[#978F8F] ">
+          <div className="flex items-center rounded-4xl border lg:min-w-[300px]  border-[#978F8F] ">
             <input
               type="text"
               placeholder="Search School"
