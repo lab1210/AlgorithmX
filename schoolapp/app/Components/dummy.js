@@ -259,5 +259,14 @@ const dummyUsers = [
       },
     ],
   },
+  {
+    userId: "USR006",
+    schoolid: "SCH002",
+    pin: "5678",
+    username: "Jane Doe",
+    password: "password",
+    Role: "Super Admin",
+    profilePic: "/superadmin.png",
+  },
 ];
 export default dummyUsers;

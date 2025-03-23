@@ -36,8 +36,12 @@ a {
   color: inherit;
   text-decoration: none;
 }
-@media (max-width: 767px) {
-  body {
-    display: none;
-  }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
