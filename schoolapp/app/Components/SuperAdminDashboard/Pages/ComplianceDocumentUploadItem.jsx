@@ -13,25 +13,8 @@ const ComplianceDocumentUploadItem = () => {
   const userId = searchParams.get("userid");
   const [certificate, setCertificate] = useState("/note.svg");
   const [proof, setProof] = useState("/note.svg");
-  const [saved, setSaved] = useState(() => {
-    // Get the saved state from sessionStorage, or default to false
-    if (typeof window !== "undefined") {
-      const storedSaved = sessionStorage.getItem("saved");
-      return storedSaved === "true"; // Convert string to boolean
-    }
-    return false;
-  });
+  const [saved, setSaved] = useState(false);
 
-  useEffect(() => {
-    // Update sessionStorage whenever the saved state changes
-    if (typeof window !== "undefined") {
-      sessionStorage.setItem("saved", saved.toString());
-    }
-  }, [saved]);
-
-  const handleSave = () => {
-    setSaved(true);
-  };
   const handleLogoUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -54,12 +37,12 @@ const ComplianceDocumentUploadItem = () => {
     }
   };
 
-  // const handleSave = () => {
-  //   setSaved(true);
-  //   setTimeout(() => {
-  //     console.log("saved:", saved);
-  //   }, 0);
-  // };
+  const handleSave = () => {
+    setSaved(true);
+    setTimeout(() => {
+      console.log("saved:", saved);
+    }, 0);
+  };
   console.log("rendering, saved:", saved);
   return (
     <SuperAdminLayout>
