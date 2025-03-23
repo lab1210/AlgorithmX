@@ -117,7 +117,7 @@ const ManageSchoolsItem = () => {
       )}
 
       {/* Header */}
-      <div className="bg-[#ffffff] pl-4 pt-6 pb-6 pr-4 sticky top-0 z-10 shadow-md flex justify-between items-center">
+      <div className="bg-[#ffffff] pl-4 pt-4 pb-3 pr-4 sticky top-0 z-10 shadow-md flex justify-between items-center">
         <DashboardHeader />
         <Link
           href={`/Super-Admin/Manage-Existing-Schools/Add-New-School?schoolid=${schoolId}&userid=${userId}`}

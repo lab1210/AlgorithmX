@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { BiChevronDown } from "react-icons/bi";
 import { Country, State, City } from "country-state-city";
-import Image from "next/image";
 import { LuUpload } from "react-icons/lu";
 import DashboardHeader from "../DashboardHeader";
 import schools from "../../school";
@@ -60,7 +59,7 @@ const EditSchoolAdminItem = () => {
 
   return (
     <SuperAdminLayout>
-      <div className="bg-[#ffffff] pl-4 pt-6 pb-6 pr-4 sticky top-0  z-10 shadow-md  flex justify-between items-center ">
+      <div className="bg-[#ffffff] pl-4 pt-4 pb-3 pr-4 sticky top-0  z-10 shadow-md  flex justify-between items-center ">
         <DashboardHeader />
         <Link
           href={`/Super-Admin/Manage-School-Admin?schoolid=${schoolId}&userid=${userId}`}
@@ -72,7 +71,7 @@ const EditSchoolAdminItem = () => {
       </div>
       <div className="bg-[#D4D4D4]  p-4 sm:overflow-auto lg:overflow-hidden ">
         <div className="sm:flex sm:flex-col sm:gap-2 lg:grid lg:grid-cols-[2.5fr_1fr] overflow-auto  gap-3 lg:h-screen ">
-          <div className="bg-[#ffffff] rounded-lg flex flex-col lg:overflow-y-auto lg:max-h-[calc(100vh-120px)] lg:overflow-auto no-scrollbar">
+          <div className="bg-[#ffffff] rounded-lg flex flex-col lg:overflow-y-auto lg:max-h-[calc(100vh-95px)] lg:overflow-auto no-scrollbar">
             <div>
               <p className="font-bold text-xl p-6">
                 Administrative Information
@@ -282,14 +281,12 @@ const EditSchoolAdminItem = () => {
                 LOGO
               </p>
               <div className="flex flex-col items-center justify-center mt-2">
-                <div className="mb-4 bg-[#E4E4E4] border-dashed border-[1.5px] border-[#333333] flex items-center relative  justify-center w-48 h-30">
+                <div className="mb-4 bg-[#E4E4E4] border-dashed border-[1.5px] border-[#333333] flex items-center relative  justify-center w-48 h-35">
                   <div className="w-12 h-12">
-                    <Image
+                    <img
                       className="w-full h-full"
                       src={schoolLogo}
                       alt="icon"
-                      width={20}
-                      height={20}
                     />
                     <input
                       type="file"

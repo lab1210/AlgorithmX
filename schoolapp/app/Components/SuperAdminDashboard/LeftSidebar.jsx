@@ -60,13 +60,7 @@ const LeftSidebar = ({ setUser }) => {
     <div className="h-full justify-between grid grid-rows-[100px_1fr_auto] pt-8">
       <div className="flex flex-col items-center gap-2  w-full">
         <div className="object-contain max-w-[50px] max-h-[50px]">
-          <Image
-            className="w-auto h-auto"
-            src={"/logo.svg"}
-            alt="logo"
-            width={50}
-            height={50}
-          />
+          <img className="w-auto h-auto" src={"/logo.svg"} alt="logo" />
         </div>
         <div className="text-white ">
           <p className="font-bold">Foursquare</p>
@@ -96,11 +90,14 @@ const LeftSidebar = ({ setUser }) => {
         <hr className="w-full border-t border-[#80ADCB] md:mt-15 xl:mt-2" />
       </div>
       <div className="text-white flex flex-col sm:pl-2 xl:pl-5 md:pl-2 md:text-sm xl:text-base md:pb-2 xl:pb-0.5 hover:bg-[#025A9A] cursor-pointer">
-        <div className="flex flex-row items-center gap-2 ">
+        <div
+          onClick={handleLogout}
+          className="flex flex-row items-center gap-2 "
+        >
           <span>
             <LuLogOut />
           </span>
-          <span className="">Logout</span>
+          <span>Logout</span>
         </div>
       </div>
     </div>

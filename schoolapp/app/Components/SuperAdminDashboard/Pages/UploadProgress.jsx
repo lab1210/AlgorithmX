@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import React from "react";
 import { IoClose } from "react-icons/io5";
 import { CgNotes } from "react-icons/cg";
@@ -13,12 +12,10 @@ const UploadProgress = ({ setSaved }) => {
             <p className="font-bold text-xl">Compliance Document Upload</p>
             <div className="pt-8 pb-6 gap-8 mb-4 rounded-md bg-[#E4E4E4] border-dashed border-[1.5px] border-[#333333] flex flex-col items-center relative  justify-center">
               <div className="w-35 h-48">
-                <Image
+                <img
                   className="w-full h-full"
                   src={"/doclogo.png"}
                   alt="icon"
-                  width={20}
-                  height={20}
                 />
               </div>
 

@@ -82,7 +82,7 @@ const SuperAdminDashboardItem = () => {
   return (
     <SuperAdminLayout>
       {/* header */}
-      <div className="bg-[#ffffff] pl-4 pt-6 pb-6 pr-4 sticky top-0  z-10 shadow-md  flex justify-between items-center ">
+      <div className="bg-[#ffffff] pl-4 pt-4 pb-3 pr-4 sticky top-0  z-10 shadow-md  flex justify-between items-center ">
         <DashboardHeader />
 
         <div className="flex items-center gap-4">
@@ -107,11 +107,9 @@ const SuperAdminDashboardItem = () => {
               <div className="absolute top-1 right-2 w-2 h-2 rounded-full bg-[#F94144]"></div>
             </div>
             <div className="w-12 h-12 object-contain">
-              <Image
+              <img
                 src={"/superadmin.png"}
                 alt="admin"
-                width={12}
-                height={12}
                 className="w-full h-full"
               />
             </div>

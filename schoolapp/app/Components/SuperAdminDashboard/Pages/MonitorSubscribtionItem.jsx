@@ -87,7 +87,7 @@ const MonitorSubscribtionItem = () => {
           </div>
         </div>
       )}
-      <div className="bg-[#ffffff] pl-4 pt-6 pb-6 sm:pr-4 lg:pr-9 sticky top-0 z-10 shadow-md flex justify-between items-center">
+      <div className="bg-[#ffffff] pl-4 pt-4 pb-3 sm:pr-4 lg:pr-9 sticky top-0 z-10 shadow-md flex justify-between items-center">
         <DashboardHeader />
 
         <div className="flex items-center gap-4 ">

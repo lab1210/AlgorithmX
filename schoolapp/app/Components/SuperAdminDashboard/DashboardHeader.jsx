@@ -36,7 +36,7 @@ const DashboardHeader = () => {
 
   return (
     <div>
-      <h1 className="text-xl xl:text-2xl font-bold">{headerTitle}</h1>
+      <p className="text-xl font-bold">{headerTitle}</p>
     </div>
   );
 };

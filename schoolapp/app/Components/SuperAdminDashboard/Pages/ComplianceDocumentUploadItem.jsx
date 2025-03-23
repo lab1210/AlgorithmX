@@ -4,7 +4,6 @@ import SuperAdminLayout from "../SuperAdminLayout";
 import DashboardHeader from "../DashboardHeader";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import Image from "next/image";
 import { LuUpload } from "react-icons/lu";
 import UploadProgress from "./UploadProgress";
 
@@ -64,7 +63,7 @@ const ComplianceDocumentUploadItem = () => {
   console.log("rendering, saved:", saved);
   return (
     <SuperAdminLayout>
-      <div className="bg-[#ffffff] pl-4 pt-6 pb-6 pr-4 sticky top-0 z-10 shadow-md flex justify-between items-center">
+      <div className="bg-[#ffffff] pl-4 pt-4 pb-3 pr-4 sticky top-0 z-10 shadow-md flex justify-between items-center">
         <DashboardHeader />
         <Link
           href={`/Super-Admin/Compliance-Document-Upload/Compliance-Document-Upload?schoolid=${schoolId}&userid=${userId}`}
@@ -97,12 +96,10 @@ const ComplianceDocumentUploadItem = () => {
 
                 <div className="mt-2  bg-[#E4E4E4] flex-grow border-dashed border-[1.5px] border-[#333333] flex items-center flex-col justify-center ">
                   <div className="w-12 h-12 mb-2">
-                    <Image
+                    <img
                       className="w-full h-full"
                       src={certificate}
                       alt="icon"
-                      width={20}
-                      height={20}
                     />
                     <input
                       type="file"
@@ -138,13 +135,7 @@ const ComplianceDocumentUploadItem = () => {
 
                   <div className="mt-6  bg-[#E4E4E4] flex-grow border-dashed border-[1.5px] border-[#333333] flex items-center flex-col justify-center ">
                     <div className="w-12 h-12 mb-2">
-                      <Image
-                        className="w-full h-full"
-                        src={proof}
-                        alt="icon"
-                        width={20}
-                        height={20}
-                      />
+                      <img className="w-full h-full" src={proof} alt="icon" />
                       <input
                         type="file"
                         id="proof-upload2"
