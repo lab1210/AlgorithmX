@@ -34,20 +34,15 @@ const LeftSidebar = ({ setUser }) => {
       icon: <IoWalletOutline />,
       route: "/Student/Fees-Payment",
     },
-    {
-      Name: "Result",
-      icon: <LuNotepadText />,
-      route: "/Student/Result",
-    },
-    {
+     {
       Name: "Attendance",
       icon: <BiPieChartAlt2 />,
-      route: "/Student/Attendance",
+      route: "/Student/AttendanceItem",
     },
-    {
+     {
       Name: "Subject Registration",
       icon: <RiBookShelfLine />,
-      route: "/Student/Subject-Registration",
+      route: "/Student/Subject-Registration/Register",
     },
     {
       Name: "Timetable",
@@ -55,9 +50,14 @@ const LeftSidebar = ({ setUser }) => {
       route: "/Student/Timetable",
     },
     {
+      Name: "Result",
+      icon: <LuNotepadText />,
+      route: "/Student/Result",
+    },
+    {
       Name: "Health Record",
       icon: <LiaHeartbeatSolid />,
-      route: "/Student/Health-Record",
+      route: "/Student/Health-Record/",
     },
     {
       Name: "Profile",
@@ -67,9 +67,9 @@ const LeftSidebar = ({ setUser }) => {
   ];
 
   return (
-    <div className="h-screen bg-white flex flex-col pt-5">
+    <div className="h-screen bg-white flex flex-col">
       {/* Logo Section */}
-      <div className="flex flex-col items-center mb-5 px-4">
+      <div className="flex flex-col items-center mb-3 px-4">
         <div className="max-w-[60px] w-full">
           <img src="/logo.svg" alt="logo" className="w-full object-cover" />
         </div>
@@ -81,26 +81,26 @@ const LeftSidebar = ({ setUser }) => {
 
       {/* Navigation Menu */}
       <div className="flex-1 flex flex-col px-4">
-        <ul className="list-none flex flex-col gap-2.5 md:mb-[30px] xl:mb-0.5">
+        <ul className="list-none flex flex-col gap-1.5 md:mb-[30px] xl:mb-0.5">
           {StudentLeft.map((item, index) => (
             <li
               key={index}
-              className="md:p-[11px] p-2.5 hover:bg-gray-100 rounded-lg transition-colors"
+              className="md:p-[11px] p-2.5 hover:text-gray-600 rounded-lg transition-colors"
             >
               <Link
                 href={`${item.route}?schoolid=${schoolId}&userid=${userId}`}
                 className="flex items-center gap-2.5 text-base font-normal"
               >
                 <span
-                  className={`text-xl ${
-                    pathname === item.route ? "text-red-500" : "text-gray-700"
+                  className={`text-3xl ${
+                    pathname === item.route ? "text-[#F94144]" : "text-gray-700 hover:text-gray-400"
                   }`}
                 >
                   {item.icon}
                 </span>
                 <span
                   className={`${
-                    pathname === item.route ? "text-red-500" : "text-gray-700"
+                    pathname === item.route ? "text-[#F94144]" : "text-gray-700 hover:text-gray-300 "
                   }`}
                 >
                   {item.Name}
@@ -114,7 +114,7 @@ const LeftSidebar = ({ setUser }) => {
         <div className="mt-auto mb-4">
           <button
             onClick={handleLogout}
-            className="w-full bg-red-500 text-white rounded-lg px-5 py-1.5 font-bold text-base flex items-center justify-center gap-2.5 hover:bg-red-600 transition-colors"
+            className="w-full bg-[#F94144] text-white rounded-lg px-5 py-1.5 font-bold text-base flex items-center justify-center gap-2.5 hover:bg-[#D81A2D] transition-colors cursor-pointer"
           >
             <TbLogout className="text-xl" />
             Logout

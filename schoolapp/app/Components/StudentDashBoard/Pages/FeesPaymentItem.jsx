@@ -28,7 +28,7 @@ const FeesPaymentItem = () => {
   if (isLoading) {
     return (
       <div className="fixed inset-0 flex items-center justify-center bg-white z-50">
-        <div className="w-12 h-12 border-4 border-blue-900 border-t-red-500 rounded-full animate-spin"></div>
+        <div className="w-12 h-12 border-4 border-blue-900 border-t-[#F94144] rounded-full animate-spin"></div>
       </div>
     );
   }
@@ -93,7 +93,7 @@ const FeesPaymentItem = () => {
 
           <Link
             href={`/Student/Fees-Payment/Receipt?schoolid=${schoolId}&userid=${userId}`}
-            className="bg-red-500 text-white rounded-2xl flex-1"
+            className="bg-[#F94144] text-white rounded-2xl flex-1"
           >
             <div className="grid grid-cols-[1fr_auto] items-center justify-between p-4 text-white">
               <div>
@@ -108,7 +108,7 @@ const FeesPaymentItem = () => {
               <div className="flex items-center gap-2 justify-center">
                 <p className="text-sm text-white">More info</p>
                 <div className="w-4 h-4 bg-white rounded-full flex items-center justify-center">
-                  <FaArrowRight className="text-red-500 text-xs" />
+                  <FaArrowRight className="text-[#F94144] text-xs" />
                 </div>
               </div>
             </div>
@@ -155,7 +155,7 @@ const FeesPaymentItem = () => {
 
             <button
               onClick={handleDownloadPDF}
-              className="bg-blue-700 text-white rounded-lg px-4 py-2 text-sm hover:bg-red-500 transition-colors duration-300"
+              className="bg-blue-700 text-white rounded-lg px-4 py-2 text-sm hover:bg-[#F94144] transition-colors duration-300"
             >
               Print
             </button>
@@ -170,7 +170,7 @@ const FeesPaymentItem = () => {
 
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-red-500 text-white">
+              <thead className="bg-[#F94144] text-white">
                 <tr>
                   <th className="p-3 text-left border-r border-gray-200">S/N</th>
                   <th className="p-3 text-left border-r border-gray-200">Purpose</th>
@@ -190,7 +190,7 @@ const FeesPaymentItem = () => {
                     <td className="p-3 border-r border-gray-200">{formatCurrency(item.AmountBilled)}</td>
                     <td className="p-3 border-r border-gray-200">{formatCurrency(item.AmountPaid)}</td>
                     <td className={`p-3 flex items-center gap-2 ${
-                      item.PaymentDate === "Pending" ? "text-red-500" : "text-gray-700"
+                      item.PaymentDate === "Pending" ? "text-[#F94144]" : "text-gray-700"
                     }`}>
                       {item.PaymentDate}
                       <LuArrowDownUp className="text-gray-400 cursor-pointer" />
@@ -220,7 +220,7 @@ const FeesPaymentItem = () => {
             </div>
             <div className="flex items-center gap-2">
               <p className="text-sm">Amount Pending:</p>
-              <span className="bg-red-500 text-white rounded px-2 text-sm">
+              <span className="bg-[#F94144] text-white rounded px-2 text-sm">
                 {formatCurrency(totalAmountPending)}
               </span>
             </div>
