@@ -66,9 +66,9 @@ export default function HealthRecordForm() {
 
   return (
     <Layout>
-    <div className="min-h-screen bg-gray-100 p-4 flex flex-col items-center">
-      <div className="w-full max-w-4xl bg-[#494949] rounded-md p-6 md:p-10">
-        <h1 className="text-2xl md:text-3xl font-bold text-white mb-5">
+    <div className="min-h-screen p-4 flex flex-col items-center">
+      <div className="w-full max-w-4xl rounded-md p-6 md:p-10">
+        <h1 className="text-2xl md:text-3xl font-bold text-black mb-5">
           Health Record
         </h1>
 

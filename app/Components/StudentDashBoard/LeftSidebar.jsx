@@ -37,7 +37,7 @@ const LeftSidebar = ({ setUser }) => {
      {
       Name: "Attendance",
       icon: <BiPieChartAlt2 />,
-      route: "/Student/AttendanceItem",
+      route: "/Student/Attendance",
     },
      {
       Name: "Subject Registration",
@@ -57,7 +57,7 @@ const LeftSidebar = ({ setUser }) => {
     {
       Name: "Health Record",
       icon: <LiaHeartbeatSolid />,
-      route: "/Student/Health-Record/",
+      route: "/Student/Health-Record/Record",
     },
     {
       Name: "Profile",
@@ -81,7 +81,7 @@ const LeftSidebar = ({ setUser }) => {
 
       {/* Navigation Menu */}
       <div className="flex-1 flex flex-col px-4">
-        <ul className="list-none flex flex-col gap-1.5 md:mb-[30px] xl:mb-0.5">
+        <ul className="list-none flex flex-col md:mb-[30px] xl:mb-0.5">
           {StudentLeft.map((item, index) => (
             <li
               key={index}
@@ -111,10 +111,10 @@ const LeftSidebar = ({ setUser }) => {
         </ul>
 
         {/* Logout Button */}
-        <div className="mt-auto mb-4">
+        <div>
           <button
             onClick={handleLogout}
-            className="w-full bg-[#F94144] text-white rounded-lg px-5 py-1.5 font-bold text-base flex items-center justify-center gap-2.5 hover:bg-[#D81A2D] transition-colors cursor-pointer"
+            className="w-full bg-[#F94144] text-white rounded-lg px-5 py-1.5 font-bold text-base flex items-center justify-center gap-1.5 hover:bg-[#D81A2D] transition-colors cursor-pointer"
           >
             <TbLogout className="text-xl" />
             Logout

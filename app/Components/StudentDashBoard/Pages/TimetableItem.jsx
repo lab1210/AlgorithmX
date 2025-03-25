@@ -41,15 +41,15 @@ export default function TimetablePage() {
         {/* Timetable Container */}
         <div className="w-full max-w-5xl overflow-x-auto">
           <div className=" p-2 rounded-md shadow">
-            <table className="w-full table-auto text-lg text-gray-800">
+            <table className="w-full table-auto text-md text-gray-800">
               <thead>
                 <tr>
                   {/* Empty corner cell */}
-                  <th className="py-2 px-4 bg-purple-800 text-white font-semibold"></th>
+                  <th className="py-1 px-4 bg-[#69577d] text-white font-semibold"></th>
                   {days.map((day) => (
                     <th
                       key={day}
-                      className="py-2 px-4  bg-purple-800 text-white font-semibold"
+                      className="py-1 px-4  bg-[#69577d] text-white font-semibold"
                     >
                       {day}
                     </th>
@@ -60,14 +60,14 @@ export default function TimetablePage() {
                 {times.map((time, rowIndex) => (
                   <tr key={rowIndex}>
 
-                    <td className="py-2 px-4 text-white bg-purple-800 font-bold items-center">
+                    <td className="py-1 px-4 text-white bg-[#69577d] font-bold items-center">
                       {time}
                     </td>
                     {/* Day columns */}
                     {days.map((day) => (
                       <td
                         key={`${day}-${rowIndex}`}
-                        className="py-2 px-4 border border-gray-300 bg-white text-center border-l"
+                        className="py-1 px-4 border border-gray-300 bg-white text-center border-l"
                       >
                         {schedule[day][rowIndex]}
                       </td>

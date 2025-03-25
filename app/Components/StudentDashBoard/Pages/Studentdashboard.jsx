@@ -37,7 +37,7 @@ const Studentdashboard = () => {
       icon: <BiPieChart size={50} />,
       title: "Attendance",
       description: "View class and event attendance",
-      Link: "/Student/AttendanceItem",
+      Link: "/Student/Attendance",
     },
     {
       id: "Registration",
@@ -108,7 +108,7 @@ const Studentdashboard = () => {
           {/* Overview Section */}
           <div className="bg-white font-bold rounded-[15px] pt-[25px] pb-[15px] px-[10px] min-w-[980px]">
             <h2 className="text-[25px]">Overview</h2>
-            <div className="grid gap-[20px] grid-cols-3 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-[20px] grid-cols-3 md:grid-cols-1 md:overflow-x-hidden lg:grid-cols-3 lg:gp-1">
               {overview.map((item, index) => (
                 <Link
                   key={index}
