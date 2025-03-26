@@ -40,9 +40,7 @@ const ReceiptItem = () => {
       <div className="grid grid-rows-[auto_auto]">
         {/* ReceiptPageTitle */}
         <div className="bg-white mb-5 rounded-[15px] p-5">
-          <h2 className="text-xl font-bold">
-            Financial Transaction Receipt
-          </h2>
+          <h2 className="text-xl font-bold">Financial Transaction Receipt</h2>
         </div>
         {/* ReceiptPageContent */}
         <div className="bg-white mb-5 rounded-[10px] py-5 px-10 flex flex-col gap-5">
@@ -99,9 +97,7 @@ const ReceiptItem = () => {
               <table className="border-collapse mb-[30px] w-full">
                 <thead className="bg-[#80adcb] text-white text-left font-bold">
                   <tr>
-                    <th className="py-[10px] px-[12px] min-h-[60px]">
-                      S/N
-                    </th>
+                    <th className="py-[10px] px-[12px] min-h-[60px]">S/N</th>
                     <th className="py-[10px] px-[12px] min-h-[60px]">
                       Purpose
                     </th>

@@ -70,7 +70,7 @@ const FeesPaymentItem = () => {
         <div className="flex flex-col gap-4 md:flex-row md:justify-between bg-white rounded-xl p-4">
           <Link
             href={`/Student/Fees-Payment/Make-Payment?schoolid=${schoolId}&userid=${userId}`}
-            className="bg-blue-800 text-white rounded-2xl flex-1"
+            className="bg-[#4084B1] text-white rounded-2xl flex-1"
           >
             <div className="grid grid-cols-[1fr_auto] items-center justify-between p-4 text-white">
               <div>
@@ -85,7 +85,7 @@ const FeesPaymentItem = () => {
               <div className="flex items-center gap-2 justify-center">
                 <p className="text-sm text-white">More info</p>
                 <div className="w-4 h-4 bg-white rounded-full flex items-center justify-center">
-                  <FaArrowRight className="text-blue-600 text-xs" />
+                  <FaArrowRight className="text-[#4084B1] text-xs" />
                 </div>
               </div>
             </div>
@@ -155,7 +155,7 @@ const FeesPaymentItem = () => {
 
             <button
               onClick={handleDownloadPDF}
-              className="bg-blue-700 text-white rounded-lg px-4 py-2 text-sm hover:bg-[#F94144] transition-colors duration-300"
+              className="bg-[#0B71B5] text-white rounded-lg px-4 py-2 text-sm hover:bg-[#F94144] transition-colors duration-300"
             >
               Print
             </button>
@@ -172,11 +172,21 @@ const FeesPaymentItem = () => {
             <table className="w-full">
               <thead className="bg-[#F94144] text-white">
                 <tr>
-                  <th className="p-3 text-left border-r border-gray-200">S/N</th>
-                  <th className="p-3 text-left border-r border-gray-200">Purpose</th>
-                  <th className="p-3 text-left border-r border-gray-200">Transaction Number</th>
-                  <th className="p-3 text-left border-r border-gray-200">Amount Billed</th>
-                  <th className="p-3 text-left border-r border-gray-200">Amount Paid</th>
+                  <th className="p-3 text-left border-r border-gray-200">
+                    S/N
+                  </th>
+                  <th className="p-3 text-left border-r border-gray-200">
+                    Purpose
+                  </th>
+                  <th className="p-3 text-left border-r border-gray-200">
+                    Transaction Number
+                  </th>
+                  <th className="p-3 text-left border-r border-gray-200">
+                    Amount Billed
+                  </th>
+                  <th className="p-3 text-left border-r border-gray-200">
+                    Amount Paid
+                  </th>
                   <th className="p-3 text-left">Payment Date</th>
                 </tr>
               </thead>
@@ -184,14 +194,28 @@ const FeesPaymentItem = () => {
               <tbody>
                 {user.fees.map((item, index) => (
                   <tr key={index} className="border-b border-gray-200">
-                    <td className="p-3 border-r border-gray-200">{index + 1}</td>
-                    <td className="p-3 border-r border-gray-200">{item.purpose}</td>
-                    <td className="p-3 border-r border-gray-200">{item.TransactionNumber}</td>
-                    <td className="p-3 border-r border-gray-200">{formatCurrency(item.AmountBilled)}</td>
-                    <td className="p-3 border-r border-gray-200">{formatCurrency(item.AmountPaid)}</td>
-                    <td className={`p-3 flex items-center gap-2 ${
-                      item.PaymentDate === "Pending" ? "text-[#F94144]" : "text-gray-700"
-                    }`}>
+                    <td className="p-3 border-r border-gray-200">
+                      {index + 1}
+                    </td>
+                    <td className="p-3 border-r border-gray-200">
+                      {item.purpose}
+                    </td>
+                    <td className="p-3 border-r border-gray-200">
+                      {item.TransactionNumber}
+                    </td>
+                    <td className="p-3 border-r border-gray-200">
+                      {formatCurrency(item.AmountBilled)}
+                    </td>
+                    <td className="p-3 border-r border-gray-200">
+                      {formatCurrency(item.AmountPaid)}
+                    </td>
+                    <td
+                      className={`p-3 flex items-center gap-2 ${
+                        item.PaymentDate === "Pending"
+                          ? "text-[#F94144]"
+                          : "text-gray-700"
+                      }`}
+                    >
                       {item.PaymentDate}
                       <LuArrowDownUp className="text-gray-400 cursor-pointer" />
                     </td>

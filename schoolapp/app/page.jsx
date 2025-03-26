@@ -72,12 +72,12 @@ export default function Login() {
       <div className={styles.Student_Right_Auth}>
         <div className={styles.login_box}>
           <div className={styles.logo}>
-            <img src="/logo.svg" alt="" />
+            <img src="/MySchoolLight.png" alt="" />
           </div>
           <div className={styles.login_form}>
-            <div className={styles.title}>
+            {/* <div className={styles.title}>
               <p>Welcome to Foursquare Management System</p>
-            </div>
+            </div> */}
             <h1>Log in</h1>
             <form onSubmit={handleSubmit}>
               <div className={styles.Login_input}>
