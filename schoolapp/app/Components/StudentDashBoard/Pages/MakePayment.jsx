@@ -7,7 +7,6 @@ import dummysession from "../../session";
 import { useUser } from "../context/UserProvider";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { FaCheck } from "react-icons/fa";
 
 const MakePaymentItem = () => {
   const [card, setCard] = useState(false);
@@ -32,7 +31,6 @@ const MakePaymentItem = () => {
   if (isLoading) {
     return (
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex justify-center items-center w-full h-full z-50">
-        {/* Spinner: border colors mimic layout.module.css (&#8203;:contentReference[oaicite:4]{index=4}&#8203;:contentReference[oaicite:5]{index=5}) */}
         <div className="border-4 border-[rgba(0,64,128,1)] border-t-4 border-t-[rgba(249,65,68,1)] rounded-full w-12 h-12 animate-spin"></div>
       </div>
     );
@@ -82,7 +80,7 @@ const MakePaymentItem = () => {
         className={`
           grid
           md:[grid-template-rows:110px_100px_1fr_1fr]
-          xl:[grid-template-rows:110px_100px_1fr]
+          xl:[grid-template-rows:110px_100px_1fr] bg-[#f0f0f0]
         `}
       >
         {/* Payment Steps */}

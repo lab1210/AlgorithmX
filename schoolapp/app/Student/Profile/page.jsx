@@ -2,20 +2,20 @@
 import { UserProvider } from "@/app/Components/StudentDashBoard/context/UserProvider";
 import React, { Suspense } from "react";
 import styles from "../../css/layout.module.css";
-import ResultItem from "@/app/Components/StudentDashBoard/Pages/ResultItem";
+import ProfilePage from "@/app/Components/StudentDashBoard/Pages/Profile";
 
 
-const ResultPage = () => {
+const Profile = () => {
   return (
     <UserProvider>
       <Suspense fallback={<div className={styles.loadingContainer}>
         {" "}
         <div className={styles.spinner}></div> {/* New: Spinner element */}
       </div>}>
-      <ResultItem />
+      <ProfilePage />
       </Suspense>
     </UserProvider>
   );
 };
 
-export default ResultPage;
+export default Profile;

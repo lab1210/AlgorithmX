@@ -65,7 +65,7 @@ const FeesPaymentItem = () => {
 
   return (
     <Layout>
-      <div className="flex flex-col gap-5 p-4">
+      <div className="flex flex-col gap-5 p-4 bg-[#f0f0f0]">
         {/* First Card Section */}
         <div className="flex flex-col gap-4 md:flex-row md:justify-between bg-white rounded-xl p-4">
           <Link
