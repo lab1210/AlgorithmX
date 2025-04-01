@@ -51,7 +51,7 @@ const SuperAdminLayout = ({ children }) => {
 
   return (
     <div className="grid sm:grid-cols-[150px_auto] md:grid-cols-[150px_auto] xl:grid-cols-[200px_auto] overflow-hidden w-screen  h-screen">
-      <div className="bg-[#01427A] h-full">
+      <div className="bg-[#01427A] h-full ">
         <Suspense>
           <LeftSidebar setUser={setUser} />
         </Suspense>

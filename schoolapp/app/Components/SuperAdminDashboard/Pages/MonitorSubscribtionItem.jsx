@@ -36,11 +36,11 @@ const MonitorSubscribtionItem = () => {
       {selectedSchoolSubscribe && (
         <div className="fixed inset-0 flex justify-center items-center z-50">
           <div
-            className="absolute inset-0 bg-black/30"
+            className="absolute inset-0 bg-black/65"
             onClick={closeModal}
           ></div>
           <div
-            className="relative bg-white  rounded-md shadow-lg  z-50 transition-transform min-w-110 duration-300 ease-in-out"
+            className="relative bg-white  rounded-md shadow-lg  z-50 transition-transform min-w-110 duration-600 ease-in-out"
             style={{ transform: modalTransform, opacity: modalOpacity }}
           >
             <div className="flex justify-end pt-5 pr-5">
@@ -116,31 +116,33 @@ const MonitorSubscribtionItem = () => {
           <table className="min-w-full table-auto">
             <thead className="bg-[#E6EFF5] lg:text-sm sm:text-xs">
               <tr className="border-b-[#978F8F] border-b">
-                <th className="p-3 text-left font-bold text-[#333333]">
+                <th className="pt-3 pb-3 pl-12 text-left font-bold text-[#333333]">
                   School Name
                 </th>
-                <th className="p-3 text-left font-bold text-[#333333]">
+                <th className="pt-3 pb-3  text-left font-bold text-[#333333]">
                   No of Students
                 </th>
-                <th className="p-3 text-left font-bold text-[#333333]">
+                <th className="pt-3 pb-3  text-left font-bold text-[#333333]">
                   Amount per Student
                 </th>
-                <th className="p-3 text-left font-bold text-[#333333]">
+                <th className="pt-3 pb-3  text-left font-bold text-[#333333]">
                   Amount Expected
                 </th>
-                <th className="p-3 text-left font-bold text-[#333333]">
+                <th className="pt-3 pb-3  text-left font-bold text-[#333333]">
                   Amount Paid
                 </th>
-                <th className="p-3 text-left font-bold text-[#333333]">
+                <th className="pt-3 pb-3  text-left font-bold text-[#333333]">
                   Start Date
                 </th>
-                <th className="p-3 text-left font-bold text-[#333333]">
+                <th className="pt-3 pb-3  text-left font-bold text-[#333333]">
                   Expiring Date
                 </th>
-                <th className="p-3 text-left font-bold text-[#333333]">
+                <th className="pt-3 pb-3  text-left font-bold text-[#333333]">
                   Status
                 </th>
-                <th className="p-3 text-left font-bold text-[#333333]">Edit</th>
+                <th className="pt-3 pb-3  text-left font-bold text-[#333333]">
+                  Edit
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -150,21 +152,27 @@ const MonitorSubscribtionItem = () => {
                     key={index}
                     className="border-b-[#978F8F] border-b font-semibold text-xs cursor-pointer "
                   >
-                    <td className="p-3 text-[#333333]">{item.SchoolName}</td>
-                    <td className="p-3 text-[#333333]">{item.NoOfStudents}</td>
-                    <td className="p-3 text-[#333333]">
+                    <td className="pt-2 pb-2 pl-12 text-[#333333]">
+                      {item.SchoolName}
+                    </td>
+                    <td className="pt-2 pb-2 text-[#333333]">
+                      {item.NoOfStudents}
+                    </td>
+                    <td className="pt-2 pb-2 text-[#333333]">
                       {"N" + item.AmountPerStudent}
                     </td>
-                    <td className="p-3 text-[#333333]">
+                    <td className="pt-2 pb-2 text-[#333333]">
                       {"N" + item.AmountExpected}
                     </td>
-                    <td className="p-3 text-[#333333]">
+                    <td className="pt-2 pb-2 text-[#333333]">
                       {"N" + item.AmountPaid}
                     </td>
-                    <td className="p-3 text-[#333333]">{item.StartDate}</td>
-                    <td className="p-3 text-[#333333]">{item.Expire}</td>
+                    <td className="pt-2 pb-2 text-[#333333]">
+                      {item.StartDate}
+                    </td>
+                    <td className="pt-2 pb-2 text-[#333333]">{item.Expire}</td>
 
-                    <td className="xl:p-3 sm:p-8 flex items-center  gap-2">
+                    <td className="pt-2 pb-2 flex items-center  gap-2">
                       <span
                         className={`${
                           item.Status === "Active"
@@ -184,7 +192,7 @@ const MonitorSubscribtionItem = () => {
                         {item.Status === "Active" ? <FaCheck /> : <IoClose />}
                       </span>
                     </td>
-                    <td className="p-3 text-[#333333]">
+                    <td className="pt-2 pb-2 pr-8 pl-5 text-[#333333]">
                       <div className="flex gap-4">
                         <FiEdit3
                           className="text-[#80ADCB] cursor-pointer"

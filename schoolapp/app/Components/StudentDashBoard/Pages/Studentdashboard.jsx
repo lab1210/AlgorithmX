@@ -14,8 +14,7 @@ import { useSearchParams } from "next/navigation";
 const Studentdashboard = () => {
   const { user, isLoading } = useUser();
   const searchParams = useSearchParams();
-  const schoolId = searchParams.get("schoolid");
-  const userId = searchParams.get("userid");
+  const studentId = searchParams.get("studentId");
 
   const overview = [
     {
@@ -99,10 +98,16 @@ const Studentdashboard = () => {
           <div className="w-[980px] min-h-[180px] bg-[#004080] rounded-[15px] py-[15px] px-[20px] flex justify-between items-center">
             <div className="text-white font-bold">
               <h1 className="text-[2.5rem] mb-[15px]">Hi, {name}</h1>
-              <p className="text-base">Welcome to the official Foursquare student portal.</p>
+              <p className="text-base">
+                Welcome to the official Foursquare student portal.
+              </p>
             </div>
             <div className="max-w-[200px]">
-              <img src="/female_teacher.svg" alt="Teacher" className="w-full object-contain" />
+              <img
+                src="/female_teacher.svg"
+                alt="Teacher"
+                className="w-full object-contain"
+              />
             </div>
           </div>
           {/* Overview Section */}
@@ -112,15 +117,27 @@ const Studentdashboard = () => {
               {overview.map((item, index) => (
                 <Link
                   key={index}
-                  href={`${item.Link}?schoolid=${schoolId}&userid=${userId}`}
-                  className={`${cardBg[item.id]} rounded-[15px] p-[30px] text-white grid items-center grid-cols-[70px_1fr] gap-[15px] mb-[15px] w-[300px] h-[150px]`}
+                  href={`${item.Link}${
+                    studentId ? `?studentId=${studentId}` : ""
+                  }`}
+                  className={`${
+                    cardBg[item.id]
+                  } rounded-[15px] p-[30px] text-white grid items-center grid-cols-[70px_1fr] gap-[15px] mb-[15px] w-[300px] h-[150px]`}
                 >
-                  <div className={`${iconBg[item.id]} flex w-fit items-center text-white rounded-[10px] pr-0.5 ml-0.5`}>
+                  <div
+                    className={`${
+                      iconBg[item.id]
+                    } flex w-fit items-center text-white rounded-[10px] pr-0.5 ml-0.5`}
+                  >
                     {item.icon}
                   </div>
                   <div className="text-white cursor-pointer group hover:opacity-60 transition">
-                    <h4 className="text-[20px] mb-[10px] break-words">{item.title}</h4>
-                    <p className="text-[14px] group-hover:scale-90 transition">{item.description}</p>
+                    <h4 className="text-[20px] mb-[10px] break-words">
+                      {item.title}
+                    </h4>
+                    <p className="text-[14px] group-hover:scale-90 transition">
+                      {item.description}
+                    </p>
                   </div>
                 </Link>
               ))}

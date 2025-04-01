@@ -1,21 +1,26 @@
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
-import { FaSchoolFlag, FaUser, FaUserShield } from "react-icons/fa6";
-import { LuFileChartLine, LuLogOut } from "react-icons/lu";
+import { FaRegUser, FaSchoolFlag, FaUser, FaUserShield } from "react-icons/fa6";
+import { LuFileChartLine, LuLogOut, LuSchool } from "react-icons/lu";
 import { TbDashboard } from "react-icons/tb";
 import { AiOutlineFileProtect } from "react-icons/ai";
 import { IoChatboxEllipsesOutline } from "react-icons/io5";
+import { LiaUserShieldSolid } from "react-icons/lia";
+import { logout } from "@/app/Service/AuthService";
+
 const LeftSidebar = ({ setUser }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const schoolId = searchParams.get("schoolid");
-  const userId = searchParams.get("userid");
+  const adminId = searchParams.get("adminId");
   const pathname = usePathname();
-  const handleLogout = () => {
-    router.push("/");
-    setUser(null);
+  const handleLogout = async () => {
+    try {
+      await logout();
+      router.push("/");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
   };
 
   const SuperAdminLeft = [
@@ -26,17 +31,17 @@ const LeftSidebar = ({ setUser }) => {
     },
     {
       Name: "Manage Schools",
-      icon: <FaSchoolFlag />,
+      icon: <LuSchool />,
       route: "/Super-Admin/Manage-Existing-Schools",
     },
     {
       Name: "Manage School Admin",
-      icon: <FaUserShield />,
+      icon: <LiaUserShieldSolid />,
       route: "/Super-Admin/Manage-School-Admin",
     },
     {
       Name: "Manage User",
-      icon: <FaUser />,
+      icon: <FaRegUser />,
       route: "/Super-Admin/Manage-User",
     },
     {
@@ -57,10 +62,10 @@ const LeftSidebar = ({ setUser }) => {
   ];
 
   return (
-    <div className="h-full justify-between grid grid-rows-[100px_1fr_auto] pt-8">
-      <div className="flex flex-col items-center gap-2  w-full">
+    <div className="h-full w-full justify-between grid grid-rows-[100px_1fr_auto] pt-8">
+      <div className="flex flex-col items-center gap-2  w-full ">
         <div className="object-contain max-w-[50px] max-h-[50px]">
-          <img className="w-auto h-auto" src={"/logo.svg"} alt="logo" />
+          <img className="w-full h-full" src={"/logo.svg"} alt="logo" />
         </div>
         <div className="text-white ">
           <p className="font-bold">Foursquare</p>
@@ -69,30 +74,30 @@ const LeftSidebar = ({ setUser }) => {
         <hr className="w-full border-t border-[#80ADCB] mt-2" />
       </div>
       <div>
-        <ul className="mt-8 text-white flex flex-col gap-0.5 ">
+        <ul className="mt-8 text-white flex flex-col  ">
           {SuperAdminLeft.map((item, index) => (
             <li
               key={index}
               className={`${
                 pathname.includes(item.route) ? "bg-[#0B71B5]" : ""
-              } pt-2 pb-2 hover:bg-[#025A9A] `}
+              } pt-2 pb-2 hover:bg-[#025A9A]  `}
             >
               <Link
-                href={`${item.route}?schoolid=${schoolId}&userid=${userId}`}
-                className="flex flex-row items-center gap-2 sm:pl-2 md:pl-2 xl:pl-5 md:text-sm xl:text-base hover:scale-105"
+                href={`${item.route}${adminId ? `?adminId=${adminId}` : ""}`}
+                className="flex flex-row items-center gap-3 sm:pl-2 md:pl-2 xl:pl-3 xl:pr-2  md:text-sm lg:text-[0.95rem]  hover:scale-105"
               >
                 <span>{item.icon}</span>
-                <span className="">{item.Name}</span>
+                <span>{item.Name}</span>
               </Link>
             </li>
           ))}
         </ul>
-        <hr className="w-full border-t border-[#80ADCB] md:mt-15 xl:mt-2" />
       </div>
-      <div className="text-white flex flex-col sm:pl-2 xl:pl-5 md:pl-2 md:text-sm xl:text-base md:pb-2 xl:pb-0.5 hover:bg-[#025A9A] cursor-pointer">
+      <hr className="w-full border-t border-[#80ADCB] md:mt-15 xl:mt-2" />
+      <div className="text-white flex flex-col pt-5 sm:pl-2 xl:pl-5 md:pl-2 md:text-sm xl:text-[0.94rem]   cursor-pointer">
         <div
           onClick={handleLogout}
-          className="flex flex-row items-center gap-2 "
+          className="flex flex-row items-center gap-2 sm:pb-2.5 xl:pb-1"
         >
           <span>
             <LuLogOut />

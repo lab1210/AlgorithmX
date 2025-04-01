@@ -16,6 +16,7 @@ const ManageSchoolAdminItem = () => {
 
   // State to track selected school
   const [selectedSchoolAdmin, setSelectedSchoolAdmin] = useState(null);
+  const [selectedSchoolDelete, setSelectedSchoolDelete] = useState(null);
 
   const [modalTransform, setModalTransform] = useState("translateX(-100%)");
   const [modalOpacity, setModalOpacity] = useState(0);
@@ -37,20 +38,74 @@ const ManageSchoolAdminItem = () => {
       setSelectedSchoolAdmin(null);
     }, 300);
   };
+  const openDeleteModal = (school) => {
+    setSelectedSchoolDelete(school);
+    setTimeout(() => {
+      setModalTransform("translateX(0)");
+      setModalOpacity(1);
+    }, 0);
+  };
+
+  // Function to close modal
+  const closeDeleteModal = () => {
+    setModalTransform("translateX(-100%)");
+    setModalOpacity(0);
+    setTimeout(() => {
+      setSelectedSchoolDelete(null);
+    }, 300);
+  };
+
   return (
     <SuperAdminLayout>
+      {/* Delete */}
+      {/* Overlay and Modal */}
+      {selectedSchoolDelete && (
+        <div className="fixed inset-0 flex justify-center items-center z-50">
+          {/* Overlay */}
+          <div
+            className="absolute inset-0 bg-black/65"
+            onClick={closeDeleteModal}
+          ></div>
+
+          {/* Modal Content */}
+          <div
+            className="relative  bg-white  rounded-xl shadow-lg min-w-75  z-50 transition-transform pt-10 pb-10  duration-600 ease-in-out"
+            style={{ transform: modalTransform, opacity: modalOpacity }}
+          >
+            <p className="font-bold  text-center text-lg">Delete School</p>
+            <div className="text-center pt-3">
+              <p className="text-base text-[#858383]">
+                Are you sure want to delete the
+              </p>
+              <p className="text-base text-[#858383]">selected School Admin?</p>
+            </div>
+            <div className="font-bold text-md items-center justify-center pt-3 flex gap-5 ">
+              <button className="cursor-pointer text-white bg-[#F94144] rounded-md pl-4 pr-4">
+                Yes, Delete
+              </button>
+              <button
+                onClick={closeDeleteModal}
+                className="cursor-pointer text-[#333333] bg-[#EBEBEB] rounded-md pl-4 pr-4"
+              >
+                No, Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Overlay and Modal */}
       {selectedSchoolAdmin && (
         <div className="fixed inset-0 flex justify-center items-center z-50">
           {/* Overlay */}
           <div
-            className="absolute inset-0 bg-black/30"
+            className="absolute inset-0 bg-black/65"
             onClick={closeModal}
           ></div>
 
           {/* Modal Content */}
           <div
-            className="relative pb-5 bg-white  rounded-md shadow-lg min-w-165  z-50 transition-transform  duration-300 ease-in-out"
+            className="relative pb-5 bg-white  rounded-md shadow-lg min-w-165  z-50 transition-transform  duration-600 ease-in-out"
             style={{ transform: modalTransform, opacity: modalOpacity }}
           >
             <div className="bg-[#01427A] rounded-t-md">
@@ -154,22 +209,22 @@ const ManageSchoolAdminItem = () => {
           <table className="min-w-full table-auto ">
             <thead className="bg-[#E6EFF5] lg:text-sm sm:text-xs ">
               <tr className="border-b-[#978F8F] border-b">
-                <th className="p-3 xl:pl-8 xl:pr-8 md:pl-8 md:pr-8 sm:pl-4 sm:pr-4  text-left  font-bold text-[#333333]">
+                <th className="pt-3 pb-3 pl-12   text-left  font-bold text-[#333333]">
                   School Admin Name
                 </th>
-                <th className="p-3 xl:pl-8 xl:pr-8 md:pl-8 md:pr-8 sm:pl-4 sm:pr-4  text-left  font-bold text-[#333333]">
+                <th className="pt-3 pb-3 text-left  font-bold text-[#333333]">
                   School Name
                 </th>
-                <th className="p-3 xl:pl-8 xl:pr-8 md:pl-8 md:pr-8 sm:pl-4 sm:pr-4  text-left  font-bold text-[#333333]">
+                <th className="pt-3 pb-3 text-left  font-bold text-[#333333]">
                   Designation
                 </th>
-                <th className="p-3 xl:pl-8 xl:pr-8 md:pl-8 md:pr-8 sm:pl-4 sm:pr-4  text-left  font-bold text-[#333333]">
+                <th className="pt-3 pb-3 text-left  font-bold text-[#333333]">
                   Phone Number
                 </th>
-                <th className="p-3 xl:pl-8 xl:pr-8 md:pl-8 md:pr-8 sm:pl-4 sm:pr-4  text-left  font-bold text-[#333333]">
+                <th className="pt-3 pb-3 text-left  font-bold text-[#333333]">
                   Email Address
                 </th>
-                <th className="p-3 xl:pl-8 xl:pr-8 md:pl-8 md:pr-8 sm:pl-4 sm:pr-4  text-left  font-bold text-[#333333]">
+                <th className="pt-3 pb-3 text-left  font-bold text-[#333333]">
                   Modify
                 </th>
               </tr>
@@ -181,22 +236,22 @@ const ManageSchoolAdminItem = () => {
                   key={index}
                   className="cursor-pointer border-b-[#978F8F] border-b font-semibold text-xs"
                 >
-                  <td className="p-3 xl:pl-8 xl:pr-8 md:pl-8 md:pr-8 sm:pl-4 sm:pr-4  text-[#333333]">
+                  <td className="pt-2 pb-2 pl-12 text-[#333333]">
                     {item.FirstName + " " + item.MiddleName}
                   </td>
-                  <td className="p-3 xl:pl-8 xl:pr-8 md:pl-8 md:pr-8 sm:pl-4 sm:pr-4  text-[#333333]">
+                  <td className="pt-2 pb-2  text-[#333333]">
                     {item.SchoolName}
                   </td>
-                  <td className="p-3 xl:pl-8 xl:pr-8 md:pl-8 md:pr-8 sm:pl-4 sm:pr-4  text-[#333333]">
+                  <td className="pt-2 pb-2  text-[#333333]">
                     {item.Designation}
                   </td>
-                  <td className="p-3 xl:pl-8 xl:pr-8 md:pl-8 md:pr-8 sm:pl-4 sm:pr-4  text-[#333333]">
+                  <td className="pt-2 pb-2  text-[#333333]">
                     {item.PhoneNumber}
                   </td>
-                  <td className="p-3 xl:pl-8 xl:pr-8 md:pl-8 md:pr-8 sm:pl-4 sm:pr-4  text-[#333333]">
+                  <td className="pt-2 pb-2  text-[#333333]">
                     {item.EmailAddress}
                   </td>
-                  <td className="p-3 text-[#333333]">
+                  <td className="pt-2 pb-2 text-[#333333]">
                     <div className="flex gap-4">
                       <Link
                         href={`/Super-Admin/Manage-School-Admin/Edit-School-Admin?schoolid=${schoolId}&userid=${userId}`}
@@ -204,13 +259,16 @@ const ManageSchoolAdminItem = () => {
                       >
                         <FiEdit3
                           className="text-[#80ADCB] cursor-pointer"
-                          size={20}
+                          size={15}
                         />
                       </Link>
                       <FiTrash2
                         className="text-[#F94144] cursor-pointer"
-                        size={20}
-                        onClick={(e) => e.stopPropagation()} // Prevents the row click
+                        size={15}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          openDeleteModal(item);
+                        }} // Prevents the row click
                       />
                     </div>
                   </td>
