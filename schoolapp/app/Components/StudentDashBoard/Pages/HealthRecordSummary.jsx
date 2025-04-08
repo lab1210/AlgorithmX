@@ -63,7 +63,6 @@ export default function RecordSummary() {
         {/* Top Card: Student Name + Image */}
         <div className="bg-white rounded-md shadow p-6 flex items-center gap-4 mb-4">
           <div className="w-16 h-16 rounded-full overflow-hidden">
-            {/* You could store a profilePic in localStorage or keep a fallback */}
             <img
               src="/female.png"
               alt="Avatar"
@@ -74,7 +73,6 @@ export default function RecordSummary() {
             <h1 className="text-xl md:text-2xl font-bold text-gray-800">
               {name}
             </h1>
-            {/* You could display other quick info here if you like */}
           </div>
         </div>
 
@@ -145,7 +143,6 @@ export default function RecordSummary() {
         {/* Past Health Record */}
 
         <div className="bg-white rounded-md shadow p-6 mb-4">
-          {/* Heading Row */}
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-bold text-[#01427A]">
               Past Health Record

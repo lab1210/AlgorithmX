@@ -31,15 +31,14 @@ export default function SubjectRegistrationPage() {
     <Layout>
       <div className="h-screen flex justify-center bg-[#b4b4b4] p-6 rounded-xl">
         <div className="w-full max-w-4xl rounded-md p-6 md:p-10">
-          <h1 className="text-2xl font-bold text-black mb-5 bg-white p-4 rounded-lg">
+          <h1 className="text-lg lg:text-2xl font-bold text-black mb-5 bg-white p-4 rounded-lg">
             Register Class Year and Class Arm
           </h1>
           <div className="bg-white rounded-md shadow-lg p-6 md:p-8">
-            <h2 className="text-lg font-semibold text-[#999999] mb-4 text-center">
+            <h2 className="text-md lg:text-lg font-semibold text-[#999999] mb-4 text-center">
               Select Class Year and Class Arm to Proceed to Subject Registration
             </h2>
             <form onSubmit={handleSubmit} className="max-w-md mx-auto flex flex-col gap-4">
-              {/* Class Year */}
               <div>
                 <select
                   id="classYear"

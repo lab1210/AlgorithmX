@@ -58,7 +58,7 @@ export default function SubjectRegistrationDemo() {
 
   return (
     <Layout>
-      <div className="h-screen bg-[#D9D9D9] p-4 md:p-8 flex flex-col items-center relative">
+      <div className="min-h-screen bg-[#D9D9D9] p-4 md:p-8 flex flex-col items-center relative">
         {/* Main Content */}
         <div className="bg-white w-full max-w-3xl rounded-lg shadow p-6 md:p-8 mb-8">
           <h1 className="text-center text-2xl md:text-3xl font-bold mb-4">

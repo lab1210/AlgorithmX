@@ -43,7 +43,7 @@ export default function TimetablePage() {
       <div className="h-screen bg-gray-100 p-4 flex flex-col items-center">
         {/* Header Card */}
         <div className="w-full max-w-4xl bg-white rounded-md p-6 mb-6 shadow">
-          <h1 className="text-2xl md:text-3xl font-bold text-gray-800">
+          <h1 className="text-lg lg:text-2xl md:text-xl font-bold text-gray-800">
             2023/2024 SS1 1st Term Timetable
           </h1>
         </div>

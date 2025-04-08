@@ -20,42 +20,42 @@ const Studentdashboard = () => {
   const overview = [
     {
       id: "Fees",
-      icon: <IoWalletOutline size={50} />,
+      icon: <IoWalletOutline size={40} />,
       title: "School Fees Payment",
       description: "Pay fees seamlessly",
       Link: "/Student/Fees-Payment",
     },
     {
       id: "result",
-      icon: <LuNotepadText size={50} />,
+      icon: <LuNotepadText size={40} />,
       title: "Result",
-      description: "View continous assessment",
+      description: "View continuous assessment",
       Link: "/Student/Result",
     },
     {
       id: "attendance",
-      icon: <BiPieChart size={50} />,
+      icon: <BiPieChart size={40} />,
       title: "Attendance",
       description: "View class and event attendance",
       Link: "/Student/Attendance",
     },
     {
       id: "Registration",
-      icon: <RiBookShelfLine size={50} />,
+      icon: <RiBookShelfLine size={40} />,
       title: "Subject Registration",
       description: "Register subjects for the session",
       Link: "/Student/Subject-Registration/Register",
     },
     {
       id: "timetable",
-      icon: <MdOutlineCalendarMonth size={50} />,
+      icon: <MdOutlineCalendarMonth size={40} />,
       title: "Timetable",
       description: "Be on track with every class",
       Link: "/Student/Timetable",
     },
     {
       id: "health",
-      icon: <LiaHeartbeatSolid size={50} />,
+      icon: <LiaHeartbeatSolid size={40} />,
       title: "Health Record",
       description: "Document your medical history",
       Link: "/Student/Health-Record/Record",
@@ -64,14 +64,15 @@ const Studentdashboard = () => {
 
   if (isLoading) {
     return (
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex justify-center items-center w-full h-full z-[1000]">
-        <div className="border-4 border-[rgba(0,64,128,1)] border-t-[rgba(249,65,68,1)] rounded-full w-[50px] h-[50px] animate-spin"></div>
+      <div className="absolute inset-0 flex justify-center items-center z-[1000]">
+        <div className="border-4 border-[rgba(0,64,128,1)] border-t-[rgba(249,65,68,1)] rounded-full w-12 h-12 animate-spin"></div>
       </div>
     );
   }
-  const name = user?.username?.split(" ")[0] || "";
 
-  // Mapping background colors for cards and their icon containers
+  const name = user?.username?.split(" ")[0] || "User";
+
+  // Card background color mapping
   const cardBg = {
     Fees: "bg-[rgba(11,113,181,1)]",
     result: "bg-[rgba(249,65,68,1)]",
@@ -81,6 +82,7 @@ const Studentdashboard = () => {
     health: "bg-[rgba(0,128,0,1)]",
   };
 
+  // Icon container color mapping
   const iconBg = {
     Fees: "bg-[rgba(128,173,203,1)]",
     result: "bg-[rgba(242,100,92,1)]",
@@ -92,39 +94,48 @@ const Studentdashboard = () => {
 
   return (
     <Layout>
-      {/* Grid container replicating the LayoutGrid */}
-      <div className="grid w-full h-screen md:[grid-template-columns:150px_minmax(200px,_1fr)_250px] xl:[grid-template-columns:160px_1fr_300px] md:px-[15px] md:pt-[10px] xl:px-[15px] xl:pt-[15px] bg-[#e9e9e9]">
-        <div className="flex flex-col gap-[30px]">
-          {/* Top Section */}
-          <div className="w-[980px] min-h-[180px] bg-[#004080] rounded-[15px] py-[15px] px-[20px] flex justify-between items-center">
-            <div className="text-white font-bold">
-              <h1 className="text-[2.5rem] mb-[15px]">Hi, {name}</h1>
-              <p className="text-base">Welcome to the official Foursquare student portal.</p>
-            </div>
-            <div className="max-w-[200px]">
-              <img src="/female_teacher.svg" alt="Teacher" className="w-full object-contain" />
-            </div>
+      <div className="min-h-screen bg-[#e9e9e9] p-4 md:p-6 flex flex-col items-center">
+        <div className="w-full max-w-5xl bg-[#004080] rounded-md shadow p-6 md:p-8 flex flex-col md:flex-row justify-between items-center text-white mb-8">
+          <div className="mb-4 md:mb-0">
+            <h2 className="text-2xl md:text-3xl font-bold mb-2">Hi, {name}</h2>
+            <p className="text-base">
+              Welcome to the official Foursquare student portal.
+            </p>
           </div>
-          {/* Overview Section */}
-          <div className="bg-white font-bold rounded-[15px] pt-[25px] pb-[15px] px-[10px] w-[980px] min-w-full">
-            <h2 className="text-[25px]">Overview</h2>
-            <div className="grid gap-[20px] sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-              {overview.map((item, index) => (
-                <Link
-                  key={index}
-                  href={`${item.Link}?schoolid=${schoolId}&userid=${userId}`}
-                  className={`${cardBg[item.id]} rounded-[15px] p-[20px] text-white grid items-center grid-cols-[50px_1fr] gap-[10px] mb-[15px] w-[300px] h-[150px] md:[250px] md:text-md`}
+          <div className="max-w-[180px] w-full">
+            <img
+              src="/female_teacher.svg"
+              alt="Teacher illustration"
+              className="object-contain w-full"
+            />
+          </div>
+        </div>
+
+        {/* Overview Section */}
+        <div className="w-full max-w-5xl bg-white rounded-md shadow p-6 md:p-4 font-bold">
+          <h2 className="text-2xl mb-4 text-gray-800">Overview</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {overview.map((item, index) => (
+              <Link
+                key={index}
+                href={`${item.Link}?schoolid=${schoolId}&userid=${userId}`}
+                className={`relative ${
+                  cardBg[item.id]
+                } rounded-md p-6 text-white flex items-center gap-4 hover:opacity-90 transition`}
+              >
+                <div
+                  className={`w-12 h-12 ${
+                    iconBg[item.id]
+                  } rounded-md flex items-center justify-center text-white`}
                 >
-                  <div className={`${iconBg[item.id]} flex w-fit items-center text-white rounded-[10px] pr-0.5 ml-0.5`}>
-                    {item.icon}
-                  </div>
-                  <div className="text-white cursor-pointer group hover:opacity-60 transition">
-                    <h4 className="text-[20px] mb-[10px] break-words">{item.title}</h4>
-                    <p className="text-[14px] group-hover:scale-90 transition">{item.description}</p>
-                  </div>
-                </Link>
-              ))}
-            </div>
+                  {item.icon}
+                </div>
+                <div className="flex-1">
+                  <h4 className="text-md md:text-md lg:text-lg font-bold mb-1 text-white">{item.title}</h4>
+                  <p className="text-sm text-white">{item.description}</p>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </div>

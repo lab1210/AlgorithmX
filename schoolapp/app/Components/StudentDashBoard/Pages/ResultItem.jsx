@@ -91,8 +91,8 @@ export default function ResultOverviewPage() {
           </h1>
         </div>
         <div className="w-full max-w-5xl bg-white rounded-md shadow p-6 md:p-8 thirdCard">
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] gap-4 mb-8">
-            <div className="flex items-center gap-2">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] gap-4 mb-8 justify-between">
+            <div className="flex items-center gap-1">
               <label className="text-sm">Select Session :</label>
               <select
                 className="bg-gray-100 rounded-lg px-2 py-1 text-sm"
@@ -132,10 +132,10 @@ export default function ResultOverviewPage() {
 
           {/* School Name / Student Info */}
           <div className="text-center mb-6">
-            <h2 className="text-xl font-bold text-gray-800 mb-1">
+            <h2 className="text-lg lg:text-xl font-bold text-gray-800 mb-1">
               Foursquare International Secondary School
             </h2>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-600 font-semibold">
               Name: {studentInfo.name} &nbsp;|&nbsp; Student ID:{" "}
               {studentInfo.studentId} &nbsp;|&nbsp; Class: {studentInfo.class}{" "}
               &nbsp;|&nbsp; Grade Year: {studentInfo.gradeYear} &nbsp;|&nbsp;
@@ -179,7 +179,7 @@ export default function ResultOverviewPage() {
           </div>
 
           <div className="flex flex-col md:flex-col md:items-center md:justify-between mb-6 float-right">
-            <div className="mb-4 flex flex-row gap-4">
+            <div className="mb-4 flex flex-cols-2 lg:flex-row gap-4">
               <p className="text-sm text-gray-700">
                 Average:{" "}
                 <span className="font-semibold bg-[#F2645C] p-1">
@@ -211,8 +211,6 @@ export default function ResultOverviewPage() {
                     goal
                   </span>
                 </div>
-              
-            
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2">

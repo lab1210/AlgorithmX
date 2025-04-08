@@ -78,7 +78,7 @@ const RightSidebar = ({ user }) => {
   const days = eachDayOfInterval({ start, end });
 
   return (
-    <div className="min-h-screen bg-white md:px-3 xl:pl-6">
+    <div className="h-screen bg-white rounded-lg">
       <div className="flex gap-4 items-center py-4">
         <div className="relative">
           <IoNotificationsOutline

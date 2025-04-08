@@ -69,8 +69,7 @@ export default function HealthRecordPage() {
 
   return (
     <Layout>
-    <div className="h-screen bg-[#f0f0f0] p-4 md:p-8">
-      {/* Top Card: Student Name + Image */}
+    <div className="min-h-screen bg-[#f0f0f0] p-4 md:p-8">
       <div className="bg-white rounded-md shadow p-6 flex items-center gap-4 mb-4">
         <div className="w-16 h-16 rounded-full overflow-hidden">
           {student.profilePic && (
