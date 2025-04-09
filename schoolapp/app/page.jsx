@@ -75,9 +75,6 @@ export default function Login() {
             <img src="/MySchoolLight.png" alt="" />
           </div>
           <div className={styles.login_form}>
-            {/* <div className={styles.title}>
-              <p>Welcome to Foursquare Management System</p>
-            </div> */}
             <h1>Log in</h1>
             <form onSubmit={handleSubmit}>
               <div className={styles.Login_input}>

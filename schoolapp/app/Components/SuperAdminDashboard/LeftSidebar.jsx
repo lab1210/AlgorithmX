@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
-import { FaRegUser, FaSchoolFlag, FaUser, FaUserShield } from "react-icons/fa6";
+import { FaRegUser } from "react-icons/fa6";
 import { LuFileChartLine, LuLogOut, LuSchool } from "react-icons/lu";
 import { TbDashboard } from "react-icons/tb";
 import { AiOutlineFileProtect } from "react-icons/ai";
@@ -9,7 +9,7 @@ import { IoChatboxEllipsesOutline } from "react-icons/io5";
 import { LiaUserShieldSolid } from "react-icons/lia";
 import { logout } from "@/app/Service/AuthService";
 
-const LeftSidebar = ({ setUser }) => {
+const LeftSidebar = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const adminId = searchParams.get("adminId");
