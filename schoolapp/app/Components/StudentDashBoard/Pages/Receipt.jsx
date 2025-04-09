@@ -26,7 +26,7 @@ const ReceiptItem = () => {
   const handleDownloadPDF = () => {
     if (downloadPdf) {
       downloadPdf(
-        ".ReceiptPageContent", // if needed, you can add an id or ref instead
+        ".ReceiptPageContent", 
         `${user.username}-Receipt.pdf`
       );
     } else {

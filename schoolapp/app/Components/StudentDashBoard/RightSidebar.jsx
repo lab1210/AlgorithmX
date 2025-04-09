@@ -78,7 +78,7 @@ const RightSidebar = ({ user }) => {
   const days = eachDayOfInterval({ start, end });
 
   return (
-    <div className="h-screen bg-white md:px-3 xl:pl-6">
+    <div className="h-screen bg-white rounded-lg">
       <div className="flex gap-4 items-center py-4">
         <div className="relative">
           <IoNotificationsOutline
@@ -129,12 +129,12 @@ const RightSidebar = ({ user }) => {
         </div>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-3">
         {/* Events Section */}
         <div className="bg-[#004080] text-white rounded-xl p-2 shadow-lg">
-          <div className="space-y-4">
+          <div className="space-y-1.5">
             <h2 className="text-xl font-bold">Events</h2>
-            <div className="space-y-2">
+            <div className="h-[50%]">
               <p className="text-xs text-gray-300">Date</p>
               <div className="flex justify-between items-center">
                 <p className="text-xs">{format(currentDate, "MMM yyy")}</p>
@@ -156,7 +156,7 @@ const RightSidebar = ({ user }) => {
             </div>
 
             {/* Calendar Grid */}
-            <div className="space-y-2">
+            <div className="h-[40%]">
               <div className="flex justify-between text-gray-300 text-xs">
                 {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(
                   (day) => (

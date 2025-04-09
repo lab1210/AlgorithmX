@@ -28,7 +28,7 @@ const FeesPaymentItem = () => {
   if (isLoading) {
     return (
       <div className="fixed inset-0 flex items-center justify-center bg-white z-50">
-        <div className="w-12 h-12 border-4 border-blue-900 border-t-[#F94144] rounded-full animate-spin"></div>
+        <div className="w-12 h-12 border-4 border-blue-900 border-t-red-500 rounded-full animate-spin"></div>
       </div>
     );
   }
@@ -65,12 +65,12 @@ const FeesPaymentItem = () => {
 
   return (
     <Layout>
-      <div className="flex flex-col gap-5 p-4">
+      <div className="flex flex-col gap-5 p-4 bg-[#f0f0f0] min-h-screen">
         {/* First Card Section */}
         <div className="flex flex-col gap-4 md:flex-row md:justify-between bg-white rounded-xl p-4">
           <Link
             href={`/Student/Fees-Payment/Make-Payment?schoolid=${schoolId}&userid=${userId}`}
-            className="bg-[#4084B1] text-white rounded-2xl flex-1"
+            className="bg-blue-800 text-white rounded-2xl flex-1"
           >
             <div className="grid grid-cols-[1fr_auto] items-center justify-between p-4 text-white">
               <div>
@@ -85,7 +85,7 @@ const FeesPaymentItem = () => {
               <div className="flex items-center gap-2 justify-center">
                 <p className="text-sm text-white">More info</p>
                 <div className="w-4 h-4 bg-white rounded-full flex items-center justify-center">
-                  <FaArrowRight className="text-[#4084B1] text-xs" />
+                  <FaArrowRight className="text-blue-600 text-xs" />
                 </div>
               </div>
             </div>
@@ -93,7 +93,7 @@ const FeesPaymentItem = () => {
 
           <Link
             href={`/Student/Fees-Payment/Receipt?schoolid=${schoolId}&userid=${userId}`}
-            className="bg-[#F94144] text-white rounded-2xl flex-1"
+            className="bg-red-500 text-white rounded-2xl flex-1"
           >
             <div className="grid grid-cols-[1fr_auto] items-center justify-between p-4 text-white">
               <div>
@@ -108,7 +108,7 @@ const FeesPaymentItem = () => {
               <div className="flex items-center gap-2 justify-center">
                 <p className="text-sm text-white">More info</p>
                 <div className="w-4 h-4 bg-white rounded-full flex items-center justify-center">
-                  <FaArrowRight className="text-[#F94144] text-xs" />
+                  <FaArrowRight className="text-red-500 text-xs" />
                 </div>
               </div>
             </div>
@@ -121,7 +121,7 @@ const FeesPaymentItem = () => {
         </div>
 
         {/* Table Section */}
-        <div className="bg-white rounded-xl p-5 thirdCard">
+        <div className="w-full bg-white rounded-xl p-5 thirdCard">
           <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] gap-4 mb-8">
             <div className="flex items-center gap-2">
               <label className="text-sm">Select Session :</label>
@@ -155,13 +155,13 @@ const FeesPaymentItem = () => {
 
             <button
               onClick={handleDownloadPDF}
-              className="bg-[#0B71B5] text-white rounded-lg px-4 py-2 text-sm hover:bg-[#F94144] transition-colors duration-300"
+              className="bg-blue-700 text-white rounded-lg px-4 py-2 text-sm hover:bg-red-500 transition-colors duration-300"
             >
               Print
             </button>
           </div>
 
-          <div className="flex flex-wrap gap-4 mb-6">
+          <div className="w-[80%] md:w-full flex flex-wrap gap-4 mb-6 justify-between">
             <p className="text-sm">Name: {user.username}</p>
             <p className="text-sm">Student ID: {user.userId}</p>
             <p className="text-sm">Class: {user.class}</p>
@@ -170,54 +170,56 @@ const FeesPaymentItem = () => {
 
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-[#F94144] text-white">
+              <thead className="bg-red-500 text-white">
                 <tr>
-                  <th className="p-3 text-left border-r border-gray-200">
+                  <th className="p-2 md:p-3 text-left border-r border-gray-200 text-xs md:text-sm">
                     S/N
                   </th>
-                  <th className="p-3 text-left border-r border-gray-200">
+                  <th className="p-2 md:p-3 text-left border-r border-gray-200 text-xs md:text-sm">
                     Purpose
                   </th>
-                  <th className="p-3 text-left border-r border-gray-200">
+                  <th className="p-2 md:p-3 text-left border-r border-gray-200 text-xs md:text-sm">
                     Transaction Number
                   </th>
-                  <th className="p-3 text-left border-r border-gray-200">
+                  <th className="p-2 md:p-3 text-left border-r border-gray-200 text-xs md:text-sm">
                     Amount Billed
                   </th>
-                  <th className="p-3 text-left border-r border-gray-200">
+                  <th className="p-2 md:p-3 text-left border-r border-gray-200 text-xs md:text-sm">
                     Amount Paid
                   </th>
-                  <th className="p-3 text-left">Payment Date</th>
+                  <th className="p-2 md:p-3 text-left text-xs md:text-sm">
+                    Payment Date
+                  </th>
                 </tr>
               </thead>
 
               <tbody>
                 {user.fees.map((item, index) => (
                   <tr key={index} className="border-b border-gray-200">
-                    <td className="p-3 border-r border-gray-200">
+                    <td className="p-2 md:p-3 border-r border-gray-200 text-xs md:text-sm">
                       {index + 1}
                     </td>
-                    <td className="p-3 border-r border-gray-200">
+                    <td className="p-2 md:p-3 border-r border-gray-200 text-xs md:text-sm">
                       {item.purpose}
                     </td>
-                    <td className="p-3 border-r border-gray-200">
+                    <td className="p-2 md:p-3 border-r border-gray-200 text-xs md:text-sm">
                       {item.TransactionNumber}
                     </td>
-                    <td className="p-3 border-r border-gray-200">
+                    <td className="p-2 md:p-3 border-r border-gray-200 text-xs md:text-sm">
                       {formatCurrency(item.AmountBilled)}
                     </td>
-                    <td className="p-3 border-r border-gray-200">
+                    <td className="p-2 md:p-3 border-r border-gray-200 text-xs md:text-sm">
                       {formatCurrency(item.AmountPaid)}
                     </td>
                     <td
-                      className={`p-3 flex items-center gap-2 ${
+                      className={`p-2 md:p-3 flex items-center gap-2 text-xs md:text-sm ${
                         item.PaymentDate === "Pending"
-                          ? "text-[#F94144]"
+                          ? "text-red-500"
                           : "text-gray-700"
                       }`}
                     >
                       {item.PaymentDate}
-                      <LuArrowDownUp className="text-gray-400 cursor-pointer" />
+                      <LuArrowDownUp className="text-gray-400 cursor-pointer text-xs md:text-sm" />
                     </td>
                   </tr>
                 ))}
@@ -244,7 +246,7 @@ const FeesPaymentItem = () => {
             </div>
             <div className="flex items-center gap-2">
               <p className="text-sm">Amount Pending:</p>
-              <span className="bg-[#F94144] text-white rounded px-2 text-sm">
+              <span className="bg-red-500 text-white rounded px-2 text-sm">
                 {formatCurrency(totalAmountPending)}
               </span>
             </div>

@@ -1,11 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import dummysession from "../../../Components/session";
+import dummyterm from "../../../Components/Term";
+import { useUser } from "../context/UserProvider";
 import Layout from "../../../Components/Studentlayout";
 
 export default function ResultOverviewPage() {
-  const [session, setSession] = useState("2023/2024");
-  const [term, setTerm] = useState("1st Term");
-
   // Example data for the report sheet
   const studentInfo = {
     name: "Ife Babalola Adesina",
@@ -15,6 +15,12 @@ export default function ResultOverviewPage() {
     session: "2023/2024",
     age: 14,
   };
+
+  const [session, setSession] = useState(dummysession[0]);
+  const [term, setTerm] = useState("");
+  const { user, isLoading } = useUser();
+  
+    
 
   // Example result data
   const subjects = [
@@ -50,65 +56,86 @@ export default function ResultOverviewPage() {
     { grade: "F", scorePoint: "0 points", scoreRange: "0 - 44" },
   ];
 
-  const handlePrint = () => {
-    window.print();
+  const handleDownloadPDF = () => {
+    if (downloadPdf) {
+      downloadPdf(
+        ".thirdCard",
+        `${user.username}-Result-${session}-${term}.pdf`
+      );
+    } else {
+      console.error("downloadPdf not loaded yet.");
+    }
   };
+  const [downloadPdf, setDownloadPdf] = useState(null);
+  
+  useEffect(() => {
+      import("../../Print/DownloadasPdf").then((module) => {
+        setDownloadPdf(() => module.default);
+      });
+    }, []);
+
+    if (isLoading) {
+      return (
+        <div className="fixed inset-0 flex items-center justify-center bg-white z-50">
+          <div className="w-12 h-12 border-4 border-blue-900 border-t-red-500 rounded-full animate-spin"></div>
+        </div>
+      );
+    }
 
   return (
     <Layout>
-      <div className="min-h-screen p-4 flex flex-col items-center">
+      <div className="min-h-screen p-4 flex flex-col items-center bg-[#e2e2e2]">
         <div className="w-full max-w-5xl bg-white rounded-md shadow p-6 md:p-8 mb-4">
           <h1 className="text-xl font-bold text-gray-800 mb-4 md:mb-0">
             Result Overview
           </h1>
         </div>
-        <div className="w-full max-w-5xl bg-white rounded-md shadow p-6 md:p-8 ">
-          <div className="flex flex-col md:justify-between mb-6">
-            <div className="flex flex-col md:flex-row md:items-center gap-4 float-left">
-              <div>
-                <label className="mr-2 text-sm font-medium text-gray-700">
-                  Select session:
-                </label>
-                <select
-                  value={session}
-                  onChange={(e) => setSession(e.target.value)}
-                  className="rounded p-1 text-sm"
-                >
-                  <option value="2023/2024">2023/2024</option>
-                  <option value="2022/2023">2022/2023</option>
-                  <option value="2021/2022">2021/2022</option>
-                </select>
-              </div>
-              <div>
-                <label className="mr-2 text-sm font-medium text-gray-700">
-                  Term:
-                </label>
-                <select
-                  value={term}
-                  onChange={(e) => setTerm(e.target.value)}
-                  className="rounded p-1 text-sm"
-                >
-                  <option value="1st Term">1st Term</option>
-                  <option value="2nd Term">2nd Term</option>
-                  <option value="3rd Term">3rd Term</option>
-                </select>
-              </div>
-              {/* Print Button */}
-              <button
-                onClick={handlePrint}
-                className="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 text-sm font-semibold float-right"
+        <div className="w-full max-w-5xl bg-white rounded-md shadow p-6 md:p-8 thirdCard">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] gap-4 mb-8 justify-between">
+            <div className="flex items-center gap-1">
+              <label className="text-sm">Select Session :</label>
+              <select
+                className="bg-gray-100 rounded-lg px-2 py-1 text-sm"
+                value={session}
+                onChange={(e) => setSession(e.target.value)}
               >
-                Print
-              </button>
+                {dummysession.map((item, index) => (
+                  <option key={index} value={item}>
+                    {item}
+                  </option>
+                ))}
+              </select>
             </div>
+
+            <div className="flex items-center gap-2">
+              <label className="text-sm">Select Term :</label>
+              <select
+                className="bg-gray-100 rounded-lg px-2 py-1 text-sm"
+                value={term}
+                onChange={(e) => setTerm(e.target.value)}
+              >
+                {dummyterm.map((item, index) => (
+                  <option key={index} value={item}>
+                    {item}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <button
+              onClick={handleDownloadPDF}
+              className="bg-blue-700 text-white rounded-lg px-4 py-2 text-sm hover:bg-red-500 transition-colors duration-300"
+            >
+              Print
+            </button>
           </div>
 
           {/* School Name / Student Info */}
           <div className="text-center mb-6">
-            <h2 className="text-xl font-bold text-gray-800 mb-1">
+            <h2 className="text-lg lg:text-xl font-bold text-gray-800 mb-1">
               Foursquare International Secondary School
             </h2>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-600 font-semibold">
               Name: {studentInfo.name} &nbsp;|&nbsp; Student ID:{" "}
               {studentInfo.studentId} &nbsp;|&nbsp; Class: {studentInfo.class}{" "}
               &nbsp;|&nbsp; Grade Year: {studentInfo.gradeYear} &nbsp;|&nbsp;
@@ -142,7 +169,7 @@ export default function ResultOverviewPage() {
                     <td className="py-2 px-4">{subj.ca}</td>
                     <td className="py-2 px-4">{subj.midTerm}</td>
                     <td className="py-2 px-4">{subj.exam}</td>
-                    <td className="py-2 px-4 font-semibold text-gray-800">
+                    <td className="py-2 px-4  text-gray-800">
                       {subj.total}
                     </td>
                   </tr>
@@ -152,7 +179,7 @@ export default function ResultOverviewPage() {
           </div>
 
           <div className="flex flex-col md:flex-col md:items-center md:justify-between mb-6 float-right">
-            <div className="mb-4 flex flex-row gap-4">
+            <div className="mb-4 flex flex-cols-2 lg:flex-row gap-4">
               <p className="text-sm text-gray-700">
                 Average:{" "}
                 <span className="font-semibold bg-[#F2645C] p-1">
@@ -184,8 +211,6 @@ export default function ResultOverviewPage() {
                     goal
                   </span>
                 </div>
-              
-            
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2">

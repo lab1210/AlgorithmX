@@ -1,15 +1,16 @@
 "use client";
 import React, { Suspense, useEffect, useState } from "react";
-import styles from "../css/layout.module.css";
 import LeftSidebar from "./StudentDashBoard/LeftSidebar";
 import { usePathname } from "next/navigation";
 import RightSidebar from "./StudentDashBoard/RightSidebar";
 import { useUser } from "./StudentDashBoard/context/UserProvider";
+import { HiMenu } from "react-icons/hi";
 
 const Layout = ({ children }) => {
   const { user, isLoading, checkUser, setUser } = useUser();
   const [headerTitle, setHeaderTitle] = useState("Dashboard");
   const pathName = usePathname();
+  const [showMobileSidebar, setShowMobileSidebar] = useState(false);
 
   const generateTitle = (path) => {
     const parts = path.split("/");
@@ -26,13 +27,11 @@ const Layout = ({ children }) => {
       };
     }
 
-    return formattedParts.join(" / ") || "Dashboard]";
+    return formattedParts.join(" / ") || "Dashboard";
   };
 
   useEffect(() => {
-    if (!checkUser()) {
-      return;
-    }
+    if (!checkUser()) return;
   }, [user, isLoading, checkUser]);
 
   useEffect(() => {
@@ -42,33 +41,46 @@ const Layout = ({ children }) => {
 
   if (isLoading) {
     return (
-      <div className={styles.loadingContainer}>
-        <div className={styles.spinner}></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full flex justify-center items-center z-[1000]">
+        <div className="w-12 h-12 border-4 border-blue-900 border-t-red-500 rounded-full animate-spin"></div>
       </div>
     );
   }
 
   return (
-    <div className={styles.LayoutGrid}>
-      <div className={styles.left}>
+    <div className="w-full h-screen grid md:grid-cols-[70%_30%] xl:grid-cols-[160px_1fr_300px] p-3 pt-[15px]">
         <Suspense>
-          <LeftSidebar setUser={setUser} />
+          <LeftSidebar 
+          setUser={setUser}
+          showMobileSidebar={showMobileSidebar} 
+          setShowMobileSidebar={setShowMobileSidebar}
+           />
         </Suspense>
-      </div>
-      <div className={styles.middle}>
-        <div className={styles.header}>
+
+      <div className="grid grid-rows-[61px_1fr] h-screen">
+        <div className="bg-white sticky top-0 z-10 p-4 flex items-center gap-4">
+          <button 
+            className="lg:hidden text-2xl ml-2"
+            onClick={() => setShowMobileSidebar(true)}
+          >
+            <HiMenu className="w-6 h-6 text-gray-800" />
+          </button>
+          
           {typeof headerTitle === "object" ? (
-            <h2>
-              <span style={{ color: "#808080" }}>{headerTitle.firstPart}</span>{" "}
-              / {headerTitle.restParts}
+            <h2 className="text-xl font-bold">
+              <span className="text-gray-500">{headerTitle.firstPart}</span>
+              {" / "}{headerTitle.restParts}
             </h2>
           ) : (
-            <h2>{headerTitle}</h2>
+            <h2 className="text-xl font-bold">{headerTitle}</h2>
           )}
         </div>
-        <div className={styles.content}>{children}</div>
+        <div className="rounded-lg overflow-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+          {children}
+        </div>
       </div>
-      <div className={styles.right}>
+
+      <div className="bg-white h-screen md:px-3 xl:pl-6">
         <RightSidebar user={user} />
       </div>
     </div>
