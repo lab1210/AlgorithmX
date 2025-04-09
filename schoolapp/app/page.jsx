@@ -5,16 +5,14 @@ import styles from "./css/StudentAuth.module.css";
 import Link from "next/link";
 import { PiEyeLight } from "react-icons/pi";
 import { IoEyeOffOutline } from "react-icons/io5";
-import dummy from "./Components/dummy";
 import { useRouter } from "next/navigation";
-
+import { Login as LoginService } from "./Service/AuthService";
 export default function Login() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [usernameerror, setUsernameerror] = useState("");
-  const [passworderror, setPassworderror] = useState("");
+  const [error, setError] = useState("");
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -22,48 +20,50 @@ export default function Login() {
   // Handle Form Submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setUsernameerror("");
-    setPassworderror("");
+    console.log("handleSubmit function CALLED");
+    setError("");
 
-    let valid = true;
-    if (!username) {
-      setUsernameerror("Username is required");
-      valid = false;
-    }
-
-    if (!password) {
-      setPassworderror("Password is required");
-      valid = false;
-    }
-
-    if (!valid) {
+    if (!username || !password) {
+      setError("Please enter both username and password");
       return;
     }
+    try {
+      const response = await LoginService(username, password);
+      console.log("Login successful", response);
 
-    const user = dummy.find(
-      (u) => u.username === username && u.password === password
-    );
-    console.log(user);
-    if (user) {
-      console.log("Login successful (dummy):", user);
-      localStorage.setItem("user", JSON.stringify(user)); // Store user data
-
-      if (user.Role === "Teacher") {
-        const url = `/Teacher/DashBoard?schoolid=${user.schoolid}&userid=${user.userId}`;
-        router.push(url);
-      } else if (user.Role === "Student") {
-        console.log("Login successful (dummy):", user);
-        const url = `/Student/DashBoard?schoolid=${user.schoolid}&userid=${user.userId}`;
-        console.log(url);
-        router.push(url);
-      } else if (user.Role === "Super Admin") {
-        console.log("Login successful (dummy):", user);
-        const url = `/Super-Admin/DashBoard?schoolid=${user.schoolid}&userid=${user.userId}`;
-        console.log(url);
-        router.push(url);
+      if (response.user_roles && response.user_roles.length > 0) {
+        const roleName = response.user_roles[0].role.name;
+        console.log("Role Name:", roleName);
+        if (roleName === "Teacher") {
+          const teacherID = response.teacher?.id;
+          const url = `/Teacher/DashBoard/?teacherID=${teacherID}`;
+          router.push(url);
+          console.log("Redirecting to:", url);
+        } else if (roleName === "Student") {
+          const studentId = response.student?.id;
+          const url = `/Student/DashBoard/?studentId=${studentId}`;
+          router.push(url);
+          console.log("Redirecting to:", url);
+        } else if (roleName === "Super Admin") {
+          const adminId = response.super_admin?.id;
+          const url = `/Super-Admin/DashBoard?adminId=${adminId}`;
+          router.push(url);
+          console.log("Redirecting to:", url);
+        } else if (roleName === "School Admin") {
+          const schooladminId = response.school_admin?.id;
+          const url = `/School-Admin/DashBoard?schooladminId=${schooladminId}`;
+          router.push(url);
+          console.log("Redirecting to:", url);
+        } else {
+          console.warn("Unknown user role", roleName);
+          router.push("/");
+        }
+      } else {
+        router.push("/");
       }
-    } else {
-      console.error("Invalid username or password");
+    } catch (err) {
+      console.error("Login failed", err);
+      setError("Invalid username or password");
     }
   };
   return (
@@ -72,12 +72,9 @@ export default function Login() {
       <div className={styles.Student_Right_Auth}>
         <div className={styles.login_box}>
           <div className={styles.logo}>
-            <img src="/logo.svg" alt="" />
+            <img src="/MySchoolLight.png" alt="" />
           </div>
           <div className={styles.login_form}>
-            <div className={styles.title}>
-              <p>Welcome to Foursquare Management System</p>
-            </div>
             <h1>Log in</h1>
             <form onSubmit={handleSubmit}>
               <div className={styles.Login_input}>
@@ -90,18 +87,14 @@ export default function Login() {
                   onChange={(e) => setUsername(e.target.value)}
                   required
                 />
-                {usernameerror && (
-                  <p className={styles.error}>{usernameerror}</p>
-                )}
               </div>
               <div className={styles.Login_input}>
                 <div className={styles.pswd}>
                   <label htmlFor="Password">Password</label>
-                  {passworderror && <p>Forgot Password?</p>}
                 </div>
                 <div className={styles.toggle}>
                   <input
-                    className={`${passworderror ? "" : styles.username}`}
+                    className={styles.username}
                     type={showPassword ? "text" : "password"}
                     placeholder="Enter Password"
                     value={password}
@@ -123,9 +116,7 @@ export default function Login() {
                     />
                   )}
                 </div>
-                {passworderror && (
-                  <p className={styles.error}>{passworderror}</p>
-                )}
+                {error && <p className={styles.error}>{error}</p>}
               </div>
               <div className={styles.loginbtn}>
                 <button type="submit">LOG IN</button>

@@ -11,8 +11,7 @@ import schools from "../../school";
 
 const AddSchoolAdminItem = () => {
   const searchParams = useSearchParams();
-  const schoolId = searchParams.get("schoolid");
-  const userId = searchParams.get("userid");
+  const adminId = searchParams.get("adminId");
 
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [selectedState, setSelectedState] = useState(null);
@@ -61,9 +60,7 @@ const AddSchoolAdminItem = () => {
     <SuperAdminLayout>
       <div className="bg-[#ffffff] pl-4 pt-4 pb-3 pr-4 sticky top-0  z-10 shadow-md  flex justify-between items-center ">
         <DashboardHeader />
-        <Link
-          href={`/Super-Admin/Manage-School-Admin?schoolid=${schoolId}&userid=${userId}`}
-        >
+        <Link href={`/Super-Admin/Manage-School-Admin?adminId=${adminId}`}>
           <button className="bg-[#07508F] text-white p-2 rounded-lg cursor-pointer ">
             View All Admin
           </button>

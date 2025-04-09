@@ -12,6 +12,7 @@ import EditUser from "../Modals/EditUser";
 const ManageUserItem = () => {
   const [modalTransform, setModalTransform] = useState("translateX(-100%)");
   const [modalOpacity, setModalOpacity] = useState(0);
+  const [selectedSchoolDelete, setSelectedSchoolDelete] = useState(null);
 
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -56,17 +57,72 @@ const ManageUserItem = () => {
     console.log("User Added:", formData);
     closeAddModal();
   };
+
+  const openDeleteModal = (school) => {
+    setSelectedSchoolDelete(school);
+    setTimeout(() => {
+      setModalTransform("translateX(0)");
+      setModalOpacity(1);
+    }, 0);
+  };
+
+  // Function to close modal
+  const closeDeleteModal = () => {
+    setModalTransform("translateX(-100%)");
+    setModalOpacity(0);
+    setTimeout(() => {
+      setSelectedSchoolDelete(null);
+    }, 300);
+  };
+
   return (
     <SuperAdminLayout>
+      {/* Delete */}
+      {/* Overlay and Modal */}
+      {selectedSchoolDelete && (
+        <div className="fixed inset-0 flex justify-center items-center z-50">
+          {/* Overlay */}
+          <div
+            className="absolute inset-0 bg-black/65"
+            onClick={closeDeleteModal}
+          ></div>
+
+          {/* Modal Content */}
+          <div
+            className="relative  bg-white  rounded-xl shadow-lg min-w-75  z-50 transition-transform pt-10 pb-10  duration-600 ease-in-out"
+            style={{ transform: modalTransform, opacity: modalOpacity }}
+          >
+            <p className="font-bold  text-center text-lg">Delete School</p>
+            <div className="text-center pt-3">
+              <p className="text-base text-[#858383]">
+                Are you sure want to delete the
+              </p>
+              <p className="text-base text-[#858383]">selected User?</p>
+            </div>
+            <div className="font-bold text-md items-center justify-center pt-3 flex gap-5 ">
+              <button className="cursor-pointer text-white bg-[#F94144] rounded-md pl-4 pr-4">
+                Yes, Delete
+              </button>
+              <button
+                onClick={closeDeleteModal}
+                className="cursor-pointer text-[#333333] bg-[#EBEBEB] rounded-md pl-4 pr-4"
+              >
+                No, Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* ADD USER */}
       {isAddModalOpen && (
         <div className="fixed inset-0 flex justify-center items-center z-50">
           <div
-            className="absolute inset-0 bg-black/60"
+            className="absolute inset-0 bg-black/65"
             onClick={closeAddModal}
           ></div>
           <div
-            className="relative md:pl-6 md:pr-6 pt-4 pb-4 sm:pl-3 sm:pr-3  bg-white  rounded-md shadow-lg  lg:max-w-280 md:max-w-180 sm:max-w-150  z-50 transition-transform  duration-300 ease-in-out"
+            className="relative md:pl-6 md:pr-6 pt-4 pb-4 sm:pl-3 sm:pr-3  bg-white  rounded-md shadow-lg  lg:max-w-280 md:max-w-180 sm:max-w-150  z-50 transition-transform  duration-600 ease-in-out"
             style={{ transform: modalTransform, opacity: modalOpacity }}
           >
             <div className="flex justify-end">
@@ -87,11 +143,11 @@ const ManageUserItem = () => {
       {isEditModalOpen && (
         <div className="fixed inset-0 flex justify-center items-center z-50">
           <div
-            className="absolute inset-0 bg-black/30"
+            className="absolute inset-0 bg-black/65"
             onClick={closeEditModal}
           ></div>
           <div
-            className="relative md:pl-6 md:pr-6 pt-4 pb-4 sm:pl-3 sm:pr-3  bg-white  rounded-md shadow-lg lg:max-w-280 md:max-w-180 sm:max-w-150  z-50 transition-transform  duration-300 ease-in-out"
+            className="relative md:pl-6 md:pr-6 pt-4 pb-4 sm:pl-3 sm:pr-3  bg-white  rounded-md shadow-lg lg:max-w-280 md:max-w-180 sm:max-w-150  z-50 transition-transform  duration-600 ease-in-out"
             style={{ transform: modalTransform, opacity: modalOpacity }}
           >
             <div className="flex justify-end">
@@ -141,19 +197,19 @@ const ManageUserItem = () => {
           <table className="min-w-full table-auto ">
             <thead className="bg-[#E6EFF5] lg:text-sm sm:text-xs ">
               <tr className="border-b-[#978F8F] border-b">
-                <th className="p-3 xl:pl-8 xl:pr-8 md:pl-8 md:pr-8 sm:pl-4 sm:pr-4  text-left  font-bold text-[#333333]">
+                <th className="pt-3 pb-3 pl-12  text-left  font-bold text-[#333333]">
                   Name
                 </th>
-                <th className="p-3 xl:pl-8 xl:pr-8 md:pl-8 md:pr-8 sm:pl-4 sm:pr-4  text-left  font-bold text-[#333333]">
+                <th className="pt-3 pb-3   text-left  font-bold text-[#333333]">
                   Phone Number
                 </th>
-                <th className="p-3 xl:pl-8 xl:pr-8 md:pl-8 md:pr-8 sm:pl-4 sm:pr-4  text-left  font-bold text-[#333333]">
+                <th className="pt-3 pb-3   text-left  font-bold text-[#333333]">
                   Email Address
                 </th>
-                <th className="p-3 xl:pl-8 xl:pr-8 md:pl-8 md:pr-8 sm:pl-4 sm:pr-4  text-left  font-bold text-[#333333]">
+                <th className="pt-3 pb-3   text-left  font-bold text-[#333333]">
                   User Role
                 </th>
-                <th className="p-3 xl:pl-8 xl:pr-8 md:pl-8 md:pr-8 sm:pl-4 sm:pr-4  text-left  font-bold text-[#333333]">
+                <th className="pt-3 pb-3   text-left  font-bold text-[#333333]">
                   Modify
                 </th>
               </tr>
@@ -164,28 +220,27 @@ const ManageUserItem = () => {
                   key={index}
                   className="cursor-pointer border-b-[#978F8F] border-b font-semibold text-xs"
                 >
-                  <td className="p-3 xl:pl-8 xl:pr-8 md:pl-8 md:pr-8 sm:pl-4 sm:pr-4  text-[#333333]">
+                  <td className="pt-2 pb-2 pl-12  text-[#333333]">
                     {item.Surname + " " + item.FirstName}
                   </td>
-                  <td className="p-3 xl:pl-8 xl:pr-8 md:pl-8 md:pr-8 sm:pl-4 sm:pr-4  text-[#333333]">
+                  <td className="pt-2 pb-2  text-[#333333]">
                     {item.PhoneNumber}
                   </td>
-                  <td className="p-3 xl:pl-8 xl:pr-8 md:pl-8 md:pr-8 sm:pl-4 sm:pr-4  text-[#333333]">
+                  <td className="pt-2 pb-2  text-[#333333]">
                     {item.EmailAddress}
                   </td>
-                  <td className="p-3 xl:pl-8 xl:pr-8 md:pl-8 md:pr-8 sm:pl-4 sm:pr-4  text-[#333333]">
-                    {item.UserRole}
-                  </td>
-                  <td className="p-3 text-[#333333]">
+                  <td className="pt-2 pb-2  text-[#333333]">{item.UserRole}</td>
+                  <td className="pt-2 pb-2 text-[#333333]">
                     <div className="flex gap-4">
                       <FiEdit3
                         className="text-[#80ADCB] cursor-pointer"
-                        size={20}
+                        size={15}
                         onClick={openEditModal}
                       />
                       <FiTrash2
+                        onClick={openDeleteModal}
                         className="text-[#F94144] cursor-pointer"
-                        size={20}
+                        size={15}
                       />
                     </div>
                   </td>

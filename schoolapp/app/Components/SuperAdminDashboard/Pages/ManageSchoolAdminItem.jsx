@@ -1,21 +1,30 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SuperAdminLayout from "../SuperAdminLayout";
 import DashboardHeader from "../DashboardHeader";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { FaUserPlus } from "react-icons/fa6";
-import schoolAdmin from "../../schooladmin";
 import { FiEdit3, FiTrash2 } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
+import styles from "../../../Super-Admin/css/spinner.module.css";
+import { getSchoolAdmin } from "@/app/Service/schoolAdminService";
 
 const ManageSchoolAdminItem = () => {
   const searchParams = useSearchParams();
-  const schoolId = searchParams.get("schoolid");
-  const userId = searchParams.get("userid");
+  const adminId = searchParams.get("adminId");
 
-  // State to track selected school
+  // State to store the fetched school admins
+  const [schoolAdminsData, setSchoolAdminsData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // State for the search term
+  const [searchTerm, setSearchTerm] = useState("");
+
+  // State to track selected school admin for modal actions
   const [selectedSchoolAdmin, setSelectedSchoolAdmin] = useState(null);
+  const [selectedSchoolDelete, setSelectedSchoolDelete] = useState(null);
 
   const [modalTransform, setModalTransform] = useState("translateX(-100%)");
   const [modalOpacity, setModalOpacity] = useState(0);
@@ -37,20 +46,123 @@ const ManageSchoolAdminItem = () => {
       setSelectedSchoolAdmin(null);
     }, 300);
   };
+  const openDeleteModal = (school) => {
+    setSelectedSchoolDelete(school);
+    setTimeout(() => {
+      setModalTransform("translateX(0)");
+      setModalOpacity(1);
+    }, 0);
+  };
+
+  // Function to close modal
+  const closeDeleteModal = () => {
+    setModalTransform("translateX(-100%)");
+    setModalOpacity(0);
+    setTimeout(() => {
+      setSelectedSchoolDelete(null);
+    }, 300);
+  };
+
+  useEffect(() => {
+    const fetchSchoolAdminsData = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const response = await getSchoolAdmin();
+        console.log("Data from API:", response.data);
+        setSchoolAdminsData(response.data);
+      } catch (err) {
+        console.error("Error fetching school admin data:", err);
+        setError(err.message || "Failed to fetch school admin data");
+        setSchoolAdminsData([]);
+      } finally {
+        setLoading(false);
+        console.log("Loading state after fetch:", loading);
+      }
+    };
+
+    fetchSchoolAdminsData();
+  }, []);
+
+  // Filter the school admins based on the search term
+  const filteredSchoolAdmins = schoolAdminsData.filter((admin) => {
+    const searchLower = searchTerm.toLowerCase();
+    return (
+      admin.first_name.toLowerCase().includes(searchLower) ||
+      admin.surname.toLowerCase().includes(searchLower) ||
+      admin.school_name.toLowerCase().includes(searchLower) ||
+      admin.designation.toLowerCase().includes(searchLower) ||
+      admin.phone_number.toLowerCase().includes(searchLower) ||
+      admin.email.toLowerCase().includes(searchLower)
+    );
+  });
+
+  if (loading) {
+    return (
+      <div className={styles.loadingContainer}>
+        <div className={styles.spinner}></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return <div>Error loading School Admins: {error}</div>; // Basic error indicator
+  }
+
+  console.log("schoolAdminsData before render:", schoolAdminsData);
+  console.log("Loading before render:", loading);
   return (
     <SuperAdminLayout>
-      {/* Overlay and Modal */}
+      {/* Delete Modal */}
+      {selectedSchoolDelete && (
+        <div className="fixed inset-0 flex justify-center items-center z-50">
+          {/* Overlay */}
+          <div
+            className="absolute inset-0 bg-black/65"
+            onClick={closeDeleteModal}
+          ></div>
+
+          {/* Modal Content */}
+          <div
+            className="relative  bg-white  rounded-xl shadow-lg min-w-75  z-50 transition-transform pt-10 pb-10   duration-600 ease-in-out"
+            style={{ transform: modalTransform, opacity: modalOpacity }}
+          >
+            <p className="font-bold  text-center text-lg">
+              Delete School Admin
+            </p>
+            <div className="text-center pt-3">
+              <p className="text-base text-[#858383]">
+                Are you sure want to delete the
+              </p>
+              <p className="text-base text-[#858383]">selected School Admin?</p>
+            </div>
+            <div className="font-bold text-md items-center justify-center pt-3 flex gap-5 ">
+              <button className="cursor-pointer text-white bg-[#F94144] rounded-md pl-4 pr-4">
+                Yes, Delete
+              </button>
+              <button
+                onClick={closeDeleteModal}
+                className="cursor-pointer text-[#333333] bg-[#EBEBEB] rounded-md pl-4 pr-4"
+              >
+                No, Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Information Modal */}
       {selectedSchoolAdmin && (
         <div className="fixed inset-0 flex justify-center items-center z-50">
           {/* Overlay */}
           <div
-            className="absolute inset-0 bg-black/30"
+            className="absolute inset-0 bg-black/65"
             onClick={closeModal}
           ></div>
 
           {/* Modal Content */}
           <div
-            className="relative pb-5 bg-white  rounded-md shadow-lg min-w-165  z-50 transition-transform  duration-300 ease-in-out"
+            className="relative pb-5 bg-white  rounded-md shadow-lg min-w-165  z-50 transition-transform  duration-600 ease-in-out"
             style={{ transform: modalTransform, opacity: modalOpacity }}
           >
             <div className="bg-[#01427A] rounded-t-md">
@@ -65,55 +177,36 @@ const ManageSchoolAdminItem = () => {
               <div className="flex items-center justify-between">
                 <p className="font-semibold text-sm">First Name:</p>
                 <p className="font-bold text-lg">
-                  {selectedSchoolAdmin.FirstName}
+                  {selectedSchoolAdmin.first_name}
                 </p>
               </div>
-              <div className="flex items-center justify-between">
-                <p className="font-semibold text-sm">Middle Name:</p>
-                <p className="font-bold text-lg">
-                  {selectedSchoolAdmin.MiddleName}
-                </p>
-              </div>
+
               <div className="flex items-center justify-between">
                 <p className="font-semibold text-sm">Last Name:</p>
                 <p className="font-bold text-lg">
-                  {selectedSchoolAdmin.LastName}
+                  {selectedSchoolAdmin.surname}
                 </p>
               </div>
               <div className="flex items-center justify-between">
                 <p className="font-semibold text-sm">Email:</p>
-                <p className="font-bold text-lg">
-                  {selectedSchoolAdmin.EmailAddress}
-                </p>
+                <p className="font-bold text-lg">{selectedSchoolAdmin.email}</p>
               </div>
               <div className="flex items-center justify-between">
                 <p className="font-semibold text-sm">Phone Number:</p>
                 <p className="font-bold text-lg">
-                  {selectedSchoolAdmin.PhoneNumber}
+                  {selectedSchoolAdmin.phone_number}
                 </p>
               </div>
               <div className="flex items-center justify-between">
                 <p className="font-semibold text-sm">School Name:</p>
                 <p className="font-bold text-lg">
-                  {selectedSchoolAdmin.SchoolName}
-                </p>
-              </div>
-              <div className="flex items-center justify-between">
-                <p className="font-semibold text-sm">User Role:</p>
-                <p className="font-bold text-lg">
-                  {selectedSchoolAdmin.UserRole}
+                  {selectedSchoolAdmin.school_name}
                 </p>
               </div>
               <div className="flex items-center justify-between">
                 <p className="font-semibold text-sm">Designation:</p>
                 <p className="font-bold text-lg">
-                  {selectedSchoolAdmin.Designation}
-                </p>
-              </div>
-              <div className="flex items-center justify-between">
-                <p className="font-semibold text-sm">Address:</p>
-                <p className="font-bold text-lg">
-                  {selectedSchoolAdmin.Address}
+                  {selectedSchoolAdmin.designation}
                 </p>
               </div>
             </div>
@@ -128,8 +221,10 @@ const ManageSchoolAdminItem = () => {
           <div className="flex items-center rounded-4xl border lg:min-w-[300px]  border-[#978F8F] ">
             <input
               type="text"
-              placeholder="Search School"
+              placeholder="Search School Admin"
               className="w-full outline-none bg-transparent text-[#AEAEAE] text-sm p-2 pl-5"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -141,7 +236,7 @@ const ManageSchoolAdminItem = () => {
             </svg>
           </div>
           <Link
-            href={`/Super-Admin/Manage-School-Admin/Add-School-Admin?schoolid=${schoolId}&userid=${userId}`}
+            href={`/Super-Admin/Manage-School-Admin/Add-School-Admin?adminId=${adminId}`}
           >
             <div className="bg-[#E6EFF5] rounded-full flex items-center p-3 cursor-pointer">
               <FaUserPlus className="text-[#01427A]" size={20} />
@@ -154,68 +249,81 @@ const ManageSchoolAdminItem = () => {
           <table className="min-w-full table-auto ">
             <thead className="bg-[#E6EFF5] lg:text-sm sm:text-xs ">
               <tr className="border-b-[#978F8F] border-b">
-                <th className="p-3 xl:pl-8 xl:pr-8 md:pl-8 md:pr-8 sm:pl-4 sm:pr-4  text-left  font-bold text-[#333333]">
+                <th className="pt-3 pb-3 pl-12  text-left  font-bold text-[#333333]">
                   School Admin Name
                 </th>
-                <th className="p-3 xl:pl-8 xl:pr-8 md:pl-8 md:pr-8 sm:pl-4 sm:pr-4  text-left  font-bold text-[#333333]">
+                <th className="pt-3 pb-3 text-left  font-bold text-[#333333]">
                   School Name
                 </th>
-                <th className="p-3 xl:pl-8 xl:pr-8 md:pl-8 md:pr-8 sm:pl-4 sm:pr-4  text-left  font-bold text-[#333333]">
+                <th className="pt-3 pb-3 text-left  font-bold text-[#333333]">
                   Designation
                 </th>
-                <th className="p-3 xl:pl-8 xl:pr-8 md:pl-8 md:pr-8 sm:pl-4 sm:pr-4  text-left  font-bold text-[#333333]">
+                <th className="pt-3 pb-3 text-left  font-bold text-[#333333]">
                   Phone Number
                 </th>
-                <th className="p-3 xl:pl-8 xl:pr-8 md:pl-8 md:pr-8 sm:pl-4 sm:pr-4  text-left  font-bold text-[#333333]">
+                <th className="pt-3 pb-3 text-left  font-bold text-[#333333]">
                   Email Address
                 </th>
-                <th className="p-3 xl:pl-8 xl:pr-8 md:pl-8 md:pr-8 sm:pl-4 sm:pr-4  text-left  font-bold text-[#333333]">
+                <th className="pt-3 pb-3 text-left  font-bold text-[#333333]">
                   Modify
                 </th>
               </tr>
             </thead>
             <tbody>
-              {schoolAdmin.map((item, index) => (
-                <tr
-                  onClick={() => openModal(item)}
-                  key={index}
-                  className="cursor-pointer border-b-[#978F8F] border-b font-semibold text-xs"
-                >
-                  <td className="p-3 xl:pl-8 xl:pr-8 md:pl-8 md:pr-8 sm:pl-4 sm:pr-4  text-[#333333]">
-                    {item.FirstName + " " + item.MiddleName}
-                  </td>
-                  <td className="p-3 xl:pl-8 xl:pr-8 md:pl-8 md:pr-8 sm:pl-4 sm:pr-4  text-[#333333]">
-                    {item.SchoolName}
-                  </td>
-                  <td className="p-3 xl:pl-8 xl:pr-8 md:pl-8 md:pr-8 sm:pl-4 sm:pr-4  text-[#333333]">
-                    {item.Designation}
-                  </td>
-                  <td className="p-3 xl:pl-8 xl:pr-8 md:pl-8 md:pr-8 sm:pl-4 sm:pr-4  text-[#333333]">
-                    {item.PhoneNumber}
-                  </td>
-                  <td className="p-3 xl:pl-8 xl:pr-8 md:pl-8 md:pr-8 sm:pl-4 sm:pr-4  text-[#333333]">
-                    {item.EmailAddress}
-                  </td>
-                  <td className="p-3 text-[#333333]">
-                    <div className="flex gap-4">
-                      <Link
-                        href={`/Super-Admin/Manage-School-Admin/Edit-School-Admin?schoolid=${schoolId}&userid=${userId}`}
-                        onClick={(e) => e.stopPropagation()} // Prevents the row click
-                      >
-                        <FiEdit3
-                          className="text-[#80ADCB] cursor-pointer"
-                          size={20}
+              {filteredSchoolAdmins.length > 0 ? (
+                filteredSchoolAdmins.map((item, index) => (
+                  <tr
+                    onClick={() => openModal(item)}
+                    key={index}
+                    className="cursor-pointer border-b-[#978F8F] border-b font-semibold text-xs"
+                  >
+                    <td className="pt-2 pb-2 pl-12 text-[#333333]">
+                      {item.first_name + " " + item.surname}
+                    </td>
+                    <td className="pt-2 pb-2  text-[#333333]">
+                      {item.school_name}
+                    </td>
+                    <td className="pt-2 pb-2  text-[#333333]">
+                      {item.designation}
+                    </td>
+                    <td className="pt-2 pb-2  text-[#333333]">
+                      {item.phone_number}
+                    </td>
+                    <td className="pt-2 pb-2  text-[#333333]">{item.email}</td>
+                    <td className="pt-2 pb-2 text-[#333333]">
+                      <div className="flex gap-4">
+                        <Link
+                          href={`/Super-Admin/Manage-School-Admin/Edit-School-Admin?adminId=${adminId}`}
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <FiEdit3
+                            className="text-[#80ADCB] cursor-pointer"
+                            size={15}
+                          />
+                        </Link>
+                        <FiTrash2
+                          className="text-[#F94144] cursor-pointer"
+                          size={15}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            openDeleteModal(item);
+                          }}
                         />
-                      </Link>
-                      <FiTrash2
-                        className="text-[#F94144] cursor-pointer"
-                        size={20}
-                        onClick={(e) => e.stopPropagation()} // Prevents the row click
-                      />
-                    </div>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="6" className="text-center py-4 text-gray-500">
+                    {loading
+                      ? "Loading School Admins..."
+                      : error
+                      ? "Error loading School Admins."
+                      : "No School Admins Found."}
                   </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>
